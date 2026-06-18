@@ -17,7 +17,8 @@
       http-equiv="Content-Security-Policy"
       content="default-src 'self'; img-src 'self' data:; media-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:"
     >
-    <link rel="stylesheet" href="styles.css?v=20260618-1">
+    <link rel="preload" as="image" href="assets/sarralbe-aerien.jpg" fetchpriority="high">
+    <link rel="stylesheet" href="styles.css?v=20260618-2">
   </head>
   <body>
     <main class="site-shell">
@@ -204,7 +205,7 @@
                 <span class="structure-card__level">1</span>
                 <div class="person-photo structure-card__portrait">
                   <span>ML</span>
-                  <img src="assets/marylise-leon.jpg" alt="Portrait de Marylise Léon" onerror="this.remove()">
+                  <img src="assets/marylise-leon.jpg" alt="Portrait de Marylise Léon" width="670" height="446" loading="lazy" decoding="async" onerror="this.remove()">
                 </div>
                 <p class="structure-card__eyebrow">Échelon Confédéral</p>
                 <h3>Marylise LÉON</h3>
@@ -257,7 +258,7 @@
                   <article class="person-chip">
                     <div class="person-photo person-photo--small">
                       <span>DN</span>
-                      <img src="assets/portraits/david-nicolay-card.jpg" alt="Portrait de David Nicolay" onerror="this.remove()">
+                      <img src="assets/portraits/david-nicolay-card.jpg" alt="Portrait de David Nicolay" width="512" height="512" loading="lazy" decoding="async" onerror="this.remove()">
                     </div>
                     <div>
                       <strong>David NICOLAY</strong>
@@ -271,7 +272,7 @@
                   <article class="person-chip">
                     <div class="person-photo person-photo--small">
                       <span>DG</span>
-                      <img src="assets/portraits/damien-grosse-card.png" alt="Portrait de Damien Grosse" onerror="this.remove()">
+                      <img src="assets/portraits/damien-grosse-card.png" alt="Portrait de Damien Grosse" width="512" height="512" loading="lazy" decoding="async" onerror="this.remove()">
                     </div>
                     <div>
                       <strong>Damien GROSSE</strong>
@@ -321,7 +322,7 @@
                   <article class="representative-card">
                     <div class="person-photo representative-card__photo">
                       <span>TK</span>
-                      <img src="assets/thierry-krempff.jpg" alt="Portrait de Thierry Krempff, Délégué Syndical CFDT" onerror="this.remove()">
+                      <img src="assets/thierry-krempff.jpg" alt="Portrait de Thierry Krempff, Délégué Syndical CFDT" width="512" height="512" loading="lazy" decoding="async" onerror="this.remove()">
                     </div>
                     <div class="representative-card__details">
                       <h4>Thierry KREMPFF</h4>
@@ -354,7 +355,7 @@
                   <article class="representative-card">
                     <div class="person-photo representative-card__photo representative-card__photo--linda">
                       <span>LN</span>
-                      <img src="assets/linda-noel.png" alt="Portrait de Linda Noel" onerror="this.remove()">
+                      <img src="assets/linda-noel.png" alt="Portrait de Linda Noel" width="689" height="1024" loading="lazy" decoding="async" onerror="this.remove()">
                     </div>
                     <div class="representative-card__details">
                       <h4>Linda NOEL</h4>
@@ -375,7 +376,7 @@
                   <article class="representative-card">
                     <div class="person-photo representative-card__photo">
                       <span>FO</span>
-                      <img src="assets/fred-ottinger-v2.jpg" alt="Portrait de Fred Ottinger" onerror="this.remove()">
+                      <img src="assets/fred-ottinger-v2.jpg" alt="Portrait de Fred Ottinger" width="512" height="512" loading="lazy" decoding="async" onerror="this.remove()">
                     </div>
                     <div class="representative-card__details">
                       <h4>Fred OTTINGER</h4>
@@ -396,7 +397,7 @@
                   <article class="representative-card">
                     <div class="person-photo representative-card__photo">
                       <span>AS</span>
-                      <img src="assets/alex-stein-enhanced.jpg" alt="Portrait de Alex Stein" onerror="this.remove()">
+                      <img src="assets/alex-stein-enhanced.jpg" alt="Portrait de Alex Stein" width="512" height="512" loading="lazy" decoding="async" onerror="this.remove()">
                     </div>
                     <div class="representative-card__details">
                       <h4>Alex STEIN</h4>
@@ -418,7 +419,7 @@
                   <article class="representative-card">
                     <div class="person-photo representative-card__photo">
                       <span>SR</span>
-                      <img src="assets/sebastien-ruden.jpg" alt="Portrait de Sébastien Ruden" onerror="this.remove()">
+                      <img src="assets/sebastien-ruden.jpg" alt="Portrait de Sébastien Ruden" width="512" height="512" loading="lazy" decoding="async" onerror="this.remove()">
                     </div>
                     <div class="representative-card__details">
                       <h4>Sébastien RUDEN</h4>
@@ -439,7 +440,7 @@
                   <article class="representative-card">
                     <div class="person-photo representative-card__photo">
                       <span>MM</span>
-                      <img src="assets/marc-moeckes-card.png" alt="Portrait de Marc Moeckes" onerror="this.remove()">
+                      <img src="assets/marc-moeckes-card.png" alt="Portrait de Marc Moeckes" width="768" height="768" loading="lazy" decoding="async" onerror="this.remove()">
                     </div>
                     <div class="representative-card__details">
                       <h4>Marc MOECKES</h4>
@@ -465,19 +466,19 @@
                     </div>
                     <div class="support-grid">
                       <article class="support-member">
-                        <img class="support-member__photo" src="assets/jerome-hoffmann.jpg" alt="Portrait de Jerome Hoffmann" onerror="this.remove()">
+                        <img class="support-member__photo" src="assets/jerome-hoffmann.jpg" alt="Portrait de Jerome Hoffmann" width="512" height="512" loading="lazy" decoding="async" onerror="this.remove()">
                         <strong>Jerome HOFFMANN</strong>
                         <span>Chef d'équipe au Secteur A</span>
                         <p>Représentant des Agents de Maîtrise</p>
                       </article>
                       <article class="support-member">
-                        <img class="support-member__photo" src="assets/matheo-maltana.jpg" alt="Portrait de Mathéo Maltana" onerror="this.remove()">
+                        <img class="support-member__photo" src="assets/matheo-maltana.jpg" alt="Portrait de Mathéo Maltana" width="512" height="512" loading="lazy" decoding="async" onerror="this.remove()">
                         <strong>Mathéo MALTANA</strong>
                         <span>Relais Secteur A</span>
                         <p>Représentant Secteur Catalyseurs</p>
                       </article>
                       <article class="support-member">
-                        <img class="support-member__photo" src="assets/greg-patrascu.png" alt="Portrait de Greg Patrascu" onerror="this.remove()">
+                        <img class="support-member__photo" src="assets/greg-patrascu.png" alt="Portrait de Greg Patrascu" width="76" height="111" loading="lazy" decoding="async" onerror="this.remove()">
                         <strong>Greg PATRASCU</strong>
                         <span>Relais Secteur A</span>
                         <p>Représentant Secteur Catalyseurs</p>
@@ -1051,6 +1052,10 @@
                 Thierry Krempff, Délégué Syndical CFDT, peut être contacté pour une question,
                 une alerte ou un besoin d'accompagnement.
               </p>
+              <p class="contact-guidance">
+                Pour une situation personnelle ou sensible, indiquez simplement que vous souhaitez
+                être rappelé et évitez d’envoyer des documents confidentiels dans un premier message.
+              </p>
             </div>
             <div class="contact-box">
               <h3>Thierry Krempff</h3>
@@ -1059,7 +1064,24 @@
                 <a href="mailto:thierry.krempff@gmail.com">thierry.krempff@gmail.com</a>
                 <a href="tel:+33687152364">06.87.15.23.64</a>
               </div>
-              <a class="section-button" href="mailto:thierry.krempff@gmail.com?subject=Contact%20CFDT%20INEOS%20Sarralbe&amp;body=Bonjour,%0D%0A%0D%0AJe%20souhaite%20contacter%20la%20section%20CFDT%20INEOS%20Sarralbe%20au%20sujet%20de%20:%0D%0A%0D%0A">Ouvrir ma messagerie</a>
+              <div class="contact-actions" aria-label="Moyens de contact directs">
+                <a class="contact-action contact-action--mail" href="mailto:thierry.krempff@gmail.com?subject=Question%20CFDT%20INEOS%20Sarralbe&amp;body=Bonjour%20Thierry,%0D%0A%0D%0AJe%20souhaite%20poser%20une%20question%20%C3%A0%20la%20section%20CFDT%20INEOS%20Sarralbe.%0D%0A%0D%0A">
+                  Envoyer un mail
+                </a>
+                <a class="contact-action contact-action--whatsapp" href="https://wa.me/33687152364?text=Bonjour%20Thierry%2C%20je%20souhaite%20poser%20une%20question%20%C3%A0%20la%20CFDT%20INEOS%20Sarralbe." target="_blank" rel="noopener noreferrer">
+                  Écrire sur WhatsApp
+                </a>
+                <a class="contact-action contact-action--sms" href="sms:+33687152364?body=Bonjour%20Thierry%2C%20je%20souhaite%20poser%20une%20question%20%C3%A0%20la%20CFDT%20INEOS%20Sarralbe.">
+                  Envoyer un SMS
+                </a>
+                <a class="contact-action contact-action--call" href="tel:+33687152364">
+                  Appeler Thierry
+                </a>
+              </div>
+              <p class="contact-safety">
+                Le site ne transmet pas votre message : il ouvre seulement l’application choisie
+                sur votre téléphone ou votre ordinateur.
+              </p>
             </div>
           </div>
         </section>
@@ -1087,8 +1109,27 @@
       const adhesionModal = document.querySelector("#adhesion-consignes");
       const openAdhesionButtons = document.querySelectorAll("[data-open-adhesion]");
       const closeAdhesionButtons = document.querySelectorAll("[data-close-adhesion]");
+      const focusableSelector = [
+        "a[href]",
+        "button:not([disabled])",
+        "input:not([disabled])",
+        "select:not([disabled])",
+        "textarea:not([disabled])",
+        "[tabindex]:not([tabindex='-1'])"
+      ].join(",");
+      let posterTrigger = openPosterButton;
+      let adhesionTrigger = null;
 
-      const setPosterOpen = (isOpen) => {
+      const getFocusableElements = (container) =>
+        Array.from(container?.querySelectorAll(focusableSelector) ?? []).filter(
+          (element) => element.offsetParent !== null
+        );
+
+      const setPosterOpen = (isOpen, trigger = openPosterButton) => {
+        if (isOpen) {
+          posterTrigger = trigger;
+        }
+
         posterModal?.classList.toggle("poster-modal--open", isOpen);
         posterModal?.setAttribute("aria-hidden", String(!isOpen));
         document.body.classList.toggle("modal-open", isOpen);
@@ -1096,29 +1137,35 @@
         if (isOpen) {
           posterModal?.querySelector(".poster-modal__close")?.focus();
         } else {
-          openPosterButton?.focus();
+          posterTrigger?.focus();
         }
       };
 
-      openPosterButton?.addEventListener("click", () => setPosterOpen(true));
+      openPosterButton?.addEventListener("click", () => setPosterOpen(true, openPosterButton));
       closePosterButtons.forEach((button) => {
         button.addEventListener("click", () => setPosterOpen(false));
       });
 
-      const setAdhesionOpen = (isOpen) => {
+      const setAdhesionOpen = (isOpen, trigger = adhesionTrigger) => {
+        if (isOpen) {
+          adhesionTrigger = trigger;
+        }
+
         adhesionModal?.classList.toggle("poster-modal--open", isOpen);
         adhesionModal?.setAttribute("aria-hidden", String(!isOpen));
         document.body.classList.toggle("modal-open", isOpen);
 
         if (isOpen) {
           adhesionModal?.querySelector(".poster-modal__close")?.focus();
+        } else {
+          adhesionTrigger?.focus();
         }
       };
 
       openAdhesionButtons.forEach((button) => {
         button.addEventListener("click", (event) => {
           event.preventDefault();
-          setAdhesionOpen(true);
+          setAdhesionOpen(true, button);
         });
       });
 
@@ -1127,6 +1174,8 @@
       });
 
       document.addEventListener("keydown", (event) => {
+        const openModal = document.querySelector(".poster-modal--open");
+
         if (event.key === "Escape" && posterModal?.classList.contains("poster-modal--open")) {
           setPosterOpen(false);
         }
@@ -1134,17 +1183,42 @@
         if (event.key === "Escape" && adhesionModal?.classList.contains("poster-modal--open")) {
           setAdhesionOpen(false);
         }
+
+        if (event.key !== "Tab" || !openModal) {
+          return;
+        }
+
+        const focusableElements = getFocusableElements(openModal);
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+
+        if (!firstElement || !lastElement) {
+          event.preventDefault();
+          return;
+        }
+
+        if (event.shiftKey && document.activeElement === firstElement) {
+          event.preventDefault();
+          lastElement.focus();
+        } else if (!event.shiftKey && document.activeElement === lastElement) {
+          event.preventDefault();
+          firstElement.focus();
+        }
       });
 
+      const setMenuOpen = (isOpen) => {
+        header?.classList.toggle("site-header--open", isOpen);
+        navToggle?.setAttribute("aria-expanded", String(isOpen));
+        navToggle?.setAttribute("aria-label", isOpen ? "Fermer le menu" : "Ouvrir le menu");
+      };
+
       navToggle?.addEventListener("click", () => {
-        const isOpen = header.classList.toggle("site-header--open");
-        navToggle.setAttribute("aria-expanded", String(isOpen));
+        setMenuOpen(!header?.classList.contains("site-header--open"));
       });
 
       navLinks.forEach((link) => {
         link.addEventListener("click", () => {
-          header.classList.remove("site-header--open");
-          navToggle?.setAttribute("aria-expanded", "false");
+          setMenuOpen(false);
         });
       });
 

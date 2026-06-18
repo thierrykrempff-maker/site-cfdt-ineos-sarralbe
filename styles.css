@@ -1,6 +1,7 @@
 :root {
   --cfdt-orange: #f39200;
   --cfdt-orange-dark: #d77800;
+  --cfdt-on-orange: #101827;
   --ink: #101827;
   --muted: #556171;
   --line: #d7dde6;
@@ -244,7 +245,7 @@ svg {
   border-radius: 7px;
   background: var(--cfdt-orange);
   box-shadow: 0 8px 22px rgba(255, 90, 0, 0.25);
-  color: #fff;
+  color: var(--cfdt-on-orange);
   font-family: var(--display-font);
   font-size: 20px;
   font-weight: 800;
@@ -346,7 +347,7 @@ svg {
 
 .button--primary {
   background: var(--cfdt-orange);
-  color: #fff;
+  color: var(--cfdt-on-orange);
   box-shadow: 0 14px 28px rgba(255, 90, 0, 0.24);
 }
 
@@ -517,7 +518,7 @@ svg {
   border: 0;
   border-radius: 999px;
   background: var(--cfdt-orange);
-  color: #ffffff;
+  color: var(--cfdt-on-orange);
   box-shadow: 0 10px 24px rgba(243, 146, 0, 0.36);
   font-family: var(--display-font);
   font-size: 16px;
@@ -575,7 +576,7 @@ svg {
   border: 0;
   border-radius: 50%;
   background: var(--cfdt-orange);
-  color: #ffffff;
+  color: var(--cfdt-on-orange);
   font-size: 30px;
   font-weight: 700;
   line-height: 1;
@@ -773,7 +774,7 @@ svg {
   margin-top: 18px;
   border-radius: 999px;
   background: var(--cfdt-orange);
-  color: #ffffff;
+  color: var(--cfdt-on-orange);
   font-family: var(--display-font);
   font-weight: 800;
   text-transform: uppercase;
@@ -857,6 +858,17 @@ svg {
 .section__lead {
   max-width: 790px;
   margin: 16px 0 0;
+}
+
+.contact-guidance {
+  max-width: 720px;
+  margin: 20px 0 0;
+  padding: 16px 18px;
+  border-left: 5px solid var(--cfdt-orange);
+  border-radius: 6px;
+  background: #fff7e8;
+  color: #2f3848;
+  font-weight: 700;
 }
 
 .section--cta p {
@@ -1615,7 +1627,7 @@ svg {
   padding: 5px 10px;
   border-radius: 999px;
   background: var(--cfdt-orange);
-  color: #ffffff;
+  color: var(--cfdt-on-orange);
   font-family: var(--display-font);
   font-size: 13px;
   font-weight: 800;
@@ -1804,7 +1816,7 @@ svg {
   padding: 0 22px;
   border: 0;
   background: var(--cfdt-orange);
-  color: #ffffff;
+  color: var(--cfdt-on-orange);
   box-shadow: 0 12px 24px rgba(255, 90, 0, 0.22);
 }
 
@@ -1862,6 +1874,58 @@ svg {
   margin-top: 16px;
 }
 
+.contact-actions {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.contact-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 18px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  font-family: var(--display-font);
+  font-size: 15px;
+  font-weight: 800;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.contact-action--mail {
+  background: var(--cfdt-orange);
+  color: var(--cfdt-on-orange);
+  box-shadow: 0 12px 24px rgba(255, 90, 0, 0.22);
+}
+
+.contact-action--whatsapp {
+  border-color: #bfe8cc;
+  background: #e9f8ef;
+  color: #075e54;
+}
+
+.contact-action--sms {
+  border-color: #cbdaf3;
+  background: #eef4ff;
+  color: #173b7a;
+}
+
+.contact-action--call {
+  border-color: #dce2eb;
+  background: #f7f8fb;
+  color: #17202d;
+}
+
+.contact-safety {
+  margin: 16px 0 0;
+  color: #556171;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
 .nav__link:focus-visible,
 .join-button:focus-visible,
 .button:focus-visible,
@@ -1873,6 +1937,7 @@ svg {
 .feed-post__link:focus-visible,
 .representative-contact a:focus-visible,
 .contact-links a:focus-visible,
+.contact-action:focus-visible,
 .section-button:focus-visible {
   outline: 3px solid rgba(255, 90, 0, 0.45);
   outline-offset: 4px;
