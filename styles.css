@@ -1820,11 +1820,31 @@ svg {
   box-shadow: 0 12px 24px rgba(255, 90, 0, 0.22);
 }
 
+.section-button--light {
+  border: 1px solid rgba(255, 255, 255, 0.58);
+  background: #ffffff;
+  color: #17202d;
+  box-shadow: none;
+}
+
 .cta-band {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 32px;
+}
+
+.adhesion-actions {
+  display: grid;
+  flex: 0 0 auto;
+  gap: 12px;
+  min-width: 260px;
+}
+
+.adhesion-actions .section-button {
+  width: 100%;
+  justify-content: center;
+  text-align: center;
 }
 
 .cta-band p {
@@ -2219,6 +2239,10 @@ svg {
   .cta-band {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .adhesion-actions {
+    width: 100%;
   }
 
   .section-button {
