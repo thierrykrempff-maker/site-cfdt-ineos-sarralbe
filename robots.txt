@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://cfdt-ineos-sarralbe.fr/sitemap.xml
