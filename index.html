@@ -15,12 +15,13 @@
     <meta name="referrer" content="no-referrer">
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; img-src 'self' data:; media-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:"
+      content="default-src 'self'; img-src 'self' data:; media-src 'self'; style-src 'self'; style-src-attr 'none'; script-src 'self' 'unsafe-inline'; script-src-attr 'none'; connect-src 'none'; frame-src https://docs.google.com https://forms.gle; object-src 'none'; base-uri 'self'; form-action 'self' mailto: https://docs.google.com"
     >
     <link rel="preload" as="image" href="assets/sarralbe-aerien.jpg" fetchpriority="high">
-    <link rel="stylesheet" href="styles.css?v=20260619-1">
+    <link rel="stylesheet" href="styles.css?v=20260701-1">
   </head>
   <body>
+    <a class="skip-link" href="#contenu-principal">Aller au contenu principal</a>
     <main class="site-shell">
       <section class="hero" id="accueil" aria-labelledby="hero-title">
         <div class="hero__shade"></div>
@@ -44,10 +45,11 @@
           </button>
 
           <nav class="nav" id="site-nav" aria-label="Rubriques">
-            <a class="nav__link nav__link--active" href="#accueil">Accueil</a>
+            <a class="nav__link nav__link--active" href="#accueil" aria-current="location">Accueil</a>
             <a class="nav__link" href="#qui-sommes-nous">Qui sommes-nous ?</a>
             <a class="nav__link" href="#nos-valeurs">Nos valeurs</a>
             <a class="nav__link" href="#droits">Vos droits</a>
+            <a class="nav__link" href="#commentaires">Commentaires</a>
             <a class="nav__link" href="#contact">Contact</a>
           </nav>
 
@@ -128,7 +130,7 @@
               <li>À l’issue des 3 mois, vous choisissez librement de continuer ou d’arrêter, sans aucun frais.</li>
             </ul>
           </div>
-          <a class="poster-modal__cta" href="https://www.cfdt.fr/adherer" target="_blank" rel="noopener">
+          <a class="poster-modal__cta" href="https://www.cfdt.fr/adherer" target="_blank" rel="noopener noreferrer">
             Je profite de l’offre Découverte (3 mois gratuits)
           </a>
         </div>
@@ -174,7 +176,7 @@
         </article>
       </section>
 
-      <div class="content">
+      <div class="content" id="contenu-principal" tabindex="-1">
         <section class="section section--intro structure-section" id="qui-sommes-nous" aria-labelledby="qui-sommes-nous-title">
           <div class="section__inner">
             <div class="section__header">
@@ -205,7 +207,7 @@
                 <span class="structure-card__level">1</span>
                 <div class="person-photo structure-card__portrait">
                   <span>ML</span>
-                  <img src="assets/marylise-leon.jpg" alt="Portrait de Marylise Léon" width="670" height="446" loading="lazy" decoding="async" onerror="this.remove()">
+                  <img src="assets/marylise-leon.jpg" alt="Portrait de Marylise Léon" width="670" height="446" loading="lazy" decoding="async">
                 </div>
                 <p class="structure-card__eyebrow">Échelon Confédéral</p>
                 <h3>Marylise LÉON</h3>
@@ -258,13 +260,13 @@
                   <article class="person-chip">
                     <div class="person-photo person-photo--small">
                       <span>DN</span>
-                      <img src="assets/portraits/david-nicolay-card.jpg" alt="Portrait de David Nicolay" width="512" height="512" loading="lazy" decoding="async" onerror="this.remove()">
+                      <img src="assets/portraits/david-nicolay-card.jpg" alt="Portrait de David Nicolay" width="512" height="512" loading="lazy" decoding="async">
                     </div>
                     <div>
                       <strong>David NICOLAY</strong>
                       <span>Secrétaire général</span>
                       <span class="person-chip__org">Syndicat Chimie Énergie Lorraine (SCEL-CFDT)</span>
-                      <a class="section-button person-chip__button" href="https://fce.cfdt.fr/syndicats/lorraine/" target="_blank" rel="noopener">
+                      <a class="section-button person-chip__button" href="https://fce.cfdt.fr/syndicats/lorraine/" target="_blank" rel="noopener noreferrer">
                         Voir le syndicat lorrain
                       </a>
                     </div>
@@ -272,7 +274,7 @@
                   <article class="person-chip">
                     <div class="person-photo person-photo--small">
                       <span>DG</span>
-                      <img src="assets/portraits/damien-grosse-card.png" alt="Portrait de Damien Grosse" width="512" height="512" loading="lazy" decoding="async" onerror="this.remove()">
+                      <img src="assets/portraits/damien-grosse-card.png" alt="Portrait de Damien Grosse" width="512" height="512" loading="lazy" decoding="async">
                     </div>
                     <div>
                       <strong>Damien GROSSE</strong>
@@ -322,7 +324,7 @@
                   <article class="representative-card">
                     <div class="person-photo representative-card__photo">
                       <span>TK</span>
-                      <img src="assets/thierry-krempff.jpg" alt="Portrait de Thierry Krempff, Délégué Syndical CFDT" width="512" height="512" loading="lazy" decoding="async" onerror="this.remove()">
+                      <img src="assets/thierry-krempff.jpg" alt="Portrait de Thierry Krempff, Délégué Syndical CFDT" width="512" height="512" loading="lazy" decoding="async">
                     </div>
                     <div class="representative-card__details">
                       <h4>Thierry KREMPFF</h4>
@@ -355,7 +357,7 @@
                   <article class="representative-card">
                     <div class="person-photo representative-card__photo representative-card__photo--linda">
                       <span>LN</span>
-                      <img src="assets/linda-noel.png" alt="Portrait de Linda Noel" width="689" height="1024" loading="lazy" decoding="async" onerror="this.remove()">
+                      <img src="assets/linda-noel.png" alt="Portrait de Linda Noel" width="689" height="1024" loading="lazy" decoding="async">
                     </div>
                     <div class="representative-card__details">
                       <h4>Linda NOEL</h4>
@@ -376,7 +378,7 @@
                   <article class="representative-card">
                     <div class="person-photo representative-card__photo">
                       <span>FO</span>
-                      <img src="assets/fred-ottinger-v2.jpg" alt="Portrait de Fred Ottinger" width="512" height="512" loading="lazy" decoding="async" onerror="this.remove()">
+                      <img src="assets/fred-ottinger-v2.jpg" alt="Portrait de Fred Ottinger" width="512" height="512" loading="lazy" decoding="async">
                     </div>
                     <div class="representative-card__details">
                       <h4>Fred OTTINGER</h4>
@@ -397,7 +399,7 @@
                   <article class="representative-card">
                     <div class="person-photo representative-card__photo">
                       <span>AS</span>
-                      <img src="assets/alex-stein-enhanced.jpg" alt="Portrait de Alex Stein" width="512" height="512" loading="lazy" decoding="async" onerror="this.remove()">
+                      <img src="assets/alex-stein-enhanced.jpg" alt="Portrait de Alex Stein" width="512" height="512" loading="lazy" decoding="async">
                     </div>
                     <div class="representative-card__details">
                       <h4>Alex STEIN</h4>
@@ -419,7 +421,7 @@
                   <article class="representative-card">
                     <div class="person-photo representative-card__photo">
                       <span>SR</span>
-                      <img src="assets/sebastien-ruden.jpg" alt="Portrait de Sébastien Ruden" width="512" height="512" loading="lazy" decoding="async" onerror="this.remove()">
+                      <img src="assets/sebastien-ruden.jpg" alt="Portrait de Sébastien Ruden" width="512" height="512" loading="lazy" decoding="async">
                     </div>
                     <div class="representative-card__details">
                       <h4>Sébastien RUDEN</h4>
@@ -440,7 +442,7 @@
                   <article class="representative-card">
                     <div class="person-photo representative-card__photo">
                       <span>MM</span>
-                      <img src="assets/marc-moeckes-card.png" alt="Portrait de Marc Moeckes" width="768" height="768" loading="lazy" decoding="async" onerror="this.remove()">
+                      <img src="assets/marc-moeckes-card.png" alt="Portrait de Marc Moeckes" width="768" height="768" loading="lazy" decoding="async">
                     </div>
                     <div class="representative-card__details">
                       <h4>Marc MOECKES</h4>
@@ -466,19 +468,19 @@
                     </div>
                     <div class="support-grid">
                       <article class="support-member">
-                        <img class="support-member__photo" src="assets/jerome-hoffmann.jpg" alt="Portrait de Jerome Hoffmann" width="512" height="512" loading="lazy" decoding="async" onerror="this.remove()">
+                        <img class="support-member__photo" src="assets/jerome-hoffmann.jpg" alt="Portrait de Jerome Hoffmann" width="512" height="512" loading="lazy" decoding="async">
                         <strong>Jerome HOFFMANN</strong>
                         <span>Chef d'équipe au Secteur A</span>
                         <p>Représentant des Agents de Maîtrise</p>
                       </article>
                       <article class="support-member">
-                        <img class="support-member__photo" src="assets/matheo-maltana.jpg" alt="Portrait de Mathéo Maltana" width="512" height="512" loading="lazy" decoding="async" onerror="this.remove()">
+                        <img class="support-member__photo" src="assets/matheo-maltana.jpg" alt="Portrait de Mathéo Maltana" width="512" height="512" loading="lazy" decoding="async">
                         <strong>Mathéo MALTANA</strong>
                         <span>Relais Secteur A</span>
                         <p>Représentant Secteur Catalyseurs</p>
                       </article>
                       <article class="support-member">
-                        <img class="support-member__photo" src="assets/greg-patrascu.png" alt="Portrait de Greg Patrascu" width="76" height="111" loading="lazy" decoding="async" onerror="this.remove()">
+                        <img class="support-member__photo" src="assets/greg-patrascu.png" alt="Portrait de Greg Patrascu" width="76" height="111" loading="lazy" decoding="async">
                         <strong>Greg PATRASCU</strong>
                         <span>Relais Secteur A</span>
                         <p>Représentant Secteur Catalyseurs</p>
@@ -543,13 +545,34 @@
               </p>
             </div>
 
+            <article class="featured-site-card" aria-labelledby="featured-site-title">
+              <div class="featured-site-card__media">
+                <img
+                  src="assets/nouveau-site-cfdt-ineos-sarralbe.png"
+                  alt="Présentation du nouveau site CFDT INEOS Sarralbe pour informer, expliquer, représenter, défendre et anticiper"
+                  width="1024"
+                  height="1536"
+                  loading="lazy"
+                  decoding="async"
+                >
+              </div>
+              <div class="featured-site-card__content">
+                <p class="section__eyebrow">Nouveau site</p>
+                <h3 id="featured-site-title">Un espace clair pour suivre l’actualité sociale</h3>
+                <p>
+                  Retrouvez les dernières informations CFDT, les sujets de branche, les repères
+                  juridiques et les informations utiles au quotidien des salariés.
+                </p>
+              </div>
+            </article>
+
             <div class="feed-board">
               <article class="action-feed" id="feed-emploi">
                 <div class="action-feed__header">
                   <span class="action-feed__tag">Actus</span>
                   <h3>Actualités de la semaine</h3>
                 </div>
-                <div class="feed-list" aria-label="Actualités de la semaine">
+                <div class="feed-list feed-list--single" aria-label="Actualité de la semaine - canicule">
                   <article class="feed-post">
                     <div class="feed-post__meta">
                       <span class="feed-post__avatar">Santé</span>
@@ -579,11 +602,20 @@
                           un élu CFDT.
                         </li>
                       </ul>
-                      <a class="feed-post__link" href="documents/tract-cfdt-canicule-v2.pdf" target="_blank" rel="noopener">
+                      <a class="feed-post__link" href="documents/tract-cfdt-canicule-v2.pdf" target="_blank" rel="noopener noreferrer">
                         Lire le tract CFDT canicule
                       </a>
                     </div>
                   </article>
+                </div>
+              </article>
+
+              <article class="action-feed" id="feed-pereco">
+                <div class="action-feed__header">
+                  <span class="action-feed__tag">Info</span>
+                  <h3>PERECO et placement CET</h3>
+                </div>
+                <div class="feed-list feed-list--single" aria-label="Information PERECO et placement CET">
                   <article class="feed-post">
                     <div class="feed-post__meta">
                       <span class="feed-post__avatar">Info</span>
@@ -596,11 +628,101 @@
                       Lors du placement de vos CET, il vous est possible de les placer dans un nouveau compartiment,
                       le PERECO. Il est également possible d’y placer votre intéressement. On vous explique :
                     </p>
-                    <video class="feed-post__video" controls preload="metadata" playsinline>
+                    <video class="feed-post__video" controls preload="metadata" playsinline aria-label="Vidéo explicative sur le PERECO chez INEOS">
                       <source src="assets/Le_PERECO_chez_INEOS.mp4" type="video/mp4">
                       Votre navigateur ne permet pas de lire cette vidéo.
                       <a href="assets/Le_PERECO_chez_INEOS.mp4">Télécharger la vidéo sur le PERECO chez INEOS</a>.
                     </video>
+                  </article>
+                </div>
+              </article>
+              <article class="action-feed" id="feed-dialogue">
+                <div class="action-feed__header">
+                  <span class="action-feed__tag">Dialogue</span>
+                  <h3>Dialogue social du groupe et du site</h3>
+                </div>
+                <div class="feed-list" role="region" aria-label="Actualités dialogue social" tabindex="0">
+                  <article class="feed-post">
+                    <div class="feed-post__meta">
+                      <span class="feed-post__avatar">CFDT</span>
+                      <div>
+                        <strong>NAO 2026 : des avancées financières, mais la CFDT refuse de brader votre santé !</strong>
+                        <time datetime="2026-06-12">12 juin 2026</time>
+                      </div>
+                    </div>
+                    <div class="feed-post__article">
+                      <p>
+                        Les Négociations Annuelles Obligatoires (NAO) 2026 se sont clôturées chez
+                        INEOS Sarralbe par la signature d'un Procès-Verbal de désaccord. En tant que
+                        représentants de la FCE-CFDT, je tenais à vous expliquer notre démarche en
+                        toute transparence, car elle illustre parfaitement nos valeurs et notre façon
+                        de vous défendre.
+                      </p>
+                      <p>
+                        Soyons clairs dès le départ : avec ce PV de désaccord, nous n’avons pas perdu
+                        au change. Au contraire, nous avons préservé l’essentiel et bloqué une
+                        régression sociale.
+                      </p>
+                      <h4>Pourquoi avoir signé un désaccord ?</h4>
+                      <p>
+                        La direction a tenté un chantage inacceptable : conditionner l'accord salarial
+                        global à une modification de nos rythmes de travail visant à réduire le temps
+                        de repos minimal entre deux postes, en le faisant passer de 11h à 9h.
+                      </p>
+                      <p>
+                        Pour la CFDT, la réponse a été immédiate et catégorique : la santé, la
+                        sécurité et la vie de famille ne se négocient pas. Réduire le repos quotidien
+                        sous prétexte de simplification administrative, c'est ouvrir la porte à la
+                        fatigue et aux risques d'accidents. Nous avons refusé de troquer votre
+                        sécurité contre des concessions de principe.
+                      </p>
+                      <h4>Le résultat : les avancées réelles préservées, le chantage bloqué !</h4>
+                      <p>
+                        Face à notre fermeté syndicale, la direction a été contrainte d'appliquer
+                        unilatéralement les revalorisations directes du pouvoir d’achat que nous avons
+                        portées lors des discussions :
+                      </p>
+                      <ul class="feed-summary-list">
+                        <li>
+                          <strong>Restauration :</strong> augmentation des tickets restaurant à 7 €
+                          (avec +1 € de part employeur) et passage des paniers de jour à 7,50 € dès
+                          le 1er juillet 2026.
+                        </li>
+                        <li>
+                          <strong>Pouvoir d'achat direct :</strong> versement d'une Prime de Partage
+                          de la Valeur (PPV) de 200 € en décembre 2026.
+                        </li>
+                      </ul>
+                      <p>
+                        <strong>Note sur les salaires :</strong> la direction tente d'inclure les
+                        évolutions d'ancienneté et les rattrapages de coefficients dans son bilan,
+                        mais ne nous trompons pas : il ne s'agit que de l'application de vos droits et
+                        de la loi, pas d'un cadeau de NAO.
+                      </p>
+                      <p>
+                        C'est là toute la force de la stratégie CFDT : nous avons prouvé que l'on peut
+                        bloquer un recul sur nos conditions de travail tout en forçant la direction à
+                        concéder les avancées financières sur la restauration et la prime. Nous n'avons
+                        pas cédé à leur pression, et le portefeuille des salariés est préservé sans
+                        contrepartie destructrice.
+                      </p>
+                      <h4>Un syndicalisme de terrain, fort et cohérent pour les élections</h4>
+                      <p>
+                        Cet épisode montre la différence fondamentale de la CFDT Chimie Énergie : nous
+                        ne sommes pas dans le dogmatisme du "non" systématique, mais nous disons un
+                        NON massif quand on touche à l'humain, à la santé et à la dignité.
+                      </p>
+                      <p>
+                        C’est ce syndicalisme constructif, protecteur et efficace qui doit continuer à
+                        peser sur notre site. Pour maintenir ce rapport de force et faire face aux
+                        futurs défis, nous avons besoin de vous.
+                      </p>
+                      <p>
+                        Si vous partagez cette vision d'un syndicat qui protège vraiment votre
+                        quotidien et votre santé, venez en discuter. C'est ensemble qu'on construit
+                        l'avenir d'INEOS Sarralbe !
+                      </p>
+                    </div>
                   </article>
                 </div>
               </article>
@@ -610,32 +732,136 @@
                   <span class="action-feed__tag">National</span>
                   <h3>Actualités nationale et de la convention chimie</h3>
                 </div>
-                <div class="feed-list" aria-label="Actualités nationale et de la convention chimie">
+                <div class="feed-list" role="region" aria-label="Actualités nationale et de la convention chimie" tabindex="0">
                   <article class="feed-post">
                     <div class="feed-post__meta">
                       <span class="feed-post__avatar">CFDT</span>
                       <div>
-                        <strong>Info flash : salaires et conditions de travail, la CFDT Chimie accentue la pression !</strong>
-                        <time datetime="2026-06-12">12 juin 2026</time>
+                        <strong>Congrès CFDT 2026 : les grandes orientations adoptées à Bordeaux</strong>
+                        <time datetime="2026-06">Juin 2026</time>
                       </div>
                     </div>
                     <div class="feed-post__article">
+                      <figure class="feed-article-visual feed-article-visual--congress" role="img" aria-label="Congrès CFDT 2026 à Bordeaux">
+                        <span>Congrès CFDT 2026</span>
+                      </figure>
                       <p>
-                        Alors que l’inflation continue de peser sur le quotidien, la FCE-CFDT (Fédération Chimie Énergie) tape du poing sur la table au niveau national. L'objectif ? Défendre le pouvoir d'achat de tous les salariés de la branche Chimie.
+                        Du 22 au 26 juin 2026, le 51ᵉ Congrès confédéral de la CFDT s’est tenu à
+                        Bordeaux. Pendant cinq jours, les représentants venus de toute la France ont
+                        débattu et voté les grandes orientations qui guideront l’action de la CFDT
+                        pour les quatre prochaines années.
                       </p>
-                      <h4>Ce qui vous concerne directement</h4>
                       <p>
-                        <strong>Négociations salariales (minimas de branche) :</strong> la CFDT exige une revalorisation réelle de la grille des salaires pour qu'aucun coefficient ne soit écrasé par le SMIC.
+                        Ce congrès est un moment important de la vie démocratique de l’organisation.
+                        Il permet de définir les priorités qui seront ensuite portées dans les
+                        entreprises, les branches professionnelles et au niveau national.
+                      </p>
+                      <div class="feed-article-callout">
+                        <strong>À retenir</strong>
+                        <ul class="feed-summary-list">
+                          <li>Bordeaux, du 22 au 26 juin 2026</li>
+                          <li>Environ 1 600 délégués réunis</li>
+                          <li>Résolution revendicative adoptée à 87,29 %</li>
+                          <li>Une feuille de route jusqu’au prochain congrès</li>
+                        </ul>
+                      </div>
+                      <section class="feed-article-section" aria-labelledby="congres-pouvoir-achat">
+                        <h4 id="congres-pouvoir-achat">Le pouvoir d’achat reste une priorité</h4>
+                        <figure class="feed-article-visual feed-article-visual--wages" role="img" aria-label="Pouvoir d’achat et négociation salariale">
+                          <span>Pouvoir d’achat</span>
+                        </figure>
+                        <p>
+                          Dans un contexte où le coût de la vie reste une préoccupation forte, la CFDT
+                          confirme que la défense du pouvoir d’achat demeure un axe central.
+                        </p>
+                        <p>Les orientations adoptées mettent l’accent sur :</p>
+                        <ul class="feed-summary-list">
+                          <li>la progression des salaires ;</li>
+                          <li>une meilleure reconnaissance des qualifications ;</li>
+                          <li>un partage plus équilibré de la valeur créée dans les entreprises ;</li>
+                          <li>la réduction des écarts de rémunération entre les femmes et les hommes.</li>
+                        </ul>
+                      </section>
+                      <section class="feed-article-section" aria-labelledby="congres-ia">
+                        <h4 id="congres-ia">L’intelligence artificielle doit rester au service de l’humain</h4>
+                        <figure class="feed-article-visual feed-article-visual--ai" role="img" aria-label="Intelligence artificielle et transformation du travail">
+                          <span>IA et travail</span>
+                        </figure>
+                        <p>
+                          L’intelligence artificielle transforme déjà de nombreux métiers. Pour la CFDT,
+                          son développement doit être accompagné afin de protéger les salariés et de
+                          garantir la transparence.
+                        </p>
+                        <p>Les priorités sont :</p>
+                        <ul class="feed-summary-list">
+                          <li>informer et consulter les représentants du personnel ;</li>
+                          <li>former les salariés aux nouveaux outils ;</li>
+                          <li>garantir la transparence sur les systèmes utilisés ;</li>
+                          <li>maintenir une intervention humaine dans les décisions importantes.</li>
+                        </ul>
+                      </section>
+                      <section class="feed-article-section" aria-labelledby="congres-sante">
+                        <h4 id="congres-sante">Santé, sécurité et conditions de travail</h4>
+                        <figure class="feed-article-visual feed-article-visual--safety" role="img" aria-label="Santé sécurité et conditions de travail">
+                          <span>Santé &amp; sécurité</span>
+                        </figure>
+                        <p>
+                          La prévention des risques professionnels reste une priorité. Le congrès
+                          rappelle l’importance d’agir en amont pour éviter les accidents, améliorer
+                          les conditions de travail et prévenir l’usure professionnelle.
+                        </p>
+                        <p>Les points clés :</p>
+                        <ul class="feed-summary-list">
+                          <li>prévention des accidents du travail ;</li>
+                          <li>amélioration des conditions de travail ;</li>
+                          <li>prévention des risques psychosociaux ;</li>
+                          <li>prise en compte de l’usure professionnelle.</li>
+                        </ul>
+                      </section>
+                      <section class="feed-article-section" aria-labelledby="congres-transition">
+                        <h4 id="congres-transition">Réussir la transition écologique sans fragiliser l’emploi</h4>
+                        <figure class="feed-article-visual feed-article-visual--industry" role="img" aria-label="Transition écologique et emploi industriel">
+                          <span>Transition &amp; emploi</span>
+                        </figure>
+                        <p>
+                          La transition écologique transforme les entreprises et les métiers. Pour la
+                          CFDT, elle doit être anticipée et accompagnée afin de préserver l’emploi et
+                          les compétences.
+                        </p>
+                        <p>L’objectif est de concilier :</p>
+                        <ul class="feed-summary-list">
+                          <li>protection de l’emploi ;</li>
+                          <li>formation professionnelle ;</li>
+                          <li>accompagnement des reconversions ;</li>
+                          <li>avenir industriel durable.</li>
+                        </ul>
+                      </section>
+                      <section class="feed-article-section" aria-labelledby="congres-dialogue">
+                        <h4 id="congres-dialogue">Renforcer le dialogue social</h4>
+                        <figure class="feed-article-visual feed-article-visual--dialogue" role="img" aria-label="Dialogue social et représentants du personnel">
+                          <span>Dialogue social</span>
+                        </figure>
+                        <p>
+                          Le congrès réaffirme l’importance du dialogue social. Les représentants du
+                          personnel jouent un rôle essentiel pour faire remonter les préoccupations des
+                          salariés et participer aux décisions qui concernent l’organisation du travail.
+                        </p>
+                      </section>
+                      <h4>Ce qu’il faut retenir</h4>
+                      <p>
+                        Le Congrès CFDT 2026 de Bordeaux fixe une feuille de route autour de sujets
+                        très concrets : salaires, intelligence artificielle, santé au travail,
+                        transition écologique et dialogue social.
                       </p>
                       <p>
-                        <strong>Pénibilité et travail posté :</strong> face aux rythmes exigeants de la chimie (3x8, travail de nuit, week-ends), la CFDT réclame une meilleure reconnaissance financière et des mesures concrètes pour la fin de carrière, notamment des dispositifs renforcés de transition vers la retraite.
+                        Ces orientations concernent directement le quotidien des salariés, qu’ils
+                        soient syndiqués ou non. Elles serviront de base aux actions et aux
+                        négociations menées dans les entreprises, les branches professionnelles et au
+                        niveau national.
                       </p>
-                      <blockquote class="feed-post__quote">
-                        <strong>Le mot de vos élus :</strong> « Dans la chimie, la richesse se crée grâce à votre engagement quotidien. La CFDT se bat pour que cette richesse soit équitablement partagée et que votre santé soit préservée. »
-                      </blockquote>
-                      <a class="feed-post__link" href="https://fce.cfdt.fr/mieux-partager-la-richesse-une-exigence-sociale-une-urgence-democratique/" target="_blank" rel="noopener">
-                        Lire l’article de la FCE-CFDT sur le partage des richesses
-                      </a>
+                      <p class="feed-article-source">
+                        Source : CFDT / Syndicalisme Hebdo / Congrès confédéral CFDT 2026
+                      </p>
                     </div>
                   </article>
                   <article class="feed-post">
@@ -686,113 +912,10 @@
                       class="feed-post__link"
                       href="https://fce.cfdt.fr/axes/sante-au-travail-risques-industriels/"
                       target="_blank"
-                      rel="noopener"
+                      rel="noopener noreferrer"
                     >
                       Découvrir les fiches de prévention et l’action de la FCE-CFDT
                     </a>
-                  </article>
-                </div>
-              </article>
-
-              <article class="action-feed" id="feed-dialogue">
-                <div class="action-feed__header">
-                  <span class="action-feed__tag">Dialogue</span>
-                  <h3>Dialogue social du groupe et du site</h3>
-                </div>
-                <div class="feed-list" aria-label="Actualités dialogue social">
-                  <article class="feed-post">
-                    <div class="feed-post__meta">
-                      <span class="feed-post__avatar">CFDT</span>
-                      <div>
-                        <strong>NAO 2026 : des avancées financières, mais la CFDT refuse de brader votre santé !</strong>
-                        <time datetime="2026-06-12">12 juin 2026</time>
-                      </div>
-                    </div>
-                    <div class="feed-post__article">
-                      <p>
-                        La dernière réunion de négociation sur les NAO (Négociations Annuelles Obligatoires) s'est achevée. Grâce à la mobilisation de vos représentants, la direction a dû concéder plusieurs avancées pour votre pouvoir d'achat. Cependant, elle a tenté d'y associer un recul inacceptable sur nos conditions de travail.
-                      </p>
-                      <p>
-                        Après consultation de ses adhérents, la CFDT a dit NON à ce chantage. Voici la synthèse de ce qu'il faut retenir.
-                      </p>
-                      <h4>1. Le bilan financier : ce que vous allez toucher</h4>
-                      <p>
-                        Puisqu'aucun accord global ne sera signé, ces gains seront appliqués unilatéralement par l'employeur via un PV de désaccord.
-                      </p>
-                      <ul class="feed-summary-list">
-                        <li><strong>Titres-restaurant :</strong> augmentation de 1 €. La part de l’employeur se rapproche ainsi du plafond d’exonération maximal de 7,32 € en vigueur pour 2026.</li>
-                        <li><strong>Prime de panier :</strong> revalorisée à 7,50 €, s'alignant sur le plafond d'exonération maximal de l'URSSAF pour les repas sur le lieu de travail.</li>
-                        <li><strong>Abondement PEE :</strong> hausse de 650 € à 690 €. Un versement complémentaire sera possible en juin ou novembre. La direction a refusé toute autre revalorisation de l'épargne salariale.</li>
-                        <li><strong>Prime de mentorat :</strong> 100 € en une fois par intérimaire formé.</li>
-                        <li><strong>Formation fabrication GN :</strong> 250 € pour le personnel formant les conducteurs ou le personnel au métier de la fabrication GN (Groupes de Niveau).</li>
-                        <li><strong>Prime de partage de la valeur :</strong> 200 € versés en fin d'année.</li>
-                        <li><strong>Bonus de présence :</strong> 60 € en fin d'année et 60 € supplémentaires possibles en juin.</li>
-                        <li><strong>Prime liée aux frais fixes :</strong> de 0 € à 100 € en janvier selon le respect du budget, versée au prorata de la présence physique sur site, intérimaires inclus.</li>
-                      </ul>
-                      <h4>2. Le point de rupture : pourquoi la CFDT a refusé de signer</h4>
-                      <p>
-                        Pour valider ces augmentations, la direction exigeait une contrepartie inadmissible : réduire notre temps de repos quotidien obligatoire de 11 heures à 9 heures consécutives.
-                      </p>
-                      <p>
-                        <strong>Pour la CFDT, votre santé n'est pas une monnaie d'échange.</strong> Réduire le repos augmente la fatigue, aggrave le risque d'accidents et détruit l'équilibre entre vie professionnelle et vie personnelle.
-                      </p>
-                      <h4>Et maintenant ? En attente du PV de désaccord</h4>
-                      <p>
-                        Parce que nous protégeons votre santé et vos salaires, nous allons acter ce bilan par un PV de désaccord.
-                      </p>
-                    </div>
-                  </article>
-                  <article class="feed-post">
-                    <div class="feed-post__meta">
-                      <span class="feed-post__avatar">CSE</span>
-                      <div>
-                        <strong>Questions CFDT pour le prochain CSE</strong>
-                        <time datetime="2026-06-19">19 juin 2026</time>
-                      </div>
-                    </div>
-                    <div class="feed-post__article">
-                      <p>
-                        La CFDT portera les questions suivantes lors du prochain CSE afin d'obtenir
-                        des réponses claires sur les droits des salariés, la sécurité et les choix de
-                        gestion du site.
-                      </p>
-                      <ul class="feed-summary-list">
-                        <li>
-                          <strong>Congés payés :</strong> la règle légale du 1/10e, prévue par
-                          l'article L. 3141-24 du Code du travail, ne semble plus être appliquée pour
-                          la valorisation des congés payés depuis le passage à l'année civile. Cette
-                          situation entraîne une baisse de la rémunération nette pour les salariés.
-                          Nous demandons des explications.
-                        </li>
-                        <li>
-                          <strong>Tableau de bord INEOS :</strong> il n'est toujours pas mis à jour,
-                          alors que le directeur avait indiqué au dernier CSE qu'une mise à jour
-                          serait faite.
-                        </li>
-                        <li>
-                          <strong>Échafaudages :</strong> nous avons entendu que le responsable
-                          maintenance ne souhaiterait plus faire appel à la société BRANT. Cette
-                          information est-elle vraie ? Si oui, quelles sont les raisons de ce choix ?
-                        </li>
-                        <li>
-                          <strong>Ignifuge abîmé :</strong> lors du CSE du 26 mars, une étude était
-                          en cours pour réparer ou remplacer les parties d'ignifuge abîmées. Avez-vous
-                          un retour de la société spécialisée sollicitée pour trouver une solution ?
-                        </li>
-                        <li>
-                          <strong>Achat de véhicules :</strong> nous avons entendu que l'entreprise
-                          achèterait quatre Grenadiers. Est-ce exact ? Si oui, est-ce bien raisonnable
-                          dans la conjoncture actuelle ?
-                        </li>
-                        <li>
-                          <strong>Convocation disciplinaire :</strong> un salarié aurait été convoqué
-                          par la DRH pour une sanction à la suite d'un tag sur les installations, sans
-                          insulte ni mépris envers des personnes. Nous trouvons déplorable que cet acte
-                          soit traité en LIH et que le service ne puisse pas gérer ce type de situation
-                          en interne.
-                        </li>
-                      </ul>
-                    </div>
                   </article>
                 </div>
               </article>
@@ -802,7 +925,7 @@
                   <span class="action-feed__tag">Branche</span>
                   <h3>Branche Chimie Lorraine</h3>
                 </div>
-                <div class="feed-list" aria-label="Actualités de la branche Chimie Lorraine">
+                <div class="feed-list" role="region" aria-label="Actualités de la branche Chimie Lorraine" tabindex="0">
                   <article class="feed-post">
                     <div class="feed-post__meta">
                       <span class="feed-post__avatar">CTB</span>
@@ -1039,7 +1162,7 @@
               </p>
             </div>
             <div class="adhesion-actions">
-              <a class="section-button" href="./documents/bulletin-adhesion-cfdt-scel.doc" target="_blank" rel="noopener">
+              <a class="section-button" href="./documents/bulletin-adhesion-cfdt-scel.doc" target="_blank" rel="noopener noreferrer">
                 T&eacute;l&eacute;charger le bulletin
               </a>
               <button class="section-button section-button--light" type="button" data-open-adhesion>
@@ -1108,11 +1231,47 @@
               Avant de transmettre le bulletin ou votre RIB, consultez
               <a href="mentions-legales.html#legal-data">les informations sur vos données personnelles</a>.
             </p>
-            <a class="poster-modal__cta" href="./documents/bulletin-adhesion-cfdt-scel.doc" target="_blank" rel="noopener">
+            <a class="poster-modal__cta" href="./documents/bulletin-adhesion-cfdt-scel.doc" target="_blank" rel="noopener noreferrer">
               Télécharger uniquement le bulletin
             </a>
           </div>
         </div>
+
+        <section class="section section--comments" id="commentaires" aria-labelledby="commentaires-title" data-comments-form-url="https://docs.google.com/forms/d/e/1FAIpQLSezsaMPGgk_qV8qCQZnZei7TfndaonJZPwfAX7a1RbqzdcjNA/viewform">
+          <div class="section__inner comments-layout">
+            <div class="section__header">
+              <p class="section__eyebrow">Commentaires</p>
+              <h2 id="commentaires-title">Un espace pour laisser une remarque</h2>
+              <p class="section__lead">
+                Vos retours aident la section CFDT INEOS Sarralbe à repérer les sujets utiles,
+                les questions fréquentes et les attentes des salariés.
+              </p>
+              <p class="comments-privacy-note">
+                Les messages transmis via le formulaire Google sont relus avant toute publication.
+                Pour une situation personnelle ou urgente, privilégiez les contacts directs.
+              </p>
+            </div>
+            <div class="comments-card">
+              <p class="comments-card__tag">Formulaire Google</p>
+              <h3>Partager un avis</h3>
+              <p>
+                Indiquez votre nom ou un pseudo, puis votre commentaire. Les informations restent
+                destinées à la section CFDT locale.
+              </p>
+              <a class="section-button comments-card__button" href="#contact" target="_blank" rel="noopener noreferrer" data-comments-link hidden>
+                Laisser un commentaire
+              </a>
+              <p class="comments-card__pending" data-comments-pending>
+                Le formulaire sera activé dès que le lien Google Forms sera ajouté. En attendant,
+                vous pouvez utiliser les moyens de contact ci-dessous.
+              </p>
+              <div class="comments-embed" data-comments-embed hidden>
+                <iframe title="Formulaire de commentaires CFDT INEOS Sarralbe" loading="lazy" referrerpolicy="no-referrer">
+                </iframe>
+              </div>
+            </div>
+          </div>
+        </section>
 
         <section class="section" id="contact" aria-labelledby="contact-title">
           <div class="section__inner contact-layout">
@@ -1166,7 +1325,7 @@
               <a href="mentions-legales.html">Mentions légales et confidentialité</a>
               <a href="https://www.cnil.fr/" target="_blank" rel="noopener noreferrer">CNIL</a>
             </nav>
-            <p class="site-footer__privacy">Aucun cookie publicitaire, outil de suivi ou formulaire en ligne.</p>
+            <p class="site-footer__privacy">Aucun cookie publicitaire. Les commentaires sont recueillis via Google Forms lorsqu'il est activé.</p>
           </div>
         </footer>
       </div>
@@ -1182,6 +1341,11 @@
       const adhesionModal = document.querySelector("#adhesion-consignes");
       const openAdhesionButtons = document.querySelectorAll("[data-open-adhesion]");
       const closeAdhesionButtons = document.querySelectorAll("[data-close-adhesion]");
+      const commentsSection = document.querySelector("[data-comments-form-url]");
+      const commentsLink = document.querySelector("[data-comments-link]");
+      const commentsPending = document.querySelector("[data-comments-pending]");
+      const commentsEmbed = document.querySelector("[data-comments-embed]");
+      const commentsIframe = commentsEmbed?.querySelector("iframe");
       const focusableSelector = [
         "a[href]",
         "button:not([disabled])",
@@ -1192,6 +1356,14 @@
       ].join(",");
       let posterTrigger = openPosterButton;
       let adhesionTrigger = null;
+
+      document.querySelectorAll("img").forEach((image) => {
+        image.addEventListener("error", () => image.remove(), { once: true });
+
+        if (image.complete && image.naturalWidth === 0) {
+          image.remove();
+        }
+      });
 
       const getFocusableElements = (container) =>
         Array.from(container?.querySelectorAll(focusableSelector) ?? []).filter(
@@ -1245,6 +1417,41 @@
       closeAdhesionButtons.forEach((button) => {
         button.addEventListener("click", () => setAdhesionOpen(false));
       });
+
+      const getGoogleFormEmbedUrl = (formUrl) => {
+        try {
+          const url = new URL(formUrl);
+
+          if (!url.hostname.endsWith("docs.google.com") || !url.pathname.includes("/forms/")) {
+            return "";
+          }
+
+          url.searchParams.set("embedded", "true");
+          return url.toString();
+        } catch {
+          return "";
+        }
+      };
+
+      const commentsFormUrl = commentsSection?.dataset.commentsFormUrl?.trim();
+
+      if (commentsFormUrl) {
+        const commentsEmbedUrl = getGoogleFormEmbedUrl(commentsFormUrl);
+
+        if (commentsLink) {
+          commentsLink.href = commentsFormUrl;
+          commentsLink.hidden = false;
+        }
+
+        if (commentsPending) {
+          commentsPending.hidden = true;
+        }
+
+        if (commentsEmbedUrl && commentsIframe && commentsEmbed) {
+          commentsIframe.src = commentsEmbedUrl;
+          commentsEmbed.hidden = false;
+        }
+      }
 
       document.addEventListener("keydown", (event) => {
         const openModal = document.querySelector(".poster-modal--open");
@@ -1307,8 +1514,14 @@
               return;
             }
 
-            navLinks.forEach((link) => link.classList.remove("nav__link--active"));
-            linksByTarget.get(`#${entry.target.id}`)?.classList.add("nav__link--active");
+            navLinks.forEach((link) => {
+              link.classList.remove("nav__link--active");
+              link.removeAttribute("aria-current");
+            });
+
+            const activeLink = linksByTarget.get(`#${entry.target.id}`);
+            activeLink?.classList.add("nav__link--active");
+            activeLink?.setAttribute("aria-current", "location");
           });
         },
         { rootMargin: "-36% 0px -54% 0px", threshold: 0 }
