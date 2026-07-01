@@ -2644,10 +2644,22 @@ svg {
   text-underline-offset: 3px;
 }
 
-.site-footer__privacy {
+.site-footer__meta {
   max-width: 310px;
+  display: grid;
+  gap: 6px;
   color: #c7cfdb;
   text-align: right;
+}
+
+.site-footer__privacy {
+  color: #c7cfdb;
+}
+
+.site-footer__automation {
+  color: #8f9bae;
+  font-size: 11px;
+  line-height: 1.35;
 }
 
 .legal-page {
@@ -2784,7 +2796,7 @@ svg {
     flex-direction: column;
   }
 
-  .site-footer__privacy {
+  .site-footer__meta {
     text-align: left;
   }
 
