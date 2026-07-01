@@ -15,11 +15,18 @@
     <meta name="referrer" content="no-referrer">
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; img-src 'self' data:; media-src 'self'; style-src 'self'; style-src-attr 'none'; script-src 'self' 'unsafe-inline'; script-src-attr 'none'; connect-src 'none'; frame-src https://docs.google.com https://forms.gle; object-src 'none'; base-uri 'self'; form-action 'self' mailto: https://docs.google.com"
+      content="default-src 'self'; img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com; media-src 'self'; style-src 'self'; style-src-attr 'none'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; script-src-attr 'none'; connect-src https://www.google-analytics.com https://region1.google-analytics.com https://www.googletagmanager.com; frame-src https://docs.google.com https://forms.gle; object-src 'none'; base-uri 'self'; form-action 'self' mailto: https://docs.google.com"
     >
     <link rel="preload" as="image" href="assets/sarralbe-aerien.jpg" fetchpriority="high">
     <link rel="stylesheet" href="styles.css?v=20260701-2">
     <meta name="google-site-verification" content="txs2p5JIHOdOoX1v4FFRYW-MwL39pWPWPtJZVMUqakQ" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2G9YJ63ZRK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag("js", new Date());
+      gtag("config", "G-2G9YJ63ZRK");
+    </script>
   </head>
   <body>
     <a class="skip-link" href="#contenu-principal">Aller au contenu principal</a>
