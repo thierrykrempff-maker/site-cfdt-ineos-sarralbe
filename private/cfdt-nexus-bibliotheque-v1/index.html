@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CFDT Nexus - Bibliothèque documentaire</title>
+    <meta name="description" content="Bibliothèque documentaire CFDT Nexus : ajout, recherche, filtres et fiches détaillées.">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#content">Aller au contenu</a>
+
+    <header class="app-header">
+      <div class="brand-block" aria-label="CFDT Nexus">
+        <span class="brand-mark">Cfdt.</span>
+        <span class="brand-copy">
+          <strong>CFDT Nexus</strong>
+          <span>Bibliothèque documentaire</span>
+        </span>
+      </div>
+      <nav class="module-nav" aria-label="Modules">
+        <a href="../cfdt-nexus-dossiers/index.html">Dossiers</a>
+        <a class="module-nav__active" href="index.html" aria-current="page">Bibliothèque</a>
+      </nav>
+      <span class="header-status"><span class="status-dot" aria-hidden="true"></span>Sprint V1</span>
+      <div class="header-actions">
+        <button class="button button--ghost" type="button" id="exportButton">Export JSON</button>
+        <button class="button button--primary" type="button" id="openAddPanel">Ajouter un document</button>
+      </div>
+    </header>
+
+    <main class="library-shell" id="content">
+      <aside class="sidebar" aria-label="Recherche et filtres">
+        <section class="panel panel--compact">
+          <label>
+            <span>Rechercher</span>
+            <input id="searchInput" type="search" placeholder="Titre, mot-clé, catégorie...">
+          </label>
+        </section>
+        <section class="panel panel--compact">
+          <div class="panel-heading">
+            <h2>Filtres</h2>
+            <button class="link-button" type="button" id="resetFilters">Tout afficher</button>
+          </div>
+          <div class="filter-stack" id="categoryFilters"></div>
+        </section>
+        <section class="panel panel--compact">
+          <div class="panel-heading"><h2>Confidentialité</h2></div>
+          <div class="filter-stack" id="confidentialityFilters"></div>
+        </section>
+        <section class="panel panel--compact">
+          <div class="metric-grid" id="metricGrid"></div>
+        </section>
+      </aside>
+
+      <section class="main-column">
+        <section class="add-panel" id="addPanel" hidden>
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Ajout de document</p>
+              <h1>Nouveau document</h1>
+            </div>
+            <button class="icon-button" type="button" id="closeAddPanel" aria-label="Fermer">×</button>
+          </div>
+          <form class="document-form" id="documentForm">
+            <label><span>Titre</span><input name="title" type="text" required></label>
+            <label><span>Catégorie</span><select name="category" id="categorySelect" required></select></label>
+            <label class="field-wide"><span>Description</span><textarea name="description" rows="3" required></textarea></label>
+            <label><span>Mots-clés</span><input name="keywords" type="text" placeholder="paie, horaires, sanction"></label>
+            <label><span>Date</span><input name="date" type="date" required></label>
+            <label><span>Version</span><input name="version" type="text" required value="v1"></label>
+            <label><span>Confidentialité</span><select name="confidentiality" id="confidentialitySelect" required></select></label>
+            <label><span>Référence fichier</span><input name="fileName" type="text" placeholder="document.pdf"></label>
+            <div class="form-actions field-wide">
+              <button class="button button--primary" type="submit">Enregistrer</button>
+              <button class="button button--ghost" type="button" id="cancelAdd">Annuler</button>
+            </div>
+          </form>
+        </section>
+
+        <section class="panel list-panel">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Liste des documents</p>
+              <h1>Bibliothèque</h1>
+              <p id="resultCount">0 document</p>
+            </div>
+            <select id="sortSelect" aria-label="Trier les documents">
+              <option value="recent">Plus récents</option>
+              <option value="title">Titre A-Z</option>
+              <option value="category">Catégorie</option>
+              <option value="confidentiality">Confidentialité</option>
+            </select>
+          </div>
+          <div class="document-list" id="documentList" aria-live="polite"></div>
+        </section>
+      </section>
+
+      <aside class="detail-panel" id="documentDetail" aria-label="Fiche détaillée"></aside>
+    </main>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>

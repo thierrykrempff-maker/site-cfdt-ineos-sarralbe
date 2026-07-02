@@ -1,0 +1,32 @@
+{
+  "id": "cfdt-nexus-bibliotheque",
+  "name": "Bibliothèque documentaire",
+  "version": "1.0.0",
+  "sprint": "Sprint V1 - Bibliothèque documentaire",
+  "entry": "index.html",
+  "storage": {
+    "mode": "localStorage",
+    "key": "cfdt-nexus-bibliotheque-v1",
+    "schemaVersion": "library-document-v1"
+  },
+  "documentFields": [
+    "titre",
+    "categorie",
+    "description",
+    "motsCles",
+    "date",
+    "version",
+    "confidentialite"
+  ],
+  "futureIntegrations": {
+    "aiIndexation": true,
+    "semanticSearch": true,
+    "intelligentRouter": true,
+    "agentFeed": true
+  },
+  "allowedAgents": [
+    "defenseur-syndical",
+    "conseiller-salarie",
+    "redacteur-cfdt"
+  ]
+}
