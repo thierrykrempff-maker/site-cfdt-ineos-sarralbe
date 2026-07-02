@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CFDT Nexus - Paramètres du Cockpit</title>
+    <meta
+      name="description"
+      content="Paramètres CFDT Nexus pour la bibliothèque documentaire privée et l'indexation locale."
+    >
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'"
+    >
+    <link rel="stylesheet" href="styles.css">
+    <script src="settings.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#settingsCenter">Aller au contenu</a>
+
+    <header class="cockpit-header">
+      <div class="brand-block" aria-label="CFDT Nexus">
+        <span class="brand-mark">Cfdt.</span>
+        <span class="brand-copy">
+          <strong>CFDT Nexus</strong>
+          <span>Cockpit représentant du personnel</span>
+        </span>
+      </div>
+
+      <nav class="module-nav" aria-label="Modules du Cockpit">
+        <a href="../private/cfdt-nexus-dossiers/index.html">Dossiers</a>
+        <a href="../private/cfdt-nexus-bibliotheque/index.html">Bibliothèque</a>
+        <a href="index.html">Analyse documentaire</a>
+        <a class="module-nav__active" href="settings.html" aria-current="page">Paramètres</a>
+      </nav>
+
+      <div class="header-status">
+        <span class="status-dot" aria-hidden="true"></span>
+        Configuration
+      </div>
+    </header>
+
+    <main class="settings-shell" id="settingsCenter">
+      <section class="hero-panel">
+        <div>
+          <p class="eyebrow">Paramètres</p>
+          <h1>Bibliothèque privée</h1>
+          <p>
+            Supervisez le lien local vers la bibliothèque documentaire privée, son état d'indexation
+            et les informations qui serviront au futur Routeur Intelligent.
+          </p>
+        </div>
+        <div class="security-reminder">
+          <strong>Rappel documentaire</strong>
+          <span>Les documents sensibles restent hors dépôt public. L'indexation réelle sera branchée plus tard.</span>
+        </div>
+      </section>
+
+      <section class="settings-layout">
+        <section class="panel settings-panel" aria-labelledby="librarySettingsTitle">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Bibliothèque documentaire</p>
+              <h2 id="librarySettingsTitle">Configuration locale</h2>
+            </div>
+          </div>
+
+          <div class="settings-grid">
+            <article class="settings-card settings-card--wide">
+              <span>Emplacement de la bibliothèque documentaire privée</span>
+              <strong class="path-value" id="libraryPath">../private/cfdt-nexus-bibliotheque/</strong>
+            </article>
+
+            <article class="settings-card">
+              <span>Statut de connexion</span>
+              <strong>
+                <span class="status-pill" id="connectionStatus">Initialisation</span>
+              </strong>
+            </article>
+
+            <article class="settings-card">
+              <span>Nombre de documents détectés</span>
+              <strong id="detectedDocuments">0</strong>
+            </article>
+
+            <article class="settings-card">
+              <span>Date de la dernière indexation</span>
+              <strong id="lastIndexedAt">Jamais indexée</strong>
+            </article>
+
+            <article class="settings-card">
+              <span>Source actuelle</span>
+              <strong id="indexSource">Démonstration locale</strong>
+            </article>
+          </div>
+
+          <div class="settings-actions">
+            <button class="button button--primary" type="button" id="reindexButton">
+              Réindexer la bibliothèque
+            </button>
+          </div>
+        </section>
+
+        <aside class="panel settings-panel" aria-labelledby="indexLogTitle">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Indexation</p>
+              <h2 id="indexLogTitle">Suivi</h2>
+            </div>
+          </div>
+          <div class="index-log" id="indexLog">
+            En attente d'une réindexation manuelle.
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>

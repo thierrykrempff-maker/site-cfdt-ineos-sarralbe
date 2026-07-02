@@ -13,6 +13,7 @@
       content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'"
     >
     <link rel="stylesheet" href="styles.css">
+    <script src="analysis-grids.js" defer></script>
     <script src="app.js" defer></script>
   </head>
   <body>
@@ -31,22 +32,23 @@
         <a href="../private/cfdt-nexus-dossiers/index.html">Dossiers</a>
         <a href="../private/cfdt-nexus-bibliotheque/index.html">Bibliothèque</a>
         <a class="module-nav__active" href="index.html" aria-current="page">Analyse documentaire</a>
+        <a href="settings.html">Paramètres</a>
       </nav>
 
       <div class="header-status">
         <span class="status-dot" aria-hidden="true"></span>
-        Sprint V2
+        Sprint V2.1
       </div>
     </header>
 
     <main class="document-center" id="documentCenter">
       <section class="hero-panel">
         <div>
-          <p class="eyebrow">Document Intelligence Center V1</p>
+          <p class="eyebrow">Document Intelligence Center V2.1</p>
           <h1>Analyse documentaire</h1>
           <p>
-            Préparez une lecture syndicale structurée d'un document, choisissez un profil d'analyse
-            et générez une synthèse simulée prête à connecter aux futurs agents IA.
+            Préparez une lecture syndicale structurée d'un document avec une grille métier extensible,
+            pensée pour reproduire le raisonnement d'un représentant du personnel expérimenté.
           </p>
         </div>
         <div class="security-reminder">
@@ -93,6 +95,11 @@
                 <option value="image">Image</option>
                 <option value="text">Texte</option>
               </select>
+            </label>
+
+            <label class="checkbox-field">
+              <input id="referenceAgreementToggle" type="checkbox">
+              <span>Accord actuellement applicable disponible</span>
             </label>
           </section>
 
@@ -145,14 +152,23 @@
             <div class="result-grid" id="analysisResult"></div>
           </section>
 
-          <section class="panel agreement-panel" id="agreementPanel" hidden>
+          <section class="panel method-panel" id="methodPanel">
             <div class="section-heading">
               <div>
-                <p class="eyebrow">Profil projet d'accord</p>
-                <h2>Grille d'analyse spécifique</h2>
+                <p class="eyebrow">Méthode CFDT Nexus</p>
+                <h2>Moteur de grilles d'analyse</h2>
               </div>
+              <label class="compact-select">
+                <span>Grille active</span>
+                <select id="analysisGridSelect"></select>
+              </label>
             </div>
-            <div class="agreement-grid" id="agreementGrid"></div>
+            <div class="method-summary" id="analysisGridSummary"></div>
+            <div class="method-grid" id="analysisGrid"></div>
+            <div class="future-grid-panel">
+              <h3>Grilles prévues</h3>
+              <div class="future-grid-list" id="futureGridList"></div>
+            </div>
           </section>
         </section>
 
@@ -178,8 +194,8 @@
             </div>
             <ol class="next-steps">
               <li>Brancher la Bibliothèque documentaire.</li>
+              <li>Ajouter de nouvelles grilles sans modifier le cœur du DIC.</li>
               <li>Router vers l'agent métier adapté.</li>
-              <li>Ajouter extraction PDF, Word et OCR.</li>
               <li>Envoyer les tâches et alertes vers n8n.</li>
             </ol>
           </section>

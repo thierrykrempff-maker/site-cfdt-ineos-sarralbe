@@ -64,20 +64,6 @@ const analysisBlocks = [
   "Proposition de communication CFDT",
 ];
 
-const agreementBlocks = [
-  "Ce que prévoit le projet",
-  "Ce qui change par rapport à l'existant",
-  "Salariés concernés",
-  "Avantages",
-  "Risques ou reculs possibles",
-  "Points flous",
-  "Questions à poser en CSE",
-  "Points de négociation",
-  "Vérification Convention Chimie",
-  "Vérification accords existants",
-  "Proposition d'article ou de tract CFDT",
-];
-
 const profileContent = {
   summary: {
     tone: "lecture synthétique",
@@ -178,6 +164,7 @@ const blindSpotItems = {
 };
 
 let activeProfile = "summary";
+let activeGridId = null;
 let currentFile = null;
 
 const els = {};
@@ -188,6 +175,7 @@ function init() {
   cacheElements();
   renderProfiles();
   renderConnectors();
+  renderAnalysisGridOptions();
   renderAnalysis();
   bindEvents();
 }
@@ -196,13 +184,16 @@ function cacheElements() {
   els.profileGrid = document.querySelector("#profileGrid");
   els.connectorList = document.querySelector("#connectorList");
   els.analysisResult = document.querySelector("#analysisResult");
-  els.agreementPanel = document.querySelector("#agreementPanel");
-  els.agreementGrid = document.querySelector("#agreementGrid");
+  els.analysisGridSelect = document.querySelector("#analysisGridSelect");
+  els.analysisGridSummary = document.querySelector("#analysisGridSummary");
+  els.analysisGrid = document.querySelector("#analysisGrid");
+  els.futureGridList = document.querySelector("#futureGridList");
   els.activeProfileTitle = document.querySelector("#activeProfileTitle");
   els.documentInput = document.querySelector("#documentInput");
   els.fileSummary = document.querySelector("#fileSummary");
   els.confidentialitySelect = document.querySelector("#confidentialitySelect");
   els.documentKindSelect = document.querySelector("#documentKindSelect");
+  els.referenceAgreementToggle = document.querySelector("#referenceAgreementToggle");
   els.questionsOutput = document.querySelector("#questionsOutput");
   els.blindSpotPanel = document.querySelector("#blindSpotPanel");
   els.toast = document.querySelector("#toast");
@@ -212,6 +203,11 @@ function bindEvents() {
   els.documentInput.addEventListener("change", handleFileSelection);
   els.confidentialitySelect.addEventListener("change", renderAnalysis);
   els.documentKindSelect.addEventListener("change", renderAnalysis);
+  els.referenceAgreementToggle.addEventListener("change", renderAnalysisGrid);
+  els.analysisGridSelect.addEventListener("change", (event) => {
+    activeGridId = event.target.value;
+    renderAnalysisGrid();
+  });
 
   document.querySelector("#prepareQuestionsButton").addEventListener("click", () => {
     renderQuestions();
@@ -238,6 +234,8 @@ function renderProfiles() {
   document.querySelectorAll("[data-profile]").forEach((button) => {
     button.addEventListener("click", () => {
       activeProfile = button.dataset.profile;
+      const profileGrid = gridForProfile(activeProfile);
+      if (profileGrid) activeGridId = profileGrid.id;
       renderProfiles();
       renderAnalysis();
       els.blindSpotPanel.hidden = true;
@@ -287,13 +285,7 @@ function renderAnalysis() {
   const context = analysisContext(profile);
 
   els.analysisResult.innerHTML = analysisBlocks.map((title) => analysisCard(title, simulatedItems(title, context))).join("");
-
-  if (activeProfile === "agreement") {
-    els.agreementPanel.hidden = false;
-    els.agreementGrid.innerHTML = agreementBlocks.map((title) => analysisCard(title, simulatedAgreementItems(title, context))).join("");
-  } else {
-    els.agreementPanel.hidden = true;
-  }
+  renderAnalysisGrid();
 }
 
 function renderQuestions() {
@@ -319,12 +311,113 @@ function renderBlindSpots() {
   `;
 }
 
+function renderAnalysisGridOptions() {
+  const grids = availableAnalysisGrids();
+  activeGridId = activeGridId || gridForProfile(activeProfile)?.id || gridRegistry().defaultGridId || grids[0]?.id || null;
+
+  els.analysisGridSelect.innerHTML = grids.map((grid) => `
+    <option value="${escapeAttr(grid.id)}"${grid.id === activeGridId ? " selected" : ""}>
+      ${escapeHtml(grid.title)}
+    </option>
+  `).join("");
+
+  renderFutureGridList();
+}
+
+function renderAnalysisGrid() {
+  const grid = activeAnalysisGrid();
+  if (!grid) {
+    els.analysisGridSummary.textContent = "Aucune grille d'analyse n'est encore configurée.";
+    els.analysisGrid.innerHTML = "";
+    return;
+  }
+
+  const context = analysisContext(profileById(activeProfile));
+  activeGridId = grid.id;
+  els.analysisGridSelect.value = grid.id;
+  const steps = Array.isArray(grid.steps) ? grid.steps : [];
+  els.analysisGridSummary.innerHTML = `
+    <strong>${escapeHtml(grid.title)}</strong>
+    <span>${escapeHtml(grid.description)}</span>
+  `;
+  els.analysisGrid.innerHTML = steps.length
+    ? steps.map((step) => methodStepCard(step, grid, context)).join("")
+    : "<p class=\"empty-state\">Cette grille ne contient pas encore d'étapes.</p>";
+}
+
+function methodStepCard(step, grid, context) {
+  const requirementAlert = step.number === 1 ? referenceRequirementAlert(grid, context) : "";
+  return `
+    <article class="method-step">
+      <div class="method-step__header">
+        <span>Étape ${escapeHtml(step.number)}</span>
+        <h3>${escapeHtml(step.title)}</h3>
+      </div>
+      <p>${escapeHtml(step.objective)}</p>
+      ${requirementAlert}
+      ${step.disclaimer ? `<div class="method-disclaimer">${escapeHtml(step.disclaimer)}</div>` : ""}
+      <div class="method-blocks">
+        ${(Array.isArray(step.blocks) ? step.blocks : []).map(methodBlock).join("")}
+      </div>
+    </article>
+  `;
+}
+
+function methodBlock(block) {
+  return `
+    <section class="method-block">
+      <h4>${escapeHtml(block.title)}</h4>
+      <ul>
+        ${block.items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
+      </ul>
+    </section>
+  `;
+}
+
+function referenceRequirementAlert(grid, context) {
+  const requirement = grid.referenceRequirement;
+  if (!requirement) return "";
+  if (requirement.field === "hasReferenceAgreement" && context.hasReferenceAgreement) return "";
+
+  return `
+    <div class="method-alert" role="alert">
+      ${escapeHtml(requirement.alert)}
+    </div>
+  `;
+}
+
+function renderFutureGridList() {
+  const futureGrids = Array.isArray(gridRegistry().futureGridCatalog) ? gridRegistry().futureGridCatalog : [];
+  els.futureGridList.innerHTML = futureGrids.map((name) => `
+    <span>${escapeHtml(name)}</span>
+  `).join("");
+}
+
+function activeAnalysisGrid() {
+  const grids = availableAnalysisGrids();
+  return grids.find((grid) => grid.id === activeGridId) || gridForProfile(activeProfile) || grids[0] || null;
+}
+
+function gridForProfile(profileId) {
+  return availableAnalysisGrids().find((grid) => grid.profileId === profileId) || null;
+}
+
+function availableAnalysisGrids() {
+  return Array.isArray(gridRegistry().grids) ? gridRegistry().grids : [];
+}
+
+function gridRegistry() {
+  if (typeof window === "undefined") return { grids: [], futureGridCatalog: [] };
+  return window.CFDT_NEXUS_ANALYSIS_GRIDS || { grids: [], futureGridCatalog: [] };
+}
+
 function analysisContext(profile) {
   return {
     profile,
     confidentiality: confidentialityLabel(els.confidentialitySelect.value),
     kind: documentKindLabel(els.documentKindSelect.value),
     fileName: currentFile?.name || "Document de démonstration",
+    hasReferenceAgreement: els.referenceAgreementToggle.checked,
     tone: profileContent[profile.id]?.tone || "lecture syndicale",
   };
 }
@@ -375,58 +468,6 @@ function simulatedItems(title, context) {
   };
 
   return shared[title] || ["Analyse simulée à connecter à un agent IA."];
-}
-
-function simulatedAgreementItems(title) {
-  const items = {
-    "Ce que prévoit le projet": [
-      "Un cadre d'application nouveau ou révisé.",
-      "Des modalités à confirmer avec la direction.",
-    ],
-    "Ce qui change par rapport à l'existant": [
-      "Comparer les droits actuels avec les nouvelles clauses.",
-      "Identifier les usages non repris dans le projet.",
-    ],
-    "Salariés concernés": [
-      "Services, équipes, horaires ou métiers visés.",
-      "Salariés exclus ou cas particuliers.",
-    ],
-    "Avantages": [
-      "Clarification possible des règles.",
-      "Meilleur suivi si des indicateurs sont ajoutés.",
-    ],
-    "Risques ou reculs possibles": [
-      "Perte d'un usage favorable.",
-      "Clause trop large ou absence de garantie écrite.",
-    ],
-    "Points flous": [
-      "Critères d'éligibilité.",
-      "Modalités de contrôle et de révision.",
-    ],
-    "Questions à poser en CSE": [
-      "Quels impacts mesurables pour les salariés ?",
-      "Quel suivi sera transmis au CSE ?",
-    ],
-    "Points de négociation": [
-      "Clause de revoyure.",
-      "Garantie de non-régression.",
-      "Indicateurs de suivi.",
-    ],
-    "Vérification Convention Chimie": [
-      "Comparer avec les minima conventionnels.",
-      "Vérifier les classifications et majorations concernées.",
-    ],
-    "Vérification accords existants": [
-      "Contrôler les accords temps de travail, astreinte ou télétravail.",
-      "Repérer les clauses incompatibles.",
-    ],
-    "Proposition d'article ou de tract CFDT": [
-      "Titre : Projet d'accord, les points que la CFDT veut clarifier.",
-      "Message : informer les salariés et préparer les questions utiles.",
-    ],
-  };
-
-  return items[title] || ["Point à connecter à la bibliothèque documentaire."];
 }
 
 function analysisCard(title, items) {
@@ -496,4 +537,8 @@ function escapeHtml(value) {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
+}
+
+function escapeAttr(value) {
+  return escapeHtml(value);
 }
