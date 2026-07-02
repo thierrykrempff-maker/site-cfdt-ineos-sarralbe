@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CFDT Nexus - Bibliothèque documentaire intelligente</title>
+    <meta
+      name="description"
+      content="Bibliothèque documentaire intelligente CFDT Nexus : documents, recherche, filtres, tri et fiche détaillée."
+    >
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'"
+    >
+    <link rel="stylesheet" href="styles.css?v=1.0.0">
+    <script src="app.js?v=1.0.0" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#libraryContent">Aller au contenu</a>
+
+    <header class="app-header">
+      <div class="brand-block" aria-label="CFDT Nexus">
+        <span class="brand-mark">Cfdt.</span>
+        <span class="brand-copy">
+          <strong>CFDT Nexus</strong>
+          <span>Bibliothèque documentaire intelligente</span>
+        </span>
+      </div>
+
+      <nav class="module-nav" aria-label="Modules CFDT Nexus">
+        <a href="../cfdt-nexus-dossiers/index.html">Dossiers</a>
+        <a class="module-nav__active" href="index.html" aria-current="page">Bibliothèque</a>
+      </nav>
+
+      <div class="header-status">
+        <span class="status-dot" aria-hidden="true"></span>
+        Sprint V1.1
+      </div>
+
+      <div class="header-actions">
+        <button class="button button--ghost" type="button" id="exportLibraryButton">Export JSON</button>
+        <button class="button button--primary" type="button" id="openAddPanel">Ajouter un document</button>
+      </div>
+    </header>
+
+    <section class="principle-strip" aria-label="Principe de fonctionnement">
+      <strong>Socle documentaire CFDT Nexus.</strong>
+      <span>Les futurs agents IA s'appuieront sur cette base, avec validation humaine et niveaux de confidentialité.</span>
+    </section>
+
+    <main class="library-shell" id="libraryContent">
+      <aside class="library-sidebar" aria-label="Recherche et filtres">
+        <section class="panel panel--compact">
+          <label class="search-field">
+            <span>Recherche instantanée</span>
+            <input id="searchInput" type="search" placeholder="Titre, mot-clé, entreprise, auteur...">
+          </label>
+        </section>
+
+        <section class="panel panel--compact">
+          <div class="panel-heading">
+            <h2>Catégories</h2>
+            <button class="link-button" type="button" id="resetFiltersButton">Tout afficher</button>
+          </div>
+          <div class="filter-stack" id="categoryFilters"></div>
+        </section>
+
+        <section class="panel panel--compact">
+          <div class="panel-heading">
+            <h2>Confidentialité</h2>
+          </div>
+          <div class="filter-stack" id="confidentialityFilters"></div>
+        </section>
+
+        <section class="panel panel--compact">
+          <div class="metric-grid" id="metricGrid"></div>
+        </section>
+      </aside>
+
+      <section class="library-main" aria-label="Documents de la bibliothèque">
+        <section class="add-panel" id="addPanel" hidden>
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Ajout de document</p>
+              <h1>Nouveau document</h1>
+              <p>Interface prête pour un futur backend, OCR, PDF et Word.</p>
+            </div>
+            <button class="icon-button" type="button" id="closeAddPanel" aria-label="Fermer">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+
+          <form class="document-form" id="documentForm">
+            <label>
+              <span>Titre</span>
+              <input name="title" type="text" required placeholder="ex. Accord temps de travail">
+            </label>
+            <label>
+              <span>Catégorie</span>
+              <select name="category" id="categorySelect" required></select>
+            </label>
+            <label class="field-wide">
+              <span>Description</span>
+              <textarea name="description" rows="3" required placeholder="Résumé court du contenu et de son usage"></textarea>
+            </label>
+            <label>
+              <span>Entreprise concernée</span>
+              <input name="company" type="text" required placeholder="ex. INEOS Sarralbe">
+            </label>
+            <label>
+              <span>Date</span>
+              <input name="date" type="date" required>
+            </label>
+            <label>
+              <span>Version</span>
+              <input name="version" type="text" required value="v1">
+            </label>
+            <label>
+              <span>Auteur</span>
+              <input name="author" type="text" required placeholder="CFDT, RH, CSE...">
+            </label>
+            <label>
+              <span>Mots-clés</span>
+              <input name="keywords" type="text" placeholder="temps de travail, paie, astreinte">
+            </label>
+            <label>
+              <span>Confidentialité</span>
+              <select name="confidentiality" id="confidentialitySelect" required></select>
+            </label>
+            <label>
+              <span>Référence fichier</span>
+              <input name="fileName" type="text" placeholder="nom-du-document.pdf">
+            </label>
+            <label class="field-wide">
+              <span>Notes internes</span>
+              <textarea name="notes" rows="2" placeholder="Précautions, usage conseillé, source à vérifier"></textarea>
+            </label>
+            <div class="form-actions field-wide">
+              <button class="button button--primary" type="submit">Enregistrer</button>
+              <button class="button button--ghost" type="button" id="cancelAddDocument">Annuler</button>
+            </div>
+          </form>
+        </section>
+
+        <section class="panel document-list-panel">
+          <div class="section-heading section-heading--toolbar">
+            <div>
+              <p class="eyebrow">Bibliothèque</p>
+              <h1>Documents disponibles</h1>
+              <p id="resultCount">0 document</p>
+            </div>
+            <div class="toolbar">
+              <label class="toolbar-control">
+                <span>Trier</span>
+                <select id="sortSelect" aria-label="Trier les documents">
+                  <option value="recent">Plus récents</option>
+                  <option value="title">Titre A-Z</option>
+                  <option value="category">Catégorie</option>
+                  <option value="company">Entreprise</option>
+                  <option value="confidentiality">Confidentialité</option>
+                </select>
+              </label>
+              <div class="segmented" aria-label="Mode d'affichage">
+                <button class="segmented__button segmented__button--active" type="button" data-view="list">Liste</button>
+                <button class="segmented__button" type="button" data-view="cards">Cartes</button>
+              </div>
+            </div>
+          </div>
+          <div class="document-list document-list--list" id="documentList" aria-live="polite"></div>
+        </section>
+      </section>
+
+      <aside class="detail-panel" id="documentDetail" aria-label="Fiche document"></aside>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>

@@ -1,0 +1,44 @@
+{
+  "id": "cfdt-nexus-bibliotheque",
+  "name": "Bibliothèque documentaire intelligente",
+  "version": "1.1.0",
+  "sprint": "Sprint V1.1 - Bibliothèque documentaire intelligente",
+  "entry": "index.html",
+  "storage": {
+    "mode": "localStorage",
+    "key": "cfdt-nexus-bibliotheque-v1-1",
+    "schemaVersion": "library-document-v1-1"
+  },
+  "documentFields": [
+    "titre",
+    "categorie",
+    "description",
+    "entrepriseConcernee",
+    "date",
+    "version",
+    "auteur",
+    "motsCles",
+    "confidentialite",
+    "referenceFichier",
+    "notesInternes"
+  ],
+  "futureIntegrations": {
+    "assistantIA": true,
+    "aiIndexation": true,
+    "semanticSearch": true,
+    "intelligentRouter": true,
+    "agentFeed": true,
+    "n8n": true,
+    "ocr": true,
+    "pdf": true,
+    "word": true
+  },
+  "allowedAgents": [
+    "defenseur-syndical",
+    "conseiller-salarie",
+    "redacteur-cfdt",
+    "paie",
+    "cssct",
+    "convention-collective"
+  ]
+}

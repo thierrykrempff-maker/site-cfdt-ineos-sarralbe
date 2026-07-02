@@ -1,8 +1,16 @@
 # Archives locales contenant des portraits non publiés ou en attente d'autorisation
-private/
+private/*
+!private/cfdt-nexus-bibliotheque/
+!private/cfdt-nexus-bibliotheque/**
+!private/cfdt-nexus-dossiers/
+!private/cfdt-nexus-dossiers/**
 
 # Captures de contrôle locales
 cfdt-home-*.png
+
+# Paquets de deploiement Hostinger generes localement
+hostinger-upload-*/
+hostinger-upload-*.zip
 
 # Journaux et fichiers temporaires
 *.log
