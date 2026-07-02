@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CFDT Nexus - Analyse documentaire</title>
+    <meta
+      name="description"
+      content="Cockpit CFDT Nexus - Document Intelligence Center V1 pour préparer l'analyse documentaire syndicale."
+    >
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'"
+    >
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#documentCenter">Aller au contenu</a>
+
+    <header class="cockpit-header">
+      <div class="brand-block" aria-label="CFDT Nexus">
+        <span class="brand-mark">Cfdt.</span>
+        <span class="brand-copy">
+          <strong>CFDT Nexus</strong>
+          <span>Cockpit représentant du personnel</span>
+        </span>
+      </div>
+
+      <nav class="module-nav" aria-label="Modules du Cockpit">
+        <a href="../private/cfdt-nexus-dossiers/index.html">Dossiers</a>
+        <a href="../private/cfdt-nexus-bibliotheque/index.html">Bibliothèque</a>
+        <a class="module-nav__active" href="index.html" aria-current="page">Analyse documentaire</a>
+      </nav>
+
+      <div class="header-status">
+        <span class="status-dot" aria-hidden="true"></span>
+        Sprint V2
+      </div>
+    </header>
+
+    <main class="document-center" id="documentCenter">
+      <section class="hero-panel">
+        <div>
+          <p class="eyebrow">Document Intelligence Center V1</p>
+          <h1>Analyse documentaire</h1>
+          <p>
+            Préparez une lecture syndicale structurée d'un document, choisissez un profil d'analyse
+            et générez une synthèse simulée prête à connecter aux futurs agents IA.
+          </p>
+        </div>
+        <div class="security-reminder">
+          <strong>Confidentialité</strong>
+          <span>Ne pas importer de document confidentiel sans vérifier son niveau de diffusion.</span>
+        </div>
+      </section>
+
+      <section class="workspace-grid">
+        <aside class="left-rail" aria-label="Import et profils">
+          <section class="panel upload-panel">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">1. Import</p>
+                <h2>Document à analyser</h2>
+              </div>
+            </div>
+
+            <label class="drop-zone" for="documentInput">
+              <input id="documentInput" type="file" accept=".pdf,.doc,.docx,.txt,.png,.jpg,.jpeg">
+              <span class="drop-zone__title">Importer un fichier</span>
+              <span>PDF, Word, image ou texte. L'OCR sera ajouté plus tard.</span>
+            </label>
+
+            <div class="file-summary" id="fileSummary">
+              <strong>Aucun document importé</strong>
+              <span>La V1 conserve uniquement les métadonnées affichées à l'écran.</span>
+            </div>
+
+            <label>
+              <span>Niveau de diffusion</span>
+              <select id="confidentialitySelect">
+                <option value="public">Public</option>
+                <option value="interne">Interne CFDT</option>
+                <option value="confidentiel">Confidentiel</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Nature du document</span>
+              <select id="documentKindSelect">
+                <option value="pdf">PDF</option>
+                <option value="word">Word</option>
+                <option value="image">Image</option>
+                <option value="text">Texte</option>
+              </select>
+            </label>
+          </section>
+
+          <section class="panel">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">2. Profil</p>
+                <h2>Choisir l'analyse</h2>
+              </div>
+            </div>
+            <div class="profile-grid" id="profileGrid"></div>
+          </section>
+
+          <section class="panel connector-panel">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Architecture future</p>
+                <h2>Connecteurs prévus</h2>
+              </div>
+            </div>
+            <div class="connector-list" id="connectorList"></div>
+          </section>
+        </aside>
+
+        <section class="analysis-workbench" aria-label="Résultat d'analyse">
+          <section class="panel action-bar">
+            <div>
+              <p class="eyebrow">3. Résultat simulé</p>
+              <h2 id="activeProfileTitle">Résumé intelligent</h2>
+            </div>
+            <div class="action-buttons">
+              <button class="button button--ghost" type="button" id="prepareQuestionsButton">
+                Préparer mes questions
+              </button>
+              <button class="button button--primary" type="button" id="blindSpotsButton">
+                Qu'est-ce que je n'ai pas vu ?
+              </button>
+            </div>
+          </section>
+
+          <section class="alert-panel" id="blindSpotPanel" hidden></section>
+
+          <section class="panel result-panel">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Analyse structurée</p>
+                <h2>Lecture syndicale simulée</h2>
+              </div>
+            </div>
+            <div class="result-grid" id="analysisResult"></div>
+          </section>
+
+          <section class="panel agreement-panel" id="agreementPanel" hidden>
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Profil projet d'accord</p>
+                <h2>Grille d'analyse spécifique</h2>
+              </div>
+            </div>
+            <div class="agreement-grid" id="agreementGrid"></div>
+          </section>
+        </section>
+
+        <aside class="right-rail" aria-label="Questions et préparation">
+          <section class="panel questions-panel">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Questions préparées</p>
+                <h2>À poser</h2>
+              </div>
+            </div>
+            <div id="questionsOutput" class="questions-output">
+              Sélectionnez un profil puis cliquez sur "Préparer mes questions".
+            </div>
+          </section>
+
+          <section class="panel next-panel">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Suite</p>
+                <h2>Étapes de connexion</h2>
+              </div>
+            </div>
+            <ol class="next-steps">
+              <li>Brancher la Bibliothèque documentaire.</li>
+              <li>Router vers l'agent métier adapté.</li>
+              <li>Ajouter extraction PDF, Word et OCR.</li>
+              <li>Envoyer les tâches et alertes vers n8n.</li>
+            </ol>
+          </section>
+        </aside>
+      </section>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>
