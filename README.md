@@ -7,6 +7,7 @@ Avant toute evolution du projet, lire :
 - [MANIFESTE_CFDT_NEXUS.md](docs/MANIFESTE_CFDT_NEXUS.md)
 - [ARCHITECTURE_GLOBALE_V1.md](docs/ARCHITECTURE_GLOBALE_V1.md)
 - [ROADMAP.md](docs/ROADMAP.md)
+- [SECURITY_POLICY.md](knowledge/SECURITY_POLICY.md)
 
 Ces documents servent de base pour garder une direction claire, coherente et utile aux salaries.
 
@@ -28,3 +29,9 @@ Les decisions d'architecture et de developpement doivent rester coherentes avec 
 - defendre sans diviser ;
 - agir avec serieux, transparence et determination ;
 - informer, accompagner, alerter si necessaire et proposer des solutions concretes.
+
+## Securite documentaire
+
+Les accords INEOS complets, reglements internes, donnees nominatives, documents BDESE et pieces confidentielles ne doivent jamais etre stockes dans ce depot ni exposes sur le site public.
+
+La reference de securite documentaire est [SECURITY_POLICY.md](knowledge/SECURITY_POLICY.md).

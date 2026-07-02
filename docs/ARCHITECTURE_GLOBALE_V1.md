@@ -8,6 +8,18 @@ CFDT Nexus est un ensemble d'outils d'accompagnement syndical.
 
 Il doit aider les représentants CFDT à écouter, comprendre, organiser les informations, préparer les actions et garder une trace utile des dossiers, sans remplacer la décision humaine.
 
+## Sécurité documentaire
+
+La règle de référence est décrite dans [SECURITY_POLICY.md](../knowledge/SECURITY_POLICY.md).
+
+CFDT Nexus sépare les espaces documentaires :
+
+- `public/` : documents publics et publiables ;
+- `private/` : références, maquettes et fiches expurgées sans contenu sensible ;
+- `confidential/` : dossier vide de rappel, aucun document confidentiel ne doit y être stocké.
+
+Les accords INEOS complets, règlements internes complets, données nominatives, éléments BDESE et pièces confidentielles ne doivent jamais être stockés dans le dépôt ni exposés sur le site public.
+
 ## Modules prévus
 
 ### 1. Dossiers d'accompagnement

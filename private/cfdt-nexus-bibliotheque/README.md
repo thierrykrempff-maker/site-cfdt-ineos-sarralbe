@@ -42,3 +42,11 @@ Le modèle de données prévoit l'intégration avec :
 Les données sont stockées dans le `localStorage` du navigateur.
 
 Aucune sécurité réelle n'est encore implémentée. Les niveaux de confidentialité sont visuels et structurels uniquement.
+
+## Règle documentaire
+
+La bibliothèque ne doit stocker que des références ou fiches expurgées.
+
+Ne jamais stocker dans ce dépôt un accord INEOS complet, un règlement interne complet, une extraction BDESE, une donnée nominative ou une pièce confidentielle.
+
+Voir [SECURITY_POLICY.md](../../knowledge/SECURITY_POLICY.md).
