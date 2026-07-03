@@ -8,6 +8,16 @@ CFDT Nexus est un ensemble d'outils d'accompagnement syndical.
 
 Il doit aider les représentants CFDT à écouter, comprendre, organiser les informations, préparer les actions et garder une trace utile des dossiers, sans remplacer la décision humaine.
 
+La V1 est recentrée sur l'analyse documentaire intelligente.
+
+Le module central de CFDT Nexus est le Document Intelligence Center : il transforme un document en lecture syndicale structurée, questions CSE/CSSCT, points de vigilance et actions à préparer.
+
+Priorité V1 :
+
+1. Analyse documentaire intelligente.
+2. Génération de questions CSE / CSSCT.
+3. Préparation des actions syndicales à partir des documents.
+
 ## Sécurité documentaire
 
 La règle de référence est décrite dans [SECURITY_POLICY.md](../knowledge/SECURITY_POLICY.md).
@@ -22,19 +32,25 @@ Les accords INEOS complets, règlements internes complets, données nominatives,
 
 ## Modules prévus
 
-### 1. Dossiers d'accompagnement
+### 1. Document Intelligence Center
 
 Module prioritaire.
 
-Objectif : suivre les situations individuelles ou collectives avec une fiche claire, une chronologie, des tâches, une checklist automatique et un bouton "Que me manque-t-il ?".
+Objectif : analyser les documents utiles à l'action syndicale, reproduire le raisonnement d'un représentant expérimenté, préparer les questions CSE/CSSCT et transformer l'analyse en actions concrètes.
 
-### 2. Assistant salarié
+Il prépare :
 
-Objectif : aider à comprendre une situation, poser les bonnes questions, préparer un échange avec un représentant CFDT et proposer une première checklist.
+- les profils d'analyse documentaire ;
+- les grilles d'analyse métier indépendantes ;
+- la génération de questions CSE / CSSCT ;
+- les points de vigilance ;
+- les documents ou informations manquants ;
+- les actions syndicales à préparer ;
+- l'intégration future avec GPT CFDT Nexus, Routeur Intelligent, Bibliothèque documentaire et n8n.
 
-### 3. Bibliothèque documentaire
+### 2. Bibliothèque documentaire
 
-Objectif : centraliser les fiches pratiques, accords, modèles, tracts, repères juridiques et documents utiles.
+Objectif : centraliser les fiches pratiques, accords, modèles, tracts, repères juridiques et documents utiles au DIC.
 
 Sprint V1.1 : ce module devient le socle documentaire des futurs experts IA.
 
@@ -47,6 +63,10 @@ Il prépare :
 - l'ajout de document sans backend ;
 - l'intégration future avec Assistant IA, Routeur intelligent, recherche sémantique, n8n, OCR, PDF et Word.
 
+### 3. Dossiers d'accompagnement
+
+Objectif : suivre les situations individuelles ou collectives après analyse documentaire, avec une fiche claire, une chronologie, des tâches, une checklist automatique et un bouton "Que me manque-t-il ?".
+
 ### 4. Rédacteur CFDT
 
 Objectif : préparer des textes clairs, prudents et utiles pour les salariés : articles, tracts, mails, affiches et flash info.
@@ -56,6 +76,19 @@ Objectif : préparer des textes clairs, prudents et utiles pour les salariés : 
 Objectif : connecter CFDT Nexus à des workflows n8n pour les relances, notifications, archivages, exports et créations de tâches.
 
 ## MVP validé
+
+Le MVP du Document Intelligence Center contient :
+
+- import visuel de document ;
+- profils d'analyse ;
+- résultat d'analyse structuré et simulé ;
+- bouton "Préparer mes questions" ;
+- bouton "Qu'est-ce que je n'ai pas vu ?" ;
+- moteur de grilles d'analyse métier ;
+- première grille : analyse d'un projet d'accord d'entreprise ;
+- alerte si l'accord actuellement applicable manque ;
+- page Paramètres pour la bibliothèque documentaire privée ;
+- architecture prête pour questions CSE/CSSCT, actions syndicales, Routeur Intelligent, GPT CFDT Nexus et n8n.
 
 Le MVP du module Dossiers d'accompagnement contient :
 

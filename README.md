@@ -1,5 +1,17 @@
 # CFDT INEOS Sarralbe
 
+## Priorite V1 de CFDT Nexus
+
+Le module central de CFDT Nexus est le Document Intelligence Center.
+
+La V1 est recentree sur trois priorites :
+
+1. Analyse documentaire intelligente.
+2. Generation de questions CSE / CSSCT.
+3. Preparation des actions syndicales a partir des documents.
+
+Les modules Dossiers d'accompagnement et Bibliotheque documentaire restent importants, mais ils servent d'appui au DIC : organiser les situations, retrouver les references utiles et transformer un document en questions, points de vigilance et actions concretes.
+
 ## Documents fondateurs
 
 Avant toute evolution du projet, lire :

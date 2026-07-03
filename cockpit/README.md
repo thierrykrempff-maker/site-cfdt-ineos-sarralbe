@@ -10,6 +10,14 @@ Nom affiché dans l'interface : Analyse documentaire.
 
 Le DIC doit reproduire une méthode de raisonnement syndical, pas seulement produire un résumé.
 
+Le module central de CFDT Nexus est le Document Intelligence Center.
+
+## Priorité V1
+
+1. Analyse documentaire intelligente.
+2. Génération de questions CSE / CSSCT.
+3. Préparation des actions syndicales à partir des documents.
+
 ## Fonctionnalités V1
 
 - import visuel de document : PDF, Word, image, texte ;
