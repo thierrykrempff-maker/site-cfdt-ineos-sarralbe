@@ -1,6 +1,6 @@
-# CFDT Nexus - Document Intelligence Center V2.1
+# CFDT Nexus - Document Intelligence Center V2.2
 
-Sprint V2.1.
+Version Accord + CSE/CSSCT V1.
 
 ## Objectif
 
@@ -30,6 +30,10 @@ Le module central de CFDT Nexus est le Document Intelligence Center.
 - bouton "Qu'est-ce que je n'ai pas vu ?" ;
 - architecture JS prête pour les futurs agents IA ;
 - moteur extensible de grilles d'analyse métier ;
+- parcours visuel de 8 étapes pour les projets d'accord ;
+- sorties distinctes Questions CSE et Questions CSSCT ;
+- synthèse finale pour l'élu ;
+- scénario fictif de démonstration sans document confidentiel ;
 - page Paramètres pour suivre la bibliothèque documentaire privée et lancer une réindexation simulée.
 
 Le module est relié au menu des modules privés Dossiers et Bibliothèque.
@@ -42,9 +46,27 @@ Le cœur du DIC (`app.js`) lit cette structure et affiche les étapes, objectifs
 
 Pour ajouter une nouvelle grille, ajouter une entrée dans `window.CFDT_NEXUS_ANALYSIS_GRIDS.grids`.
 
-Première grille disponible :
+Grille disponible :
 
-- Analyse d'un projet d'accord d'entreprise.
+- Analyse d'un projet d'accord + action CSE/CSSCT.
+
+Référentiel méthodologique :
+
+- `../methodology/analyse-projet-accord-cse-cssct.md`
+
+Structure attendue pour une grille :
+
+- titre ;
+- objectif ;
+- questions principales ;
+- questions de relance ;
+- éléments à vérifier ;
+- documents à demander ;
+- alertes ;
+- sortie attendue ;
+- sorties CSE / CSSCT ;
+- synthèse pour l'élu ;
+- scénario fictif de démonstration si nécessaire.
 
 Grilles prévues :
 

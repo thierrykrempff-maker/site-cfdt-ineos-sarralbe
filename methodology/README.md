@@ -42,6 +42,7 @@ Les méthodes doivent toujours respecter les principes CFDT Nexus :
 | Document | Statut | Usage prévu |
 | --- | --- | --- |
 | `analyse-projet-accord.md` | Créé | Référence pour analyser un projet d'accord ou d'avenant |
+| `analyse-projet-accord-cse-cssct.md` | Créé | Méthode Accord + préparation des questions CSE/CSSCT et actions syndicales |
 | `analyse-convocation.md` | À créer | Analyse des convocations, entretiens et délais |
 | `analyse-pv-cse.md` | À créer | Lecture structurée des PV CSE |
 | `analyse-paie.md` | À créer | Analyse des éléments de paie et anomalies possibles |

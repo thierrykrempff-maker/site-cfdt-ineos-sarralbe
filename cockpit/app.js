@@ -163,8 +163,9 @@ const blindSpotItems = {
   ],
 };
 
-let activeProfile = "summary";
+let activeProfile = "agreement";
 let activeGridId = null;
+let activeGridStepIndex = 0;
 let currentFile = null;
 
 const els = {};
@@ -235,7 +236,10 @@ function renderProfiles() {
     button.addEventListener("click", () => {
       activeProfile = button.dataset.profile;
       const profileGrid = gridForProfile(activeProfile);
-      if (profileGrid) activeGridId = profileGrid.id;
+      if (profileGrid) {
+        activeGridId = profileGrid.id;
+        activeGridStepIndex = 0;
+      }
       renderProfiles();
       renderAnalysis();
       els.blindSpotPanel.hidden = true;
@@ -290,6 +294,12 @@ function renderAnalysis() {
 
 function renderQuestions() {
   const profile = profileById(activeProfile);
+  const grid = activeAnalysisGrid();
+  if (activeProfile === "agreement" && grid?.questionOutputs) {
+    els.questionsOutput.innerHTML = renderQuestionOutputGroups(grid.questionOutputs);
+    return;
+  }
+
   const questions = profileContent[profile.id]?.questions || profileContent.summary.questions;
   els.questionsOutput.innerHTML = `
     <ul>
@@ -336,17 +346,61 @@ function renderAnalysisGrid() {
   activeGridId = grid.id;
   els.analysisGridSelect.value = grid.id;
   const steps = Array.isArray(grid.steps) ? grid.steps : [];
-  els.analysisGridSummary.innerHTML = `
+  activeGridStepIndex = clampStepIndex(activeGridStepIndex, steps.length);
+  const activeStep = steps[activeGridStepIndex];
+
+  els.analysisGridSummary.innerHTML = methodSummary(grid);
+  els.analysisGrid.innerHTML = steps.length ? `
+    <div class="method-step-nav" aria-label="Parcours d'analyse">
+      ${steps.map((step, index) => methodStepButton(step, index)).join("")}
+    </div>
+    <div class="method-active-step">
+      ${methodStepCard(activeStep, grid, context)}
+    </div>
+    ${questionOutputsPanel(grid)}
+    ${finalSynthesisPanel(grid)}
+    ${demoScenarioPanel(grid)}
+  ` : "<p class=\"empty-state\">Cette grille ne contient pas encore d'étapes.</p>";
+
+  bindMethodStepNavigation();
+}
+
+function methodSummary(grid) {
+  const principles = Array.isArray(grid.principles) ? grid.principles : [];
+  return `
     <strong>${escapeHtml(grid.title)}</strong>
     <span>${escapeHtml(grid.description)}</span>
+    ${grid.methodologyReference ? `<a class="method-reference" href="${escapeAttr(grid.methodologyReference)}">Référentiel méthodologique</a>` : ""}
+    ${principles.length ? `
+      <div class="method-principles">
+        ${principles.map((principle) => `<span>${escapeHtml(principle)}</span>`).join("")}
+      </div>
+    ` : ""}
   `;
-  els.analysisGrid.innerHTML = steps.length
-    ? steps.map((step) => methodStepCard(step, grid, context)).join("")
-    : "<p class=\"empty-state\">Cette grille ne contient pas encore d'étapes.</p>";
+}
+
+function methodStepButton(step, index) {
+  const isActive = index === activeGridStepIndex;
+  return `
+    <button class="method-step-tab${isActive ? " method-step-tab--active" : ""}" type="button" data-method-step="${index}" aria-current="${isActive ? "step" : "false"}">
+      <span>Étape ${escapeHtml(step.number)}</span>
+      <strong>${escapeHtml(step.shortTitle || step.title)}</strong>
+    </button>
+  `;
+}
+
+function bindMethodStepNavigation() {
+  document.querySelectorAll("[data-method-step]").forEach((button) => {
+    button.addEventListener("click", () => {
+      activeGridStepIndex = Number(button.dataset.methodStep);
+      renderAnalysisGrid();
+    });
+  });
 }
 
 function methodStepCard(step, grid, context) {
   const requirementAlert = step.number === 1 ? referenceRequirementAlert(grid, context) : "";
+  const sections = methodStepSections(step);
   return `
     <article class="method-step">
       <div class="method-step__header">
@@ -357,10 +411,27 @@ function methodStepCard(step, grid, context) {
       ${requirementAlert}
       ${step.disclaimer ? `<div class="method-disclaimer">${escapeHtml(step.disclaimer)}</div>` : ""}
       <div class="method-blocks">
-        ${(Array.isArray(step.blocks) ? step.blocks : []).map(methodBlock).join("")}
+        ${sections.map(methodBlock).join("")}
       </div>
     </article>
   `;
+}
+
+function methodStepSections(step) {
+  const sections = [];
+  pushSection(sections, "Questions principales", step.mainQuestions);
+  pushSection(sections, "Questions de relance", step.followUpQuestions);
+  pushSection(sections, "Éléments à vérifier", step.checks);
+  pushSection(sections, "Documents à demander", step.documents);
+  pushSection(sections, "Alertes", step.alerts);
+  pushSection(sections, "Sortie attendue", step.expectedOutput ? [step.expectedOutput] : []);
+  if (Array.isArray(step.blocks)) sections.push(...step.blocks);
+  return sections;
+}
+
+function pushSection(sections, title, items) {
+  if (!Array.isArray(items) || !items.length) return;
+  sections.push({ title, items });
 }
 
 function methodBlock(block) {
@@ -368,7 +439,78 @@ function methodBlock(block) {
     <section class="method-block">
       <h4>${escapeHtml(block.title)}</h4>
       <ul>
-        ${block.items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
+        ${(Array.isArray(block.items) ? block.items : []).map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
+      </ul>
+    </section>
+  `;
+}
+
+function questionOutputsPanel(grid) {
+  if (!grid.questionOutputs) return "";
+  return `
+    <section class="method-output-panel">
+      <div class="method-output-heading">
+        <p class="eyebrow">Questions instance</p>
+        <h3>Questions CSE / CSSCT</h3>
+      </div>
+      ${renderQuestionOutputGroups(grid.questionOutputs)}
+    </section>
+  `;
+}
+
+function renderQuestionOutputGroups(questionOutputs) {
+  return `
+    <div class="question-output-grid">
+      ${questionOutputGroup("Questions CSE", questionOutputs.cse)}
+      ${questionOutputGroup("Questions CSSCT", questionOutputs.cssct)}
+    </div>
+  `;
+}
+
+function questionOutputGroup(title, questions = []) {
+  return `
+    <section class="question-output-group">
+      <h4>${escapeHtml(title)}</h4>
+      <ol>
+        ${questions.map((item) => `
+          <li>
+            <strong>${escapeHtml(item.question || item)}</strong>
+            ${item.sourceHint ? `<span>${escapeHtml(item.sourceHint)}</span>` : ""}
+          </li>
+        `).join("")}
+      </ol>
+    </section>
+  `;
+}
+
+function finalSynthesisPanel(grid) {
+  const sections = Array.isArray(grid.finalSynthesis) ? grid.finalSynthesis : [];
+  if (!sections.length) return "";
+  return `
+    <section class="method-output-panel">
+      <div class="method-output-heading">
+        <p class="eyebrow">Synthèse pour l'élu</p>
+        <h3>Synthèse finale</h3>
+      </div>
+      <div class="synthesis-grid">
+        ${sections.map(methodBlock).join("")}
+      </div>
+    </section>
+  `;
+}
+
+function demoScenarioPanel(grid) {
+  const scenario = grid.demoScenario;
+  if (!scenario) return "";
+  return `
+    <section class="method-output-panel demo-scenario">
+      <div class="method-output-heading">
+        <p class="eyebrow">Démonstration</p>
+        <h3>${escapeHtml(scenario.title)}</h3>
+      </div>
+      <p>${escapeHtml(scenario.notice)}</p>
+      <ul>
+        ${(Array.isArray(scenario.points) ? scenario.points : []).map((point) => `<li>${escapeHtml(point)}</li>`).join("")}
       </ul>
     </section>
   `;
@@ -404,6 +546,12 @@ function gridForProfile(profileId) {
 
 function availableAnalysisGrids() {
   return Array.isArray(gridRegistry().grids) ? gridRegistry().grids : [];
+}
+
+function clampStepIndex(index, stepCount) {
+  if (!stepCount) return 0;
+  if (!Number.isFinite(index)) return 0;
+  return Math.min(Math.max(index, 0), stepCount - 1);
 }
 
 function gridRegistry() {
