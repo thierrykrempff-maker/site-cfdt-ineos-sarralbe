@@ -14,6 +14,7 @@
     >
     <link rel="stylesheet" href="styles.css">
     <script src="analysis-grids.js" defer></script>
+    <script src="salary-analysis-report.js" defer></script>
     <script src="app.js" defer></script>
   </head>
   <body>
@@ -137,6 +138,40 @@
               <button class="button button--primary" type="button" id="blindSpotsButton">
                 Qu'est-ce que je n'ai pas vu ?
               </button>
+            </div>
+          </section>
+
+          <section class="panel salary-question-panel" aria-label="Rapport d'analyse salarié">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Analyse salarié</p>
+                <h2>Question Nexus</h2>
+              </div>
+            </div>
+            <label>
+              <span>Question posée</span>
+              <textarea
+                id="salaryQuestionInput"
+                rows="4"
+                placeholder="Ex. Un salarié peut-il contester sa classification si les fonctions réellement exercées dépassent sa fiche de poste ?"
+              ></textarea>
+            </label>
+            <div class="report-actions">
+              <button class="button button--ghost" type="button" id="normalAnswerButton">
+                Réponse normale
+              </button>
+              <button class="button button--primary" type="button" id="generateReportButton">
+                Générer un rapport
+              </button>
+              <button class="button button--ghost" type="button" id="copyReportButton" disabled>
+                Copier le rapport
+              </button>
+              <button class="button button--ghost" type="button" id="downloadReportButton" disabled>
+                Télécharger .md
+              </button>
+            </div>
+            <div class="salary-report-output" id="salaryReportOutput" aria-live="polite">
+              Saisissez une question salarié puis choisissez une réponse normale ou un rapport structuré.
             </div>
           </section>
 

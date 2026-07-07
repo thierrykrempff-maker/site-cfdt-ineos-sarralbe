@@ -167,6 +167,8 @@ let activeProfile = "agreement";
 let activeGridId = null;
 let activeGridStepIndex = 0;
 let currentFile = null;
+let latestSalaryReportMarkdown = "";
+let latestSalaryReportFilename = "rapport-analyse-salarie.md";
 
 const els = {};
 
@@ -197,6 +199,12 @@ function cacheElements() {
   els.referenceAgreementToggle = document.querySelector("#referenceAgreementToggle");
   els.questionsOutput = document.querySelector("#questionsOutput");
   els.blindSpotPanel = document.querySelector("#blindSpotPanel");
+  els.salaryQuestionInput = document.querySelector("#salaryQuestionInput");
+  els.normalAnswerButton = document.querySelector("#normalAnswerButton");
+  els.generateReportButton = document.querySelector("#generateReportButton");
+  els.copyReportButton = document.querySelector("#copyReportButton");
+  els.downloadReportButton = document.querySelector("#downloadReportButton");
+  els.salaryReportOutput = document.querySelector("#salaryReportOutput");
   els.toast = document.querySelector("#toast");
 }
 
@@ -222,6 +230,8 @@ function bindEvents() {
     renderBlindSpots();
     showToast("Angles morts simulés affichés.");
   });
+
+  bindSalaryReportEvents();
 }
 
 function renderProfiles() {
@@ -667,6 +677,170 @@ function formatBytes(size) {
   if (size < 1024) return `${size} o`;
   if (size < 1024 * 1024) return `${Math.round(size / 1024)} Ko`;
   return `${(size / (1024 * 1024)).toFixed(1)} Mo`;
+}
+
+function bindSalaryReportEvents() {
+  if (!els.salaryQuestionInput) return;
+
+  els.normalAnswerButton.addEventListener("click", renderSalaryNormalAnswer);
+  els.generateReportButton.addEventListener("click", renderSalaryReport);
+  els.copyReportButton.addEventListener("click", copyLatestSalaryReport);
+  els.downloadReportButton.addEventListener("click", downloadLatestSalaryReport);
+  els.salaryQuestionInput.addEventListener("input", () => {
+    latestSalaryReportMarkdown = "";
+    updateSalaryReportActions();
+  });
+
+  updateSalaryReportActions();
+}
+
+function renderSalaryNormalAnswer() {
+  const question = salaryQuestionValue();
+  if (!question) {
+    showSalaryReportMessage("Saisissez une question salarié avant de générer une réponse.");
+    return;
+  }
+
+  const api = salaryAnalysisApi();
+  if (!api) {
+    showSalaryReportMessage("Le moteur de rapport salarié n'est pas chargé.");
+    return;
+  }
+
+  const analysis = api.analyzeSalaryQuestion(question);
+  latestSalaryReportMarkdown = "";
+  latestSalaryReportFilename = "rapport-analyse-salarie.md";
+  updateSalaryReportActions();
+
+  els.salaryReportOutput.innerHTML = `
+    <div class="salary-report-meta">
+      <span>Réponse normale</span>
+      <strong>${escapeHtml(analysis.title)}</strong>
+    </div>
+    ${renderSalarySectionsHtml(analysis.normalAnswerSections)}
+  `;
+  showToast("Réponse normale générée.");
+}
+
+function renderSalaryReport() {
+  const question = salaryQuestionValue();
+  if (!question) {
+    showSalaryReportMessage("Saisissez une question salarié avant de générer un rapport.");
+    return;
+  }
+
+  const api = salaryAnalysisApi();
+  if (!api) {
+    showSalaryReportMessage("Le moteur de rapport salarié n'est pas chargé.");
+    return;
+  }
+
+  const analysis = api.analyzeSalaryQuestion(question);
+  latestSalaryReportMarkdown = api.renderMarkdownReport(question);
+  latestSalaryReportFilename = `${slugify(analysis.title)}.md`;
+  updateSalaryReportActions();
+
+  els.salaryReportOutput.innerHTML = `
+    <div class="salary-report-meta">
+      <span>Rapport d'analyse V${escapeHtml(analysis.version)}</span>
+      <strong>${escapeHtml(analysis.title)}</strong>
+    </div>
+    ${renderSalarySectionsHtml(api.reportSections(analysis), "salary-report-section--report")}
+  `;
+  showToast("Rapport d'analyse généré.");
+}
+
+function renderSalarySectionsHtml(sections, modifier = "") {
+  return sections.map((section) => renderSalarySectionHtml(section, modifier)).join("");
+}
+
+function renderSalarySectionHtml(section, modifier) {
+  const items = Array.isArray(section.items) ? section.items.filter(Boolean) : [section.items].filter(Boolean);
+  const content = items.length === 1
+    ? `<p>${escapeHtml(items[0])}</p>`
+    : `<ul>${items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`;
+
+  return `
+    <section class="salary-report-section ${modifier}">
+      <h3>${escapeHtml(section.title)}</h3>
+      ${content}
+    </section>
+  `;
+}
+
+function showSalaryReportMessage(message) {
+  els.salaryReportOutput.innerHTML = `<p class="report-empty">${escapeHtml(message)}</p>`;
+  latestSalaryReportMarkdown = "";
+  updateSalaryReportActions();
+  showToast(message);
+}
+
+async function copyLatestSalaryReport() {
+  if (!latestSalaryReportMarkdown) return;
+
+  try {
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(latestSalaryReportMarkdown);
+    } else {
+      fallbackCopyText(latestSalaryReportMarkdown);
+    }
+    showToast("Rapport copié.");
+  } catch (error) {
+    fallbackCopyText(latestSalaryReportMarkdown);
+    showToast("Rapport copié.");
+  }
+}
+
+function fallbackCopyText(text) {
+  const textarea = document.createElement("textarea");
+  textarea.value = text;
+  textarea.setAttribute("readonly", "");
+  textarea.style.position = "fixed";
+  textarea.style.left = "-9999px";
+  document.body.appendChild(textarea);
+  textarea.select();
+  document.execCommand("copy");
+  textarea.remove();
+}
+
+function downloadLatestSalaryReport() {
+  if (!latestSalaryReportMarkdown) return;
+
+  const blob = new Blob([latestSalaryReportMarkdown], { type: "text/markdown;charset=utf-8" });
+  const link = document.createElement("a");
+  const url = URL.createObjectURL(blob);
+  link.href = url;
+  link.download = latestSalaryReportFilename;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  window.setTimeout(() => URL.revokeObjectURL(url), 500);
+  showToast("Rapport téléchargé.");
+}
+
+function updateSalaryReportActions() {
+  const hasReport = Boolean(latestSalaryReportMarkdown);
+  if (els.copyReportButton) els.copyReportButton.disabled = !hasReport;
+  if (els.downloadReportButton) els.downloadReportButton.disabled = !hasReport;
+}
+
+function salaryQuestionValue() {
+  return els.salaryQuestionInput?.value.trim() || "";
+}
+
+function salaryAnalysisApi() {
+  return window.CFDT_NEXUS_SALARY_ANALYSIS_V22 || null;
+}
+
+function slugify(value) {
+  const slug = String(value || "rapport-analyse-salarie")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 80);
+  return slug || "rapport-analyse-salarie";
 }
 
 function showToast(message) {

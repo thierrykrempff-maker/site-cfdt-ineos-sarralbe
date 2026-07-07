@@ -182,6 +182,7 @@ def check_interface(results: list[CheckResult]) -> None:
         "cockpit/index.html",
         "cockpit/app.js",
         "cockpit/analysis-grids.js",
+        "cockpit/salary-analysis-report.js",
         "cockpit/settings.html",
         "cockpit/settings.js",
         "private/cfdt-nexus-bibliotheque/index.html",
@@ -223,6 +224,7 @@ def check_interface(results: list[CheckResult]) -> None:
     js_files = [
         ROOT / "cockpit/app.js",
         ROOT / "cockpit/analysis-grids.js",
+        ROOT / "cockpit/salary-analysis-report.js",
         ROOT / "cockpit/settings.js",
         ROOT / "private/cfdt-nexus-bibliotheque/app.js",
         ROOT / "private/cfdt-nexus-dossiers/app.js",
@@ -386,7 +388,9 @@ def check_experts(results: list[CheckResult]) -> None:
 
 
 def check_scenarios(results: list[CheckResult]) -> None:
+    cockpit_index = read_text("cockpit/index.html")
     cockpit_app = read_text("cockpit/app.js")
+    salary_report_app = read_text("cockpit/salary-analysis-report.js")
     analysis_grid = read_text("cockpit/analysis-grids.js")
     dossiers_app = read_text("private/cfdt-nexus-dossiers/app.js")
     library_app = read_text("private/cfdt-nexus-bibliotheque/app.js")
@@ -410,6 +414,56 @@ def check_scenarios(results: list[CheckResult]) -> None:
         "Les profils d'analyse DIC attendus sont disponibles." if not missing_profiles else "Profils DIC manquants.",
         expected_profiles if not missing_profiles else missing_profiles,
     )
+
+    required_report_labels = [
+        "Titre du dossier",
+        "Question posée",
+        "Résumé du problème",
+        "Domaines détectés",
+        "Experts mobilisés",
+        "Réponse courte",
+        "Analyse Juriste si concernée",
+        "Analyse Paie si concernée",
+        "Points établis par les sources",
+        "Points à vérifier",
+        "Pièces à demander",
+        "Questions à poser à la direction",
+        "Position de travail proposée",
+        "Conclusion provisoire",
+        "Niveau de confiance",
+        "Limites",
+        "Sources utilisées",
+    ]
+    priority_questions = [
+        "Un salarié peut-il contester sa classification",
+        "heures de nuit et une majoration dimanche",
+        "Un salarié d’astreinte intervient la nuit",
+        "Ma prime est fausse",
+    ]
+    salary_report_checks = [
+        "salary-analysis-report.js" in cockpit_index,
+        "generateReportButton" in cockpit_index,
+        "copyReportButton" in cockpit_index,
+        "downloadReportButton" in cockpit_index,
+        "renderMarkdownReport" in salary_report_app,
+        "renderNormalAnswer" in salary_report_app,
+        "reportSectionLabels" in salary_report_app,
+        "Juriste" in salary_report_app and "Paie" in salary_report_app,
+        all(label in salary_report_app for label in required_report_labels),
+        all(question in salary_report_app for question in priority_questions),
+    ]
+    add(
+        results,
+        SECTION_SCENARIOS,
+        "Rapport d'analyse salarie V2.2",
+        STATUS_OK if all(salary_report_checks) else STATUS_BLOCKING,
+        "Mode rapport salarie disponible : reponse normale, rapport structure, copie, telechargement et 4 cas prioritaires declares."
+        if all(salary_report_checks)
+        else "Le mode rapport salarie V2.2 est incomplet.",
+        required_report_labels if all(salary_report_checks) else ["Controle statique incomplet"],
+    )
+
+    run_salary_report_scenario_tests(results)
 
     step_count = len(re.findall(r"\n\s*number:\s*\d+", analysis_grid))
     grid_checks = [
@@ -480,6 +534,52 @@ def check_scenarios(results: list[CheckResult]) -> None:
         if all(library_checks)
         else "La bibliotheque locale ne couvre pas tous les controles attendus.",
         ["Categories", "Confidentialite", "Connecteurs futurs", "localStorage", "Export JSON"],
+    )
+
+
+def run_salary_report_scenario_tests(results: list[CheckResult]) -> None:
+    node = find_node()
+    test_script = ROOT / "scripts/test_salary_analysis_reports.js"
+    if not test_script.is_file():
+        add(
+            results,
+            SECTION_SCENARIOS,
+            "Tests rapports salaries",
+            STATUS_BLOCKING,
+            "Le script de test des rapports salaries est absent.",
+            [rel(test_script)],
+        )
+        return
+
+    if not node:
+        add(
+            results,
+            SECTION_SCENARIOS,
+            "Tests rapports salaries",
+            STATUS_FIX,
+            "Tests non executes car Node n'est pas disponible.",
+            [rel(test_script)],
+        )
+        return
+
+    completed = subprocess.run(
+        [node, str(test_script)],
+        cwd=ROOT,
+        text=True,
+        capture_output=True,
+        encoding="utf-8",
+        errors="replace",
+    )
+    output = [line for line in (completed.stdout + completed.stderr).splitlines() if line.strip()]
+    add(
+        results,
+        SECTION_SCENARIOS,
+        "Tests rapports salaries",
+        STATUS_OK if completed.returncode == 0 else STATUS_BLOCKING,
+        "Les 4 cas prioritaires generent une reponse normale et un rapport structure."
+        if completed.returncode == 0
+        else "Au moins un cas prioritaire ne respecte pas le contrat de rapport.",
+        output[:20] or [rel(test_script)],
     )
 
 

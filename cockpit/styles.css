@@ -31,7 +31,8 @@ body {
 
 button,
 input,
-select {
+select,
+textarea {
   font: inherit;
 }
 
@@ -277,7 +278,8 @@ label span {
 }
 
 select,
-input[type="file"] {
+input[type="file"],
+textarea {
   width: 100%;
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -287,10 +289,17 @@ input[type="file"] {
 }
 
 select:focus,
+textarea:focus,
 button:focus-visible,
 .drop-zone:focus-within {
   outline: 3px solid rgba(243, 146, 0, 0.32);
   outline-offset: 2px;
+}
+
+textarea {
+  min-height: 108px;
+  resize: vertical;
+  line-height: 1.45;
 }
 
 .drop-zone {
@@ -408,6 +417,13 @@ button:focus-visible,
   justify-content: flex-end;
 }
 
+.report-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 12px 0;
+}
+
 .button {
   min-height: 38px;
   border: 1px solid transparent;
@@ -493,6 +509,82 @@ button:focus-visible,
   background: var(--soft);
   color: var(--muted);
   line-height: 1.45;
+}
+
+.salary-question-panel {
+  display: grid;
+  gap: 12px;
+}
+
+.salary-report-output {
+  display: grid;
+  gap: 10px;
+  min-height: 180px;
+  max-height: 680px;
+  overflow: auto;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--soft);
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.salary-report-meta {
+  display: grid;
+  gap: 4px;
+  padding: 12px;
+  border: 1px solid #c7d7ed;
+  border-radius: 8px;
+  background: #f1f6fd;
+}
+
+.salary-report-meta span {
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.salary-report-meta strong {
+  color: var(--ink);
+  font-size: 17px;
+}
+
+.salary-report-section {
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.salary-report-section h3 {
+  margin: 0 0 7px;
+  color: var(--ink);
+  font-size: 15px;
+}
+
+.salary-report-section p,
+.salary-report-section ul {
+  margin: 0;
+}
+
+.salary-report-section ul {
+  padding-left: 18px;
+}
+
+.salary-report-section li {
+  margin: 6px 0;
+}
+
+.salary-report-section--report:nth-of-type(6),
+.salary-report-section--report:nth-of-type(13),
+.salary-report-section--report:nth-of-type(14) {
+  border-left: 5px solid var(--orange);
+}
+
+.report-empty {
+  margin: 0;
 }
 
 .empty-state {
@@ -999,7 +1091,12 @@ button:focus-visible,
   }
 
   .action-buttons,
+  .report-actions,
   .action-buttons .button {
+    width: 100%;
+  }
+
+  .report-actions .button {
     width: 100%;
   }
 }

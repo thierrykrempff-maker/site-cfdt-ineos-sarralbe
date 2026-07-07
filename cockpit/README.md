@@ -28,6 +28,8 @@ Le module central de CFDT Nexus est le Document Intelligence Center.
 - grille spécifique Projet d'accord ;
 - bouton "Préparer mes questions" ;
 - bouton "Qu'est-ce que je n'ai pas vu ?" ;
+- bloc "Analyse salarié" avec réponse normale et rapport d'analyse structuré ;
+- copie du rapport et téléchargement local en Markdown ;
 - architecture JS prête pour les futurs agents IA ;
 - moteur extensible de grilles d'analyse métier ;
 - parcours visuel de 8 étapes pour les projets d'accord ;
@@ -77,6 +79,21 @@ Grilles prévues :
 - Rapport CSSCT ;
 - Jurisprudence ;
 - Note de service.
+
+## Rapport d'analyse salarié V2.2
+
+Le générateur de rapport est isolé dans `salary-analysis-report.js`.
+
+Il ne modifie pas le routeur préparé/futur et ne crée pas de nouveaux experts. Il mobilise uniquement les rôles nécessaires dans la fiche : Conseiller salarié, Juriste et/ou Paie.
+
+Sorties disponibles :
+
+- réponse normale courte ;
+- rapport d'analyse structuré ;
+- copie du rapport ;
+- téléchargement local `.md`.
+
+Les 4 cas prioritaires sont déclarés dans le moteur et vérifiés par `../scripts/test_salary_analysis_reports.js`.
 
 ## Profils préparés
 
