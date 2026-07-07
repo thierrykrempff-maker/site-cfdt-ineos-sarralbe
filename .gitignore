@@ -19,5 +19,11 @@ hostinger-upload-*.zip
 
 # Journaux et fichiers temporaires
 *.log
+__pycache__/
 Thumbs.db
 .DS_Store
+
+# Rapports Nexus generes localement
+reports/*.md
+reports/latest-nexus-test-report.txt
+!reports/.gitkeep
