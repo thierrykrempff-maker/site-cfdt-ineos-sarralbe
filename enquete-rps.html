@@ -1,1 +1,1058 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="referrer" content="no-referrer">
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; connect-src https://zasaiypphdgdjxhxxvhk.supabase.co; img-src 'self' data:; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'self'"
+    >
+    <title>Enquête RPS anonyme - CFDT INEOS Sarralbe</title>
+    <meta
+      name="description"
+      content="Questionnaire anonyme d'évaluation des risques psychosociaux selon la méthodologie du Rapport Gollac, proposé par la CFDT Chimie Énergie INEOS Sarralbe."
+    >
+    <style>
+      :root {
+        --cfdt-orange: #f39200;
+        --cfdt-orange-dark: #c66700;
+        --ink: #101827;
+        --ink-soft: #273549;
+        --muted: #5f6d7c;
+        --line: #d9e0e8;
+        --panel: #ffffff;
+        --soft-panel: #f6f8fb;
+        --success: #147d4c;
+        --success-bg: #e8f6ef;
+        --error: #b42318;
+        --error-bg: #fff1f0;
+        --focus: #165dff;
+        --shadow: 0 16px 42px rgba(16, 24, 39, 0.12);
+        --font: "Segoe UI", Arial, sans-serif;
+      }
 
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        min-width: 320px;
+        scroll-behavior: smooth;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          transition-duration: 0.01ms !important;
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+        }
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background:
+          linear-gradient(180deg, rgba(243, 146, 0, 0.14), transparent 330px),
+          #eef2f6;
+        font-family: var(--font);
+        line-height: 1.5;
+      }
+
+      button,
+      input,
+      select {
+        font: inherit;
+      }
+
+      button,
+      label {
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      .skip-link {
+        position: fixed;
+        z-index: 20;
+        top: 12px;
+        left: 12px;
+        padding: 12px 16px;
+        border-radius: 8px;
+        background: var(--ink);
+        color: #ffffff;
+        font-weight: 800;
+        text-decoration: none;
+        transform: translateY(-150%);
+        transition: transform 160ms ease;
+      }
+
+      .skip-link:focus-visible {
+        transform: translateY(0);
+        outline: 3px solid var(--cfdt-orange);
+        outline-offset: 3px;
+      }
+
+      .page-shell {
+        width: min(100%, 1120px);
+        margin: 0 auto;
+        padding: 20px 16px 46px;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 12px 0 20px;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        color: var(--ink);
+        text-decoration: none;
+      }
+
+      .brand__mark {
+        display: grid;
+        place-items: center;
+        width: 66px;
+        height: 66px;
+        border-radius: 50%;
+        background: var(--cfdt-orange);
+        color: #ffffff;
+        font-size: 21px;
+        font-weight: 900;
+        letter-spacing: 0;
+        line-height: 1;
+      }
+
+      .brand__text {
+        display: grid;
+        gap: 1px;
+        font-weight: 900;
+        line-height: 1.02;
+        text-transform: uppercase;
+      }
+
+      .brand__site {
+        color: var(--cfdt-orange-dark);
+      }
+
+      .privacy-chip {
+        max-width: 190px;
+        padding: 9px 12px;
+        border: 1px solid rgba(16, 24, 39, 0.12);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.74);
+        color: var(--ink-soft);
+        font-size: 13px;
+        font-weight: 800;
+        text-align: center;
+      }
+
+      .intro {
+        display: grid;
+        gap: 20px;
+        padding: clamp(22px, 5vw, 46px);
+        border-radius: 8px;
+        background:
+          linear-gradient(135deg, rgba(16, 24, 39, 0.95), rgba(35, 49, 68, 0.96)),
+          var(--ink);
+        color: #ffffff;
+        box-shadow: var(--shadow);
+      }
+
+      .intro__eyebrow {
+        margin: 0;
+        color: var(--cfdt-orange);
+        font-size: 13px;
+        font-weight: 900;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        max-width: 900px;
+        margin: 0;
+        font-size: clamp(31px, 7vw, 58px);
+        line-height: 1.02;
+        letter-spacing: 0;
+      }
+
+      .intro__lead {
+        max-width: 850px;
+        margin: 0;
+        color: rgba(255, 255, 255, 0.86);
+        font-size: clamp(17px, 2.4vw, 22px);
+      }
+
+      .intro__notes {
+        display: grid;
+        gap: 10px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .intro__notes li {
+        position: relative;
+        padding-left: 28px;
+        color: rgba(255, 255, 255, 0.9);
+      }
+
+      .intro__notes li::before {
+        position: absolute;
+        top: 0.62em;
+        left: 0;
+        width: 12px;
+        height: 12px;
+        border: 3px solid var(--cfdt-orange);
+        border-radius: 50%;
+        content: "";
+        transform: translateY(-50%);
+      }
+
+      .form-layout {
+        display: grid;
+        gap: 22px;
+        margin-top: 24px;
+      }
+
+      .notice,
+      .profile-panel,
+      .axis,
+      .send-panel {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+        box-shadow: 0 10px 24px rgba(16, 24, 39, 0.06);
+      }
+
+      .notice {
+        padding: 16px;
+        color: var(--ink-soft);
+      }
+
+      .notice strong {
+        color: var(--ink);
+      }
+
+      .profile-panel {
+        padding: clamp(18px, 4vw, 28px);
+      }
+
+      .section-heading {
+        display: grid;
+        gap: 6px;
+        margin: 0 0 18px;
+      }
+
+      h2,
+      h3 {
+        margin: 0;
+        color: var(--ink);
+        line-height: 1.15;
+        letter-spacing: 0;
+      }
+
+      h2 {
+        font-size: clamp(23px, 4.4vw, 34px);
+      }
+
+      h3 {
+        font-size: clamp(20px, 3.6vw, 26px);
+      }
+
+      .section-heading p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      fieldset {
+        min-width: 0;
+        margin: 0;
+        padding: 0;
+        border: 0;
+      }
+
+      legend {
+        padding: 0;
+      }
+
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      .profile-options {
+        display: grid;
+        gap: 12px;
+      }
+
+      .profile-option {
+        display: grid;
+        grid-template-columns: 24px 1fr;
+        gap: 12px;
+        align-items: start;
+        min-height: 58px;
+        padding: 15px;
+        border: 2px solid var(--line);
+        border-radius: 8px;
+        background: var(--soft-panel);
+        cursor: pointer;
+      }
+
+      .profile-option:has(input:checked) {
+        border-color: var(--cfdt-orange);
+        background: #fff8ec;
+      }
+
+      input[type="radio"] {
+        width: 22px;
+        height: 22px;
+        margin: 2px 0 0;
+        accent-color: var(--cfdt-orange);
+      }
+
+      .profile-option strong {
+        display: block;
+        color: var(--ink);
+        font-size: 17px;
+        line-height: 1.2;
+      }
+
+      .profile-option span {
+        display: block;
+        margin-top: 3px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .axis {
+        overflow: hidden;
+      }
+
+      .axis__header {
+        display: grid;
+        gap: 8px;
+        padding: clamp(18px, 4vw, 26px);
+        border-bottom: 1px solid var(--line);
+        background: #f9fafc;
+      }
+
+      .axis__kicker {
+        color: var(--cfdt-orange-dark);
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .axis__questions {
+        display: grid;
+        gap: 0;
+      }
+
+      .question {
+        padding: clamp(18px, 4vw, 28px);
+      }
+
+      .question + .question {
+        border-top: 1px solid var(--line);
+      }
+
+      .question.is-missing {
+        background: var(--error-bg);
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        width: fit-content;
+        min-height: 30px;
+        margin-bottom: 12px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: #edf1f6;
+        color: var(--ink-soft);
+        font-size: 12px;
+        font-weight: 900;
+        line-height: 1.15;
+        text-transform: uppercase;
+      }
+
+      .badge--general {
+        background: #e9f0f8;
+        color: #24425f;
+      }
+
+      .badge--profile {
+        background: #fff0d6;
+        color: #7a4100;
+      }
+
+      .question__text {
+        margin: 0 0 16px;
+        color: var(--ink);
+        font-size: clamp(18px, 3.8vw, 22px);
+        font-weight: 800;
+        line-height: 1.3;
+      }
+
+      .scale {
+        display: grid;
+        gap: 10px;
+      }
+
+      .scale-option {
+        display: grid;
+        grid-template-columns: 24px 1fr;
+        gap: 12px;
+        align-items: center;
+        min-height: 56px;
+        padding: 14px;
+        border: 2px solid var(--line);
+        border-radius: 8px;
+        background: #ffffff;
+        color: var(--ink-soft);
+        font-weight: 800;
+        cursor: pointer;
+      }
+
+      .scale-option:has(input:checked) {
+        border-color: var(--cfdt-orange);
+        background: #fff8ec;
+        color: var(--ink);
+      }
+
+      .field-error {
+        margin: 12px 0 0;
+        color: var(--error);
+        font-weight: 800;
+      }
+
+      .status {
+        display: none;
+        padding: 15px;
+        border-radius: 8px;
+        font-weight: 800;
+      }
+
+      .status[aria-hidden="false"] {
+        display: block;
+      }
+
+      .status--error {
+        border: 1px solid rgba(180, 35, 24, 0.28);
+        background: var(--error-bg);
+        color: var(--error);
+      }
+
+      .status--success {
+        border: 1px solid rgba(20, 125, 76, 0.25);
+        background: var(--success-bg);
+        color: var(--success);
+      }
+
+      .send-panel {
+        display: grid;
+        gap: 14px;
+        padding: clamp(18px, 4vw, 28px);
+      }
+
+      .submit-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        min-height: 58px;
+        padding: 15px 18px;
+        border: 0;
+        border-radius: 8px;
+        background: var(--cfdt-orange);
+        color: #111827;
+        font-weight: 900;
+        line-height: 1.2;
+        cursor: pointer;
+      }
+
+      .submit-button:hover {
+        background: #ffab22;
+      }
+
+      .submit-button:disabled {
+        background: #b9c1cc;
+        color: #3d4652;
+        cursor: not-allowed;
+      }
+
+      .privacy-reminder {
+        margin: 0;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .footer {
+        padding: 28px 0 0;
+        color: var(--muted);
+        font-size: 14px;
+        text-align: center;
+      }
+
+      :focus-visible {
+        outline: 3px solid var(--focus);
+        outline-offset: 3px;
+      }
+
+      @media (min-width: 720px) {
+        .page-shell {
+          padding: 28px 24px 58px;
+        }
+
+        .profile-options {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .scale {
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+
+        .scale-option {
+          grid-template-columns: 1fr;
+          justify-items: center;
+          align-content: center;
+          text-align: center;
+        }
+
+        .scale-option input {
+          margin: 0;
+        }
+
+        .submit-button {
+          width: auto;
+          min-width: 310px;
+          justify-self: start;
+        }
+      }
+
+      @media (max-width: 520px) {
+        .topbar {
+          align-items: flex-start;
+        }
+
+        .brand__mark {
+          width: 58px;
+          height: 58px;
+          font-size: 19px;
+        }
+
+        .brand__text {
+          font-size: 14px;
+        }
+
+        .privacy-chip {
+          max-width: 132px;
+          padding: 8px 9px;
+          font-size: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#questionnaire">Aller au questionnaire</a>
+
+    <div class="page-shell">
+      <header class="topbar" aria-label="En-tête CFDT">
+        <a class="brand" href="index.html" aria-label="Retour à l'accueil CFDT Chimie Énergie INEOS Sarralbe">
+          <span class="brand__mark">Cfdt.</span>
+          <span class="brand__text">
+            <span>Chimie Énergie</span>
+            <span class="brand__site">INEOS Sarralbe</span>
+          </span>
+        </a>
+        <div class="privacy-chip">Questionnaire anonyme</div>
+      </header>
+
+      <main>
+        <section class="intro" aria-labelledby="page-title">
+          <p class="intro__eyebrow">Évaluation des risques psychosociaux (RPS)</p>
+          <h1 id="page-title">Enquête anonyme — Méthodologie Rapport Gollac</h1>
+          <p class="intro__lead">
+            Votre section syndicale CFDT Chimie Énergie INEOS Sarralbe vous donne la parole.
+          </p>
+          <ul class="intro__notes">
+            <li>Pour chacun des 6 axes, vous devez répondre à la question générale “TOUS”, puis à la question correspondant à votre profil professionnel.</li>
+            <li>Aucun nom, matricule, e-mail ou numéro de téléphone ne vous est demandé.</li>
+          </ul>
+        </section>
+
+        <form class="form-layout" id="questionnaire" novalidate>
+          <p class="notice">
+            <strong>Important :</strong> vos réponses sont envoyées de façon anonyme. Cette page ne lit pas les réponses déjà enregistrées et n'affiche jamais les données d'autres salariés.
+          </p>
+
+          <section class="profile-panel" aria-labelledby="profile-title">
+            <div class="section-heading">
+              <h2 id="profile-title">Choisissez votre profil</h2>
+              <p>Un seul profil est nécessaire pour afficher les 6 questions ciblées correspondantes.</p>
+            </div>
+            <fieldset>
+              <legend class="sr-only">Profil professionnel</legend>
+              <div class="profile-options" data-profile-group>
+                <label class="profile-option">
+                  <input type="radio" name="profil" value="ADMIN">
+                  <span>
+                    <strong>Administratif</strong>
+                    <span>Gestion, support, dossiers administratifs.</span>
+                  </span>
+                </label>
+                <label class="profile-option">
+                  <input type="radio" name="profil" value="TECH">
+                  <span>
+                    <strong>Technicien</strong>
+                    <span>Maintenance, labo, logistique.</span>
+                  </span>
+                </label>
+                <label class="profile-option">
+                  <input type="radio" name="profil" value="5X8">
+                  <span>
+                    <strong>Personnel posté en 5x8</strong>
+                    <span>Conduite, quart, rotations postées.</span>
+                  </span>
+                </label>
+              </div>
+            </fieldset>
+            <p class="field-error" data-error-for="profil" hidden>Choisissez un profil pour afficher les questions ciblées.</p>
+          </section>
+
+          <div class="status status--error" id="missing-summary" aria-hidden="true" tabindex="-1"></div>
+          <div id="questions-root"></div>
+
+          <section class="send-panel" aria-label="Validation et envoi">
+            <button class="submit-button" id="submit-button" type="submit">Envoyer ma réponse anonyme</button>
+            <p class="privacy-reminder">Les champs sont obligatoires. Aucun commentaire libre ni identifiant personnel n'est demandé.</p>
+            <div class="status" id="form-status" aria-live="polite" aria-hidden="true"></div>
+          </section>
+        </form>
+      </main>
+
+      <footer class="footer">
+        CFDT Chimie Énergie INEOS Sarralbe - Questionnaire RPS anonyme.
+      </footer>
+    </div>
+
+    <script>
+      (function () {
+        "use strict";
+
+        const SUPABASE_URL = "https://zasaiypphdgdjxhxxvhk.supabase.co/rest/v1/reponses_rps";
+        const SUPABASE_KEY = "sb_publishable_GinDaAz1xh1I8pJiA5dTMw_xHKo12GI";
+
+        const profileLabels = {
+          ADMIN: "ADMINISTRATIF",
+          TECH: "TECHNICIEN",
+          "5X8": "PERSONNEL 5X8"
+        };
+
+        const scale = [
+          { value: 1, label: "Pas du tout" },
+          { value: 2, label: "Plutôt pas" },
+          { value: 3, label: "Plutôt oui" },
+          { value: 4, label: "Tout à fait" }
+        ];
+
+        const axes = [
+          {
+            number: 1,
+            title: "Intensité et temps de travail",
+            tous: "Mon rythme de travail me permet de réaliser mes tâches avec un niveau de sécurité optimal.",
+            profile: {
+              ADMIN: "La charge de travail administrative me laisse le temps de traiter les dossiers sans précipitation.",
+              TECH: "Lors d'arrêts ou d'urgence, je dispose du temps et des ressources pour appliquer la consignation.",
+              "5X8": "Le rythme des rotations me permet une récupération physique et mentale suffisante entre mes postes."
+            }
+          },
+          {
+            number: 2,
+            title: "Exigences émotionnelles",
+            tous: "Dans mon travail, je dois fréquemment cacher mes émotions (stress, agacement) pour maintenir un climat serein.",
+            profile: {
+              ADMIN: "Je subis des tensions liées à la nécessité de répondre dans l'urgence à de multiples sollicitations.",
+              TECH: "Je ressens une forte pression entre la nécessité de réparer rapidement et le respect absolu des règles HSE.",
+              "5X8": "La responsabilité de la conduite des installations la nuit ou le week-end, en effectif réduit, m'angoisse."
+            }
+          },
+          {
+            number: 3,
+            title: "Manque d'autonomie",
+            tous: "Je participe activement aux décisions concernant l'organisation de mon propre travail.",
+            profile: {
+              ADMIN: "J'ai la liberté d'organiser mon emploi du temps pour gérer mes priorités hebdomadaires.",
+              TECH: "Les fiches de tâches sont adaptées au terrain et me laissent la possibilité d'ajuster en cas d'imprévu.",
+              "5X8": "En cas d'anomalie sur le procédé, je me sens autorisé(e) à stopper l'installation sans craindre de reproches."
+            }
+          },
+          {
+            number: 4,
+            title: "Rapports sociaux au travail",
+            tous: "En cas de difficulté technique ou organisationnelle, je sais que je peux compter sur le soutien de mon responsable.",
+            profile: {
+              ADMIN: "La communication entre les services administratifs et la production est fluide et respectueuse.",
+              TECH: "La coopération inter-services, notamment maintenance et fabrication, permet de résoudre les problèmes.",
+              "5X8": "Le passage de consignes lors de la relève de quart se fait dans un climat de confiance et de transparence."
+            }
+          },
+          {
+            number: 5,
+            title: "Conflits de valeurs",
+            tous: "J'ai parfois le sentiment de devoir faire un travail « bâclé » par manque de temps ou de moyens.",
+            profile: {
+              ADMIN: "Je ressens un décalage entre les directives stratégiques et la réalité de leur application.",
+              TECH: "Il m'arrive de devoir « bricoler » ou de faire du curatif temporaire plutôt qu'une réparation pérenne et sécurisée.",
+              "5X8": "Je ressens une injonction contradictoire entre les objectifs de tonnage et le respect des limites de sécurité."
+            }
+          },
+          {
+            number: 6,
+            title: "Insécurité de la situation de travail",
+            tous: "Les changements d'organisation sur le site me sont expliqués clairement et suffisamment à l'avance.",
+            profile: {
+              ADMIN: "Je me sens accompagné(e) et formé(e) face à l'évolution des outils numériques et des processus de gestion.",
+              TECH: "Je crains que l'évolution des technologies sur le site ne rende mes compétences actuelles obsolètes.",
+              "5X8": "Je m'inquiète des conséquences à long terme du travail de nuit sur ma santé et de mon aptitude médicale à ce poste."
+            }
+          }
+        ];
+
+        const form = document.getElementById("questionnaire");
+        const questionsRoot = document.getElementById("questions-root");
+        const missingSummary = document.getElementById("missing-summary");
+        const formStatus = document.getElementById("form-status");
+        const submitButton = document.getElementById("submit-button");
+        const profileError = document.querySelector('[data-error-for="profil"]');
+        let selectedProfile = "";
+        let answers = {};
+        let isSubmitting = false;
+
+        function fieldName(axisNumber, kind) {
+          return "axe_" + axisNumber + "_" + kind;
+        }
+
+        function getCheckedValue(name) {
+          const selected = form.querySelector('input[name="' + name + '"]:checked');
+          return selected ? selected.value : "";
+        }
+
+        function rememberVisibleAnswers() {
+          const selectedInputs = form.querySelectorAll('input[type="radio"]:checked');
+          selectedInputs.forEach(function (input) {
+            answers[input.name] = input.value;
+          });
+        }
+
+        function restoreAnswers() {
+          Object.keys(answers).forEach(function (name) {
+            const input = form.querySelector('input[name="' + name + '"][value="' + answers[name] + '"]');
+            if (input) {
+              input.checked = true;
+            }
+          });
+        }
+
+        function renderQuestions(shouldRemember) {
+          if (shouldRemember !== false) {
+            rememberVisibleAnswers();
+          }
+          questionsRoot.innerHTML = "";
+
+          axes.forEach(function (axis) {
+            const axisSection = document.createElement("section");
+            axisSection.className = "axis";
+            axisSection.id = "axe-" + axis.number;
+            axisSection.setAttribute("aria-labelledby", "axe-" + axis.number + "-title");
+
+            const header = document.createElement("div");
+            header.className = "axis__header";
+
+            const kicker = document.createElement("div");
+            kicker.className = "axis__kicker";
+            kicker.textContent = "Axe " + axis.number;
+
+            const title = document.createElement("h3");
+            title.id = "axe-" + axis.number + "-title";
+            title.textContent = axis.title;
+
+            header.append(kicker, title);
+
+            const questionList = document.createElement("div");
+            questionList.className = "axis__questions";
+            questionList.appendChild(
+              createQuestion({
+                axisNumber: axis.number,
+                name: fieldName(axis.number, "tous"),
+                badge: "Question générale — TOUS",
+                badgeClass: "badge--general",
+                text: axis.tous
+              })
+            );
+
+            if (selectedProfile) {
+              questionList.appendChild(
+                createQuestion({
+                  axisNumber: axis.number,
+                  name: fieldName(axis.number, "profil"),
+                  badge: "Question ciblée — " + profileLabels[selectedProfile],
+                  badgeClass: "badge--profile",
+                  text: axis.profile[selectedProfile]
+                })
+              );
+            }
+
+            axisSection.append(header, questionList);
+            questionsRoot.appendChild(axisSection);
+          });
+
+          restoreAnswers();
+          clearMissingState();
+        }
+
+        function createQuestion(config) {
+          const wrapper = document.createElement("fieldset");
+          wrapper.className = "question";
+          wrapper.dataset.questionName = config.name;
+
+          const legend = document.createElement("legend");
+
+          const badge = document.createElement("span");
+          badge.className = "badge " + config.badgeClass;
+          badge.textContent = config.badge;
+
+          const questionText = document.createElement("p");
+          questionText.className = "question__text";
+          questionText.textContent = config.text;
+
+          legend.append(badge, questionText);
+          wrapper.appendChild(legend);
+
+          const scaleGroup = document.createElement("div");
+          scaleGroup.className = "scale";
+
+          scale.forEach(function (item) {
+            const option = document.createElement("label");
+            option.className = "scale-option";
+
+            const input = document.createElement("input");
+            input.type = "radio";
+            input.name = config.name;
+            input.value = String(item.value);
+
+            const label = document.createElement("span");
+            label.textContent = item.label;
+
+            option.append(input, label);
+            scaleGroup.appendChild(option);
+          });
+
+          const error = document.createElement("p");
+          error.className = "field-error";
+          error.dataset.errorFor = config.name;
+          error.hidden = true;
+          error.textContent = "Réponse obligatoire pour cette question.";
+
+          wrapper.append(scaleGroup, error);
+          return wrapper;
+        }
+
+        function showStatus(element, type, message) {
+          element.className = "status status--" + type;
+          element.textContent = message;
+          element.setAttribute("aria-hidden", "false");
+        }
+
+        function hideStatus(element) {
+          element.textContent = "";
+          element.setAttribute("aria-hidden", "true");
+        }
+
+        function clearMissingState() {
+          form.querySelectorAll(".is-missing").forEach(function (node) {
+            node.classList.remove("is-missing");
+          });
+          form.querySelectorAll(".field-error").forEach(function (error) {
+            error.hidden = true;
+          });
+          hideStatus(missingSummary);
+        }
+
+        function markMissing(name) {
+          const field = form.querySelector('[data-question-name="' + name + '"]');
+          const error = form.querySelector('[data-error-for="' + name + '"]');
+          if (field) {
+            field.classList.add("is-missing");
+          }
+          if (error) {
+            error.hidden = false;
+          }
+        }
+
+        function validateForm() {
+          clearMissingState();
+          hideStatus(formStatus);
+          rememberVisibleAnswers();
+
+          const missing = [];
+          const payload = {
+            profil: selectedProfile
+          };
+
+          if (!selectedProfile) {
+            missing.push("le profil professionnel");
+            profileError.hidden = false;
+          }
+
+          axes.forEach(function (axis) {
+            const tousName = fieldName(axis.number, "tous");
+            const tousValue = Number(getCheckedValue(tousName));
+
+            if (!tousValue) {
+              missing.push("axe " + axis.number + " - question générale TOUS");
+              markMissing(tousName);
+            } else {
+              payload[tousName] = tousValue;
+            }
+
+            if (selectedProfile) {
+              const profileName = fieldName(axis.number, "profil");
+              const profileValue = Number(getCheckedValue(profileName));
+
+              if (!profileValue) {
+                missing.push("axe " + axis.number + " - question ciblée " + profileLabels[selectedProfile]);
+                markMissing(profileName);
+              } else {
+                payload[profileName] = profileValue;
+              }
+            }
+          });
+
+          if (missing.length > 0) {
+            const message = "Merci de compléter : " + missing.join(", ") + ".";
+            showStatus(missingSummary, "error", message);
+            missingSummary.focus({ preventScroll: true });
+            missingSummary.scrollIntoView({ behavior: "smooth", block: "center" });
+            return { valid: false, payload: null };
+          }
+
+          return { valid: true, payload: payload };
+        }
+
+        function resetFormAfterSuccess() {
+          form.reset();
+          answers = {};
+          selectedProfile = "";
+          renderQuestions();
+        }
+
+        function setSubmitting(state) {
+          isSubmitting = state;
+          submitButton.disabled = state;
+          submitButton.textContent = state ? "Envoi en cours..." : "Envoyer ma réponse anonyme";
+        }
+
+        async function sendPayload(payload) {
+          const response = await fetch(SUPABASE_URL, {
+            method: "POST",
+            mode: "cors",
+            cache: "no-store",
+            credentials: "omit",
+            headers: {
+              "Content-Type": "application/json",
+              "apikey": SUPABASE_KEY,
+              "Prefer": "return=minimal"
+            },
+            body: JSON.stringify(payload)
+          });
+
+          if (response.status !== 201 && response.status !== 204) {
+            throw new Error("insert_failed");
+          }
+        }
+
+        form.addEventListener("change", function (event) {
+          const target = event.target;
+          if (!(target instanceof HTMLInputElement) || target.type !== "radio") {
+            return;
+          }
+
+          if (target.name === "profil") {
+            rememberVisibleAnswers();
+            selectedProfile = target.value;
+            axes.forEach(function (axis) {
+              delete answers[fieldName(axis.number, "profil")];
+            });
+            answers.profil = selectedProfile;
+            profileError.hidden = true;
+            renderQuestions(false);
+            return;
+          }
+
+          answers[target.name] = target.value;
+          const field = form.querySelector('[data-question-name="' + target.name + '"]');
+          const error = form.querySelector('[data-error-for="' + target.name + '"]');
+          if (field) {
+            field.classList.remove("is-missing");
+          }
+          if (error) {
+            error.hidden = true;
+          }
+        });
+
+        form.addEventListener("submit", async function (event) {
+          event.preventDefault();
+          if (isSubmitting) {
+            return;
+          }
+
+          const result = validateForm();
+          if (!result.valid) {
+            return;
+          }
+
+          setSubmitting(true);
+
+          try {
+            await sendPayload(result.payload);
+            resetFormAfterSuccess();
+            showStatus(
+              formStatus,
+              "success",
+              "Votre réponse anonyme a bien été enregistrée. Merci pour votre participation."
+            );
+            window.setTimeout(function () {
+              setSubmitting(false);
+            }, 1200);
+          } catch (error) {
+            showStatus(
+              formStatus,
+              "error",
+              "L'envoi n'a pas abouti. Vérifiez votre connexion puis réessayez."
+            );
+            setSubmitting(false);
+          }
+        });
+
+        renderQuestions();
+      })();
+    </script>
+  </body>
+</html>
