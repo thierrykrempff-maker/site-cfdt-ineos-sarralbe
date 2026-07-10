@@ -381,12 +381,12 @@ svg {
 
 .hero-side {
   position: absolute;
-  z-index: 2;
-  right: clamp(28px, 5vw, 86px);
-  top: 230px;
+  z-index: 4;
+  right: clamp(96px, 13vw, 210px);
+  top: 178px;
   display: grid;
-  gap: 18px;
-  width: min(430px, calc(100% - 96px));
+  gap: 14px;
+  width: min(380px, calc(100% - 96px));
 }
 
 .home-rps-cta {
@@ -395,7 +395,7 @@ svg {
   justify-items: center;
   width: 100%;
   margin: 0;
-  padding: clamp(22px, 2.5vw, 30px);
+  padding: clamp(18px, 2vw, 24px);
   border-radius: 8px;
   border: 1px solid rgba(215, 221, 230, 0.95);
   border-top: 6px solid var(--cfdt-orange);
@@ -405,7 +405,7 @@ svg {
 }
 
 .home-rps-cta__eyebrow {
-  margin: 0 0 8px;
+  margin: 0 0 6px;
   color: var(--cfdt-orange-dark);
   font-family: var(--display-font);
   font-size: clamp(17px, 1.6vw, 22px);
@@ -414,11 +414,11 @@ svg {
 }
 
 .home-rps-cta h2 {
-  max-width: 360px;
+  max-width: 310px;
   margin: 0;
   color: #17202d;
   font-family: var(--display-font);
-  font-size: clamp(24px, 2.2vw, 32px);
+  font-size: clamp(22px, 1.9vw, 28px);
   font-weight: 800;
   line-height: 1.08;
 }
@@ -426,8 +426,8 @@ svg {
 .home-rps-cta__button {
   width: 100%;
   min-width: 0;
-  margin-top: 22px;
-  min-height: 64px;
+  margin-top: 16px;
+  min-height: 58px;
   line-height: 1.15;
   text-align: center;
   white-space: normal;
@@ -511,7 +511,7 @@ svg {
   justify-items: center;
   width: 100%;
   margin: 0 auto;
-  padding: 24px;
+  padding: 14px;
   border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.55);
   background: rgba(255, 255, 255, 0.94);
@@ -523,53 +523,53 @@ svg {
 .flash-info__label {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   color: var(--cfdt-orange-dark);
   font-family: var(--display-font);
-  font-size: 20px;
+  font-size: 14px;
   font-weight: 800;
   text-transform: uppercase;
 }
 
 .flash-info__label svg {
-  width: 25px;
-  height: 25px;
+  width: 18px;
+  height: 18px;
 }
 
 .flash-info__status {
-  margin: 12px 0 0;
-  padding: 6px 12px;
+  margin: 6px 0 0;
+  padding: 4px 9px;
   border-radius: 999px;
   border: 1px solid rgba(243, 146, 0, 0.42);
   background: #fff7e8;
   color: #8a4b00;
   font-family: var(--display-font);
-  font-size: 15px;
+  font-size: 12px;
   font-weight: 800;
   text-transform: uppercase;
 }
 
 .flash-info h2 {
-  margin: 12px 0 0;
+  margin: 6px 0 0;
   color: #17202d;
   font-family: var(--display-font);
-  font-size: 30px;
+  font-size: 19px;
   font-weight: 800;
   line-height: 1.05;
   text-transform: uppercase;
 }
 
 .flash-info p {
-  margin: 12px 0 0;
+  margin: 6px 0 0;
   color: #354154;
-  font-size: 18px;
-  line-height: 1.5;
+  font-size: 14px;
+  line-height: 1.28;
 }
 
 .flash-info__highlight {
   display: inline-block;
-  margin-bottom: 6px;
-  padding: 5px 12px;
+  margin-bottom: 3px;
+  padding: 3px 9px;
   border-radius: 999px;
   background: #fff200;
   color: #101827;
@@ -583,16 +583,16 @@ svg {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 58px;
-  margin-top: 22px;
-  padding: 0 28px;
+  min-height: 40px;
+  margin-top: 10px;
+  padding: 0 18px;
   border: 0;
   border-radius: 999px;
   background: var(--cfdt-orange);
   color: var(--cfdt-on-orange);
   box-shadow: 0 10px 24px rgba(243, 146, 0, 0.36);
   font-family: var(--display-font);
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 800;
   text-transform: uppercase;
   transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
@@ -777,7 +777,7 @@ svg {
 .poster-fallback__tagline {
   margin: 0;
   color: #354154;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.45;
 }
 
@@ -2522,13 +2522,13 @@ svg {
   }
 
   .flash-info__inner {
-    padding: 24px 18px;
+    padding: 14px;
   }
 
   .flash-info__button {
     width: 100%;
     justify-content: center;
-    font-size: 16px;
+    font-size: 14px;
   }
 
   .poster-modal {
