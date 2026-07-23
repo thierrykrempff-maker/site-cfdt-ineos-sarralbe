@@ -1790,7 +1790,7 @@ svg {
     grid-row: 1;
   }
 
-  #feed-pereco {
+  #feed-rps-results {
     grid-column: 1 / -1;
     grid-row: 2;
   }
