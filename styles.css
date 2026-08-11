@@ -2040,6 +2040,25 @@ svg {
     linear-gradient(135deg, #f3f6fb 0%, #7d8da8 45%, #002b49 100%);
 }
 
+.feed-article-visual--poster {
+  min-height: 0;
+  display: block;
+  background: #fffaf2;
+  box-shadow: none;
+}
+
+.feed-article-visual--poster::before,
+.feed-article-visual--poster::after {
+  content: none;
+}
+
+.feed-article-visual--poster img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+}
+
 .feed-article-callout {
   margin: 8px 0;
   padding: 18px;
