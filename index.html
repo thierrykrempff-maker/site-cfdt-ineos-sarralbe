@@ -1500,9 +1500,10 @@
 
       if (weekBadge && updatedRubriqueNames.length > 0) {
         const rubriqueLabel = updatedRubriqueNames.length > 1 ? "rubriques" : "rubrique";
-        weekBadge.textContent = `🆕 ${updatedRubriqueNames.length} ${rubriqueLabel} mise${
+        weekBadge.textContent = `🆕 Nouveau : ${updatedRubriqueNames.join(", ")}`;
+        weekBadge.title = `${updatedRubriqueNames.length} ${rubriqueLabel} mise${
           updatedRubriqueNames.length > 1 ? "s" : ""
-        } à jour cette semaine (${weekRangeLabel}) : ${updatedRubriqueNames.join(", ")}`;
+        } à jour cette semaine (${weekRangeLabel})`;
         weekBadge.hidden = false;
       }
     </script>
