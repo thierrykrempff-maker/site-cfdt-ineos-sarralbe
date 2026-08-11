@@ -368,6 +368,17 @@ svg {
   display: none;
 }
 
+.hero__new-badge a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.hero__new-badge a:hover,
+.hero__new-badge a:focus-visible {
+  text-decoration-thickness: 2px;
+}
+
 @keyframes hero-new-badge-pulse {
   0%,
   100% {

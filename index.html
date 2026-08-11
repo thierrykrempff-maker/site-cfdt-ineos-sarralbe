@@ -18,7 +18,7 @@
       content="default-src 'self'; img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com; media-src 'self'; style-src 'self'; style-src-attr 'none'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; script-src-attr 'none'; connect-src https://www.google-analytics.com https://region1.google-analytics.com https://www.googletagmanager.com; frame-src https://docs.google.com https://forms.gle; object-src 'none'; base-uri 'self'; form-action 'self' mailto: https://docs.google.com"
     >
     <link rel="preload" as="image" href="assets/sarralbe-aerien.jpg" fetchpriority="high">
-    <link rel="stylesheet" href="styles.css?v=20260811-week-badge">
+    <link rel="stylesheet" href="styles.css?v=20260811-badge-link">
     <meta name="google-site-verification" content="txs2p5JIHOdOoX1v4FFRYW-MwL39pWPWPtJZVMUqakQ" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-2G9YJ63ZRK"></script>
     <script>
@@ -803,7 +803,7 @@
 
               <article class="action-feed" id="feed-sante">
                 <div class="action-feed__header">
-                  <span class="action-feed__tag">National</span>
+                  <span class="action-feed__tag">Info nationale</span>
                   <h3>Actualités nationale et de la convention chimie</h3>
                 </div>
                 <div class="feed-list feed-list--single" aria-label="Actualités nationale et de la convention chimie">
@@ -1469,7 +1469,7 @@
           ? `${dayOnlyFormatter.format(weekStart)} au ${dayMonthYearFormatter.format(weekEnd)}`
           : `${dayMonthYearFormatter.format(weekStart)} au ${dayMonthYearFormatter.format(weekEnd)}`;
 
-      const updatedRubriqueNames = [];
+      const updatedRubriques = [];
 
       document.querySelectorAll(".action-feed").forEach((feed) => {
         const hasNewPost = Array.from(feed.querySelectorAll("[data-published]")).some((post) => {
@@ -1484,8 +1484,8 @@
         const header = feed.querySelector(".action-feed__header");
         const tagName = header?.querySelector(".action-feed__tag")?.textContent?.trim();
 
-        if (tagName) {
-          updatedRubriqueNames.push(tagName);
+        if (tagName && feed.id) {
+          updatedRubriques.push({ name: tagName, id: feed.id });
         }
 
         if (header && !header.querySelector(".action-feed__new-badge")) {
@@ -1498,11 +1498,14 @@
 
       const weekBadge = document.querySelector("[data-week-badge]");
 
-      if (weekBadge && updatedRubriqueNames.length > 0) {
-        const rubriqueLabel = updatedRubriqueNames.length > 1 ? "rubriques" : "rubrique";
-        weekBadge.textContent = `🆕 Nouveau : ${updatedRubriqueNames.join(", ")}`;
-        weekBadge.title = `${updatedRubriqueNames.length} ${rubriqueLabel} mise${
-          updatedRubriqueNames.length > 1 ? "s" : ""
+      if (weekBadge && updatedRubriques.length > 0) {
+        const rubriqueLabel = updatedRubriques.length > 1 ? "rubriques" : "rubrique";
+        const links = updatedRubriques
+          .map((rubrique) => `<a href="#${rubrique.id}">${rubrique.name}</a>`)
+          .join(", ");
+        weekBadge.innerHTML = `🆕 Nouveau : ${links}`;
+        weekBadge.title = `${updatedRubriques.length} ${rubriqueLabel} mise${
+          updatedRubriques.length > 1 ? "s" : ""
         } à jour cette semaine (${weekRangeLabel})`;
         weekBadge.hidden = false;
       }
