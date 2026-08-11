@@ -87,6 +87,7 @@
               </svg>
               Infos et actualités
             </a>
+            <p class="hero__new-badge" data-week-badge hidden></p>
           </div>
         </div>
 
@@ -604,7 +605,7 @@
                   <h3>Actualités de la semaine</h3>
                 </div>
                 <div class="feed-list feed-list--single" aria-label="Actualité de la semaine - droit local Alsace-Moselle">
-                  <article class="feed-post">
+                  <article class="feed-post" data-published="2026-07-23">
                     <div class="feed-post__meta">
                       <span class="feed-post__avatar">Santé</span>
                       <div>
@@ -646,7 +647,7 @@
                   <h3>Votre enquête est prête</h3>
                 </div>
                 <div class="feed-list feed-list--single" aria-label="Résultats de l’enquête RPS 2026">
-                  <article class="feed-post">
+                  <article class="feed-post" data-published="2026-07-23">
                     <div class="feed-post__meta">
                       <span class="feed-post__avatar">RPS</span>
                       <div>
@@ -685,7 +686,7 @@
                   <h3>Dialogue social du groupe et du site</h3>
                 </div>
                 <div class="feed-list" role="region" aria-label="Actualités dialogue social" tabindex="0">
-                  <article class="feed-post">
+                  <article class="feed-post" data-published="2026-07-23">
                     <div class="feed-post__meta">
                       <span class="feed-post__avatar">CFDT</span>
                       <div>
@@ -728,7 +729,7 @@
                   <h3>Branche Chimie Lorraine</h3>
                 </div>
                 <div class="feed-list" role="region" aria-label="Actualités de la branche Chimie Lorraine" tabindex="0">
-                  <article class="feed-post">
+                  <article class="feed-post" data-published="2026-06-12">
                     <div class="feed-post__meta">
                       <span class="feed-post__avatar">CTB</span>
                       <div>
@@ -754,7 +755,7 @@
                       du bassin de l'emploi lorrain.
                     </p>
                   </article>
-                  <article class="feed-post">
+                  <article class="feed-post" data-published="2026-06-01">
                     <div class="feed-post__meta">
                       <span class="feed-post__avatar">CNB</span>
                       <div>
@@ -806,7 +807,7 @@
                   <h3>Actualités nationale et de la convention chimie</h3>
                 </div>
                 <div class="feed-list feed-list--single" aria-label="Actualités nationale et de la convention chimie">
-                  <article class="feed-post">
+                  <article class="feed-post" data-published="2026-08-11">
                     <div class="feed-post__meta">
                       <span class="feed-post__avatar">CFDT</span>
                       <div>
@@ -868,7 +869,7 @@
                       </p>
                     </div>
                   </article>
-                  <article class="feed-post">
+                  <article class="feed-post" data-published="2026-08-11">
                     <div class="feed-post__meta">
                       <span class="feed-post__avatar">CFDT</span>
                       <div>
@@ -1449,6 +1450,61 @@
       );
 
       sections.forEach((section) => observer.observe(section));
+
+      const MS_PER_DAY = 24 * 60 * 60 * 1000;
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const isoWeekday = (today.getDay() + 6) % 7;
+      const weekStart = new Date(today.getTime() - isoWeekday * MS_PER_DAY);
+      const weekEnd = new Date(weekStart.getTime() + 6 * MS_PER_DAY);
+
+      const dayMonthYearFormatter = new Intl.DateTimeFormat("fr-FR", {
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+      });
+      const dayOnlyFormatter = new Intl.DateTimeFormat("fr-FR", { day: "numeric" });
+      const weekRangeLabel =
+        weekStart.getMonth() === weekEnd.getMonth()
+          ? `${dayOnlyFormatter.format(weekStart)} au ${dayMonthYearFormatter.format(weekEnd)}`
+          : `${dayMonthYearFormatter.format(weekStart)} au ${dayMonthYearFormatter.format(weekEnd)}`;
+
+      const updatedRubriqueNames = [];
+
+      document.querySelectorAll(".action-feed").forEach((feed) => {
+        const hasNewPost = Array.from(feed.querySelectorAll("[data-published]")).some((post) => {
+          const published = new Date(`${post.dataset.published}T00:00:00`);
+          return published >= weekStart && published <= weekEnd;
+        });
+
+        if (!hasNewPost) {
+          return;
+        }
+
+        const header = feed.querySelector(".action-feed__header");
+        const tagName = header?.querySelector(".action-feed__tag")?.textContent?.trim();
+
+        if (tagName) {
+          updatedRubriqueNames.push(tagName);
+        }
+
+        if (header && !header.querySelector(".action-feed__new-badge")) {
+          const badge = document.createElement("span");
+          badge.className = "action-feed__new-badge";
+          badge.textContent = "Nouveau cette semaine";
+          header.appendChild(badge);
+        }
+      });
+
+      const weekBadge = document.querySelector("[data-week-badge]");
+
+      if (weekBadge && updatedRubriqueNames.length > 0) {
+        const rubriqueLabel = updatedRubriqueNames.length > 1 ? "rubriques" : "rubrique";
+        weekBadge.textContent = `🆕 ${updatedRubriqueNames.length} ${rubriqueLabel} mise${
+          updatedRubriqueNames.length > 1 ? "s" : ""
+        } à jour cette semaine (${weekRangeLabel}) : ${updatedRubriqueNames.join(", ")}`;
+        weekBadge.hidden = false;
+      }
     </script>
   </body>
 </html>
