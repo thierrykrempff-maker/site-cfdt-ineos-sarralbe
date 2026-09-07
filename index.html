@@ -1508,9 +1508,8 @@
       const MS_PER_DAY = 24 * 60 * 60 * 1000;
       const today = new Date();
       today.setHours(0, 0, 0, 0);
-      const isoWeekday = (today.getDay() + 6) % 7;
-      const weekStart = new Date(today.getTime() - isoWeekday * MS_PER_DAY);
-      const weekEnd = new Date(weekStart.getTime() + 6 * MS_PER_DAY);
+      const weekEnd = today;
+      const weekStart = new Date(today.getTime() - 6 * MS_PER_DAY);
 
       const dayMonthYearFormatter = new Intl.DateTimeFormat("fr-FR", {
         day: "numeric",
