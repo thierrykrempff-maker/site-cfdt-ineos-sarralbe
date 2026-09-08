@@ -42,6 +42,12 @@ Les decisions d'architecture et de developpement doivent rester coherentes avec 
 - agir avec serieux, transparence et determination ;
 - informer, accompagner, alerter si necessaire et proposer des solutions concretes.
 
+## Publier un article plus vite
+
+- Gabarits prêts à copier-remplir : [templates/gabarits-articles.html](templates/gabarits-articles.html).
+- Chaque rubrique dans `index.html` porte un commentaire `<!-- RUBRIQUE: ... -->` qui indique où coller le nouvel article.
+- À chaque `git push` sur `main`, le site est publié automatiquement sur Hostinger via `.github/workflows/deploy-hostinger.yml` (secrets FTP à configurer une fois dans les paramètres GitHub du dépôt).
+
 ## Securite documentaire
 
 Les accords INEOS complets, reglements internes, donnees nominatives, documents BDESE et pieces confidentielles ne doivent jamais etre stockes dans ce depot ni exposes sur le site public.

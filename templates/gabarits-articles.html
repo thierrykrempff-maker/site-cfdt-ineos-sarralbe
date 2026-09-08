@@ -1,0 +1,164 @@
+<!--
+  GABARITS D'ARTICLES — CFDT INEOS Sarralbe
+  ==========================================
+  But : publier un article plus vite en copiant le bon modèle ci-dessous
+  dans index.html, au lieu d'écrire le HTML depuis zéro à chaque fois.
+
+  MODE D'EMPLOI
+  --------------
+  1. Repérer la rubrique dans index.html en cherchant le commentaire
+     "RUBRIQUE: <nom>" (Actus, Enquête RPS 2026, Dialogue, Branche,
+     Info nationale).
+  2. Rubriques "multi" (Dialogue, Branche) : coller le nouvel article
+     juste après le commentaire, AU-DESSUS des articles existants
+     (le plus récent en premier).
+     Rubriques "single" (Actus, Enquête RPS, Info nationale) :
+     REMPLACER entièrement l'unique <article class="feed-post">...</article>
+     par le nouveau.
+  3. Choisir le modèle ci-dessous qui correspond au contenu (affiche,
+     citation, liste à puces, texte simple, document PDF).
+  4. Remplir les [ENTRE CROCHETS].
+  5. Rappel : avant de remplacer/supprimer un article existant, archiver
+     son contenu complet dans historique.html (workflow standard du site).
+  6. data-published et <time datetime="..."> utilisent le format AAAA-MM-JJ.
+
+  -->
+
+
+<!-- ============================================================
+     MODÈLE A — Affiche/poster + texte d'introduction
+     (ex: annonces, convocations, communiqués visuels)
+     ============================================================ -->
+<article class="feed-post" data-published="[AAAA-MM-JJ]">
+  <div class="feed-post__meta">
+    <span class="feed-post__avatar">[SIGLE, ex: CFDT, CTB, RPS]</span>
+    <div>
+      <strong>[Titre de l'article]</strong>
+      <time datetime="[AAAA-MM-JJ]">[JJ mois AAAA]</time>
+    </div>
+  </div>
+  <div class="feed-post__article">
+    <figure class="feed-article-visual feed-article-visual--poster">
+      <img
+        src="assets/[nom-du-fichier].png"
+        alt="[Description complète et fidèle de l'affiche pour l'accessibilité]"
+        width="[largeur px]"
+        height="[hauteur px]"
+        loading="lazy"
+      >
+    </figure>
+    <p>
+      [Texte d'introduction ou de contexte, 2-4 phrases.]
+    </p>
+    <p class="feed-article-source">
+      Source : [CFDT / autre]
+    </p>
+  </div>
+</article>
+
+
+<!-- ============================================================
+     MODÈLE B — Affiche/poster + texte + liste à puces (callout)
+     (ex: "À retenir", points clés à mettre en avant)
+     ============================================================ -->
+<article class="feed-post" data-published="[AAAA-MM-JJ]">
+  <div class="feed-post__meta">
+    <span class="feed-post__avatar">[SIGLE]</span>
+    <div>
+      <strong>[Titre de l'article]</strong>
+      <time datetime="[AAAA-MM-JJ]">[JJ mois AAAA]</time>
+    </div>
+  </div>
+  <div class="feed-post__article">
+    <figure class="feed-article-visual feed-article-visual--poster">
+      <img
+        src="assets/[nom-du-fichier].png"
+        alt="[Description complète et fidèle de l'affiche]"
+        width="[largeur px]"
+        height="[hauteur px]"
+        loading="lazy"
+      >
+    </figure>
+    <p>
+      [Texte d'introduction.]
+    </p>
+    <div class="feed-article-callout">
+      <strong>[Titre du bloc, ex: À retenir / Au programme]</strong>
+      <ul class="feed-summary-list">
+        <li><strong>[Point 1 :]</strong> [détail.]</li>
+        <li><strong>[Point 2 :]</strong> [détail.]</li>
+        <li><strong>[Point 3 :]</strong> [détail.]</li>
+      </ul>
+    </div>
+    <p class="feed-article-source">
+      Source : [CFDT / autre]
+    </p>
+  </div>
+</article>
+
+
+<!-- ============================================================
+     MODÈLE C — Texte simple, sans image
+     (ex: explication, présentation d'une instance)
+     ============================================================ -->
+<article class="feed-post" data-published="[AAAA-MM-JJ]">
+  <div class="feed-post__meta">
+    <span class="feed-post__avatar">[SIGLE]</span>
+    <div>
+      <strong>[Titre de l'article]</strong>
+      <time datetime="[AAAA-MM-JJ]">[JJ mois AAAA]</time>
+    </div>
+  </div>
+  <p>
+    [Paragraphe 1.]
+  </p>
+  <p>
+    [Paragraphe 2, si besoin.]
+  </p>
+</article>
+
+
+<!-- ============================================================
+     MODÈLE D — Citation / témoignage (blockquote)
+     (ex: prise de parole introductive avant un document)
+     ============================================================ -->
+<article class="feed-post" data-published="[AAAA-MM-JJ]">
+  <div class="feed-post__meta">
+    <span class="feed-post__avatar">[SIGLE]</span>
+    <div>
+      <strong>[Titre de l'article]</strong>
+      <time datetime="[AAAA-MM-JJ]">[JJ mois AAAA]</time>
+    </div>
+  </div>
+  <blockquote class="feed-post__quote">
+    <p><em>[Première phrase de la citation.]</em></p>
+    <p>
+      <em>[Suite de la citation.]</em>
+    </p>
+  </blockquote>
+  <a class="feed-post__link" href="documents/[nom-du-fichier].pdf" target="_blank" rel="noopener noreferrer" type="application/pdf" aria-label="Lire l'article complet au format PDF">
+    [Texte du lien, ex: Lire l'article complet]
+  </a>
+</article>
+
+
+<!-- ============================================================
+     MODÈLE E — Lien vers un document (PDF/PPTX) uniquement
+     ============================================================ -->
+<article class="feed-post" data-published="[AAAA-MM-JJ]">
+  <div class="feed-post__meta">
+    <span class="feed-post__avatar">[SIGLE]</span>
+    <div>
+      <strong>[Titre de l'article]</strong>
+      <time datetime="[AAAA-MM-JJ]">[JJ mois AAAA]</time>
+    </div>
+  </div>
+  <div class="feed-post__article">
+    <p>
+      [Texte d'introduction avant le document.]
+    </p>
+  </div>
+  <a class="feed-post__link" href="documents/[nom-du-fichier].pdf" target="_blank" rel="noopener noreferrer" type="application/pdf" aria-label="[Description de l'action pour l'accessibilité]">
+    [Texte du lien]
+  </a>
+</article>
