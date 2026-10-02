@@ -2992,3 +2992,11 @@ svg {
   border-radius: 8px;
   box-shadow: 0 8px 22px rgba(15, 23, 42, 0.12);
 }
+
+.home-poster--flash {
+  border-left: 5px solid #e8501a;
+}
+
+.home-poster--flash .home-poster__label {
+  color: #e8501a;
+}
