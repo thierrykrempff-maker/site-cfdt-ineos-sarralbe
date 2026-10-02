@@ -567,130 +567,6 @@ svg {
   text-transform: uppercase;
 }
 
-.flash-info {
-  width: min(280px, 100%);
-  justify-self: end;
-}
-
-.flash-info__inner {
-  display: grid;
-  grid-template-columns: 62px minmax(0, 1fr);
-  align-items: center;
-  gap: 7px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 7px;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.55);
-  background: rgba(255, 255, 255, 0.94);
-  box-shadow: 0 18px 42px rgba(4, 14, 28, 0.3);
-  text-align: left;
-  backdrop-filter: blur(8px);
-}
-
-.flash-info__visual {
-  align-self: center;
-  width: 62px;
-  height: 62px;
-  min-height: 0;
-  margin: 0;
-  overflow: hidden;
-  border-radius: 8px;
-  background: #dfe8f0;
-}
-
-.flash-info__visual img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 38% 20%;
-}
-
-.flash-info__content {
-  display: grid;
-  justify-items: start;
-  min-width: 0;
-}
-
-.flash-info__label {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  color: var(--cfdt-orange-dark);
-  font-family: var(--display-font);
-  font-size: 10px;
-  font-weight: 800;
-  text-transform: uppercase;
-}
-
-.flash-info__label svg {
-  width: 15px;
-  height: 15px;
-}
-
-.flash-info__status {
-  margin: 4px 0 0;
-  padding: 3px 7px;
-  border-radius: 999px;
-  border: 1px solid rgba(243, 146, 0, 0.42);
-  background: #fff7e8;
-  color: #8a4b00;
-  font-family: var(--display-font);
-  font-size: 10px;
-  font-weight: 800;
-  text-transform: uppercase;
-}
-
-.flash-info h2 {
-  margin: 3px 0 0;
-  color: #17202d;
-  font-family: var(--display-font);
-  font-size: 13px;
-  font-weight: 800;
-  line-height: 1.05;
-  text-transform: uppercase;
-}
-
-.flash-info p {
-  margin: 3px 0 0;
-  color: #354154;
-  font-size: 10px;
-  line-height: 1.15;
-}
-
-.flash-info__highlight {
-  display: inline-block;
-  margin-bottom: 2px;
-  padding: 2px 6px;
-  border-radius: 999px;
-  background: #fff200;
-  color: #101827;
-  box-shadow: 0 0 0 3px rgba(243, 146, 0, 0.35);
-  font-family: var(--display-font);
-  font-weight: 900;
-  text-transform: uppercase;
-}
-
-.flash-info__button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 27px;
-  margin-top: 5px;
-  padding: 0 10px;
-  border: 0;
-  border-radius: 999px;
-  background: var(--cfdt-orange);
-  color: var(--cfdt-on-orange);
-  box-shadow: 0 10px 24px rgba(243, 146, 0, 0.36);
-  font-family: var(--display-font);
-  font-size: 10px;
-  font-weight: 800;
-  text-transform: uppercase;
-  transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
-}
-
 .poster-modal__image {
   display: block;
   width: min(100%, 680px);
@@ -699,12 +575,6 @@ svg {
   border-radius: 8px;
   object-fit: contain;
   background: #eef2f7;
-}
-
-.flash-info__button:hover {
-  background: var(--cfdt-orange-dark);
-  box-shadow: 0 14px 30px rgba(243, 146, 0, 0.46);
-  transform: translateY(-2px);
 }
 
 .poster-modal {
@@ -2430,7 +2300,6 @@ svg {
 .join-button:focus-visible,
 .button:focus-visible,
 .pillar a:focus-visible,
-.flash-info__button:focus-visible,
 .poster-modal__close:focus-visible,
 .poster-modal__cta:focus-visible,
 .action-list a:focus-visible,
@@ -2645,34 +2514,6 @@ svg {
     border-left: 0;
     border-top: 1px solid var(--line);
     padding-top: 28px;
-  }
-
-  .flash-info__inner {
-    grid-template-columns: 62px minmax(0, 1fr);
-    gap: 7px;
-    padding: 7px;
-  }
-
-  .flash-info__visual {
-    width: 62px;
-    height: 62px;
-    min-height: 0;
-  }
-
-  .flash-info h2 {
-    font-size: 13px;
-  }
-
-  .flash-info p {
-    font-size: 10px;
-  }
-
-  .flash-info__button {
-    width: auto;
-    justify-content: center;
-    min-height: 27px;
-    margin-top: 5px;
-    font-size: 10px;
   }
 
   .poster-modal {
