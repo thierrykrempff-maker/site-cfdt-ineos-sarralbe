@@ -46,7 +46,7 @@ Les decisions d'architecture et de developpement doivent rester coherentes avec 
 
 - Gabarits prêts à copier-remplir : [templates/gabarits-articles.html](templates/gabarits-articles.html).
 - Chaque rubrique dans `index.html` porte un commentaire `<!-- RUBRIQUE: ... -->` qui indique où coller le nouvel article.
-- À chaque `git push` sur `main`, le site est publié automatiquement sur Hostinger via `.github/workflows/deploy-hostinger.yml` (secrets FTP à configurer une fois dans les paramètres GitHub du dépôt).
+- À chaque `git push` sur `main`, le site est mis à jour automatiquement par la liaison Git de Hostinger. L'ancienne action GitHub FTP (`deploy-hostinger.yml`) a été supprimée : elle échouait faute de secrets FTP et faisait doublon.
 
 ## Securite documentaire
 
