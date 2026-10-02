@@ -498,6 +498,94 @@ svg {
   white-space: normal;
 }
 
+.home-poster {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  width: min(280px, 100%);
+  justify-self: end;
+  padding: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 18px 42px rgba(4, 14, 28, 0.3);
+  text-align: left;
+}
+
+.home-poster__visual {
+  display: block;
+  overflow: hidden;
+  border-radius: 6px;
+  background: #dfe8f0;
+}
+
+.home-poster__visual img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.home-poster__content {
+  display: grid;
+  justify-items: start;
+  min-width: 0;
+}
+
+.home-poster__label {
+  margin: 0;
+  color: var(--cfdt-orange-dark);
+  font-family: var(--display-font);
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.home-poster h2 {
+  margin: 2px 0 0;
+  color: #17202d;
+  font-family: var(--display-font);
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.home-poster p:not(.home-poster__label) {
+  margin: 3px 0 0;
+  color: #354154;
+  font-size: 11px;
+  line-height: 1.25;
+}
+
+.home-poster__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 27px;
+  margin-top: 6px;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: var(--cfdt-orange);
+  color: var(--cfdt-on-orange);
+  font-family: var(--display-font);
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.home-poster__link:hover,
+.home-poster__link:focus-visible {
+  background: var(--cfdt-orange-dark);
+}
+
+@media (max-width: 1180px) {
+  .home-poster {
+    justify-self: stretch;
+    width: 100%;
+  }
+}
+
 .pillars {
   position: relative;
   z-index: 3;
