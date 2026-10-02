@@ -18,7 +18,7 @@
       content="default-src 'self'; img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com; media-src 'self'; style-src 'self'; style-src-attr 'none'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; script-src-attr 'none'; connect-src https://www.google-analytics.com https://region1.google-analytics.com https://www.googletagmanager.com; frame-src https://docs.google.com https://forms.gle; object-src 'none'; base-uri 'self'; form-action 'self' mailto: https://docs.google.com"
     >
     <link rel="preload" as="image" href="assets/sarralbe-aerien.jpg" fetchpriority="high">
-    <link rel="stylesheet" href="styles.css?v=20261002-rps-archive">
+    <link rel="stylesheet" href="styles.css?v=20261002-alerte">
     <meta name="google-site-verification" content="txs2p5JIHOdOoX1v4FFRYW-MwL39pWPWPtJZVMUqakQ" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-2G9YJ63ZRK"></script>
     <script>
@@ -95,6 +95,24 @@
         </div>
 
         <div class="hero-side" aria-label="Actions prioritaires">
+          <aside class="home-poster home-poster--alert" aria-labelledby="home-alert-title">
+            <a class="home-poster__visual home-poster__visual--alert" href="#alerte-astreinte" aria-label="Lire l'alerte sur l'accord d'astreinte">
+              <svg viewBox="0 0 24 24" aria-hidden="true" width="40" height="40">
+                <path d="M12 3 2 21h20L12 3Z" fill="none" stroke="#ffffff" stroke-width="2" stroke-linejoin="round"/>
+                <path d="M12 10v5" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="12" cy="18" r="1.1" fill="#ffffff"/>
+              </svg>
+            </a>
+            <div class="home-poster__content">
+              <p class="home-poster__label">Alerte</p>
+              <h2 id="home-alert-title">Accord d'astreinte dénoncé</h2>
+              <p>Mécaniciens, agents de maîtrise, cadres : contactez-moi pour vous impliquer.</p>
+              <a class="home-poster__link" href="#alerte-astreinte">
+                Lire l'alerte
+              </a>
+            </div>
+          </aside>
+
           <aside class="home-poster home-poster--flash" aria-labelledby="home-flash-title">
             <a class="home-poster__visual" href="vote-electronique-pap.html" aria-label="Lire l'explication sur le vote électronique et le PAP">
               <img
@@ -671,6 +689,65 @@
                 </div>
                 <div class="feed-list feed-list--single" aria-label="Actualités dialogue social">
                   <!-- RUBRIQUE: Dialogue (feed-dialogue) — bloc "multi" : ajouter le nouvel article ICI, au-dessus des précédents (le plus récent en premier). Voir templates/gabarits-articles.html -->
+                  <article class="feed-post" id="alerte-astreinte" data-published="2026-10-02">
+                    <div class="feed-post__meta">
+                      <span class="feed-post__avatar">CFDT</span>
+                      <div>
+                        <strong>ALERTE : l'accord sur l'astreinte est dénoncé</strong>
+                        <time datetime="2026-10-02">2 octobre 2026</time>
+                      </div>
+                    </div>
+                    <div class="feed-post__article">
+                      <div class="feed-article-callout feed-article-callout--alert">
+                        <strong>Mécaniciens, agents de maîtrise, cadres : vous êtes concernés</strong>
+                        <p>
+                          La direction a dénoncé l'accord qui fixe le fonctionnement et la rémunération
+                          de l'astreinte. Un nouvel accord va se négocier : nous avons besoin de vous.
+                        </p>
+                      </div>
+                      <p>
+                        Par un courrier du 22 septembre 2026, la direction d'INEOS Polymers Sarralbe a
+                        informé les syndicats qu'elle dénonce l'accord relatif aux modalités de
+                        fonctionnement et à la rémunération de l'astreinte (signé le 22 mars 2021, en
+                        vigueur depuis le 1<sup>er</sup> mai 2021).
+                      </p>
+                      <ul class="feed-summary-list">
+                        <li>
+                          <strong>Pourquoi :</strong> la direction explique que c'est pour négocier un
+                          accord de substitution, c'est-à-dire un nouvel accord à la place de l'ancien.
+                        </li>
+                        <li>
+                          <strong>Quand :</strong> un préavis de 3 mois s'applique et se termine le
+                          31 décembre 2026. À l'issue, selon le courrier de la direction, l'accord
+                          cessera ses effets.
+                        </li>
+                        <li>
+                          <strong>Qui est concerné :</strong> les mécaniciens, les agents de maîtrise
+                          et les cadres qui font des astreintes.
+                        </li>
+                        <li>
+                          <strong>Pourquoi c'est important :</strong> la façon dont l'astreinte
+                          fonctionne et est rémunérée peut changer avec le nouvel accord.
+                        </li>
+                      </ul>
+                      <p>
+                        <strong>Ne laissez pas décider sans vous.</strong> Plus nous serons nombreux à
+                        porter la réalité du terrain (astreintes réalisées, contraintes, rémunération),
+                        plus le nouvel accord sera juste.
+                      </p>
+                      <div class="feed-article-callout">
+                        <strong>Vous voulez vous impliquer dans la suite de cet accord ?</strong>
+                        <p>
+                          Contactez Thierry Krempff, Délégué Syndical CFDT :
+                          <a href="tel:+33687152364">06.87.15.23.64</a> ou
+                          <a href="mailto:thierry.krempff@gmail.com">thierry.krempff@gmail.com</a>
+                        </p>
+                      </div>
+                      <p class="feed-article-source">
+                        Source : courrier de la direction du 22 septembre 2026
+                      </p>
+                    </div>
+                  </article>
                   <article class="feed-post" data-published="2026-10-02">
                     <div class="feed-post__meta">
                       <span class="feed-post__avatar">CSE</span>
