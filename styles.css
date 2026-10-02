@@ -454,49 +454,9 @@ svg {
   width: min(380px, calc(100% - 96px));
 }
 
-.home-rps-cta {
-  position: relative;
-  display: grid;
-  justify-items: center;
-  width: 100%;
-  margin: 0;
-  padding: clamp(18px, 2vw, 24px);
-  border-radius: 8px;
-  border: 1px solid rgba(215, 221, 230, 0.95);
-  border-top: 6px solid var(--cfdt-orange);
-  background: rgba(255, 255, 255, 0.98);
-  box-shadow: var(--shadow);
-  text-align: center;
-}
 
-.home-rps-cta__eyebrow {
-  margin: 0 0 6px;
-  color: var(--cfdt-orange-dark);
-  font-family: var(--display-font);
-  font-size: clamp(17px, 1.6vw, 22px);
-  font-weight: 800;
-  text-transform: uppercase;
-}
 
-.home-rps-cta h2 {
-  max-width: 310px;
-  margin: 0;
-  color: #17202d;
-  font-family: var(--display-font);
-  font-size: clamp(22px, 1.9vw, 28px);
-  font-weight: 800;
-  line-height: 1.08;
-}
 
-.home-rps-cta__button {
-  width: 100%;
-  min-width: 0;
-  margin-top: 16px;
-  min-height: 58px;
-  line-height: 1.15;
-  text-align: center;
-  white-space: normal;
-}
 
 .home-poster {
   display: grid;
@@ -1813,14 +1773,9 @@ svg {
     grid-row: 1;
   }
 
-  #feed-rps-results {
-    grid-column: 1 / -1;
-    grid-row: 2;
-  }
-
   #feed-dialogue {
     grid-column: 1 / -1;
-    grid-row: 3;
+    grid-row: 2;
   }
 }
 
