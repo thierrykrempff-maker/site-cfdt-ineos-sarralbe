@@ -1,0 +1,16 @@
+# Redirection HTTP -> HTTPS (comportement existant conservé, host inchangé)
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+# Les pages HTML sont revalidées à chaque visite : les visiteurs voient
+# toujours la dernière version (le serveur répond "304 inchangé" si rien n'a bougé).
+# CSS, images et PDF gardent leur cache habituel (le CSS est versionné via ?v=...).
+<IfModule mod_headers.c>
+  <FilesMatch "\.html?$">
+    Header set Cache-Control "no-cache, must-revalidate"
+    Header unset Expires
+  </FilesMatch>
+</IfModule>
