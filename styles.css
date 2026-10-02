@@ -2950,3 +2950,45 @@ svg {
     gap: 5px;
   }
 }
+
+.article-logos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0 0 28px;
+}
+
+.article-logos img {
+  display: block;
+  width: auto;
+  height: 64px;
+  border-radius: 10px;
+}
+
+.article-logos__slogan {
+  background: #ffffff;
+}
+
+.article-contact {
+  padding: 14px 18px;
+  border-left: 5px solid var(--cfdt-orange);
+  background: #fff8ed;
+  line-height: 1.6;
+}
+
+.article-pages {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.article-pages img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.12);
+}
