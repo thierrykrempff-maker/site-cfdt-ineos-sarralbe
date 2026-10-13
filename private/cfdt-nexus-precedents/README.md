@@ -40,7 +40,10 @@ d'un `.json`) reste disponible.
 serveur Nexus local : toute requête de navigateur (en-tête `Origin` ou `Sec-Fetch-*`) est refusée, et les en-têtes
 `X-Nexus` et `X-Nexus-Server` sont exigés. Les pages du module, elles, ne reçoivent que des références.
 
-Corps : `{"points": [{"id": "0", "concepts": ["connaissances", "installations"], "min_matches": 2}], "since": 2014}`.
+Corps : `{"points": [{"id": "0", "concepts": ["connaissances", "installations"], "min_matches": 2}], "since": 2014, "limit": 6}`
+(`limit` : 1 à 15 PV par point, 3 par défaut ; 12 notions au plus par point).
+Le Nexus local l'utilise pour trois fonctions : analyse d'ordre du jour CSE, bloc sous la réponse à une question, et bouton
+« Recherche dans les PV ».
 Réponse : `{"ok": true, "points": {"0": [{"date", "precision_date", "fichier", "page", "notions", "extrait"}]}}`
 (3 PV au plus par point, classés par notions couvertes et proximité des notions).
 

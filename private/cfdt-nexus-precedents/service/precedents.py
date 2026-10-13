@@ -253,7 +253,7 @@ def search_points(data, points, since=0, until=9999, limit=3, extract=700):
     out = {}
     for pt in points:
         pid = str(pt.get("id", ""))
-        concepts = [norm(c).strip() for c in pt.get("concepts", []) if norm(c).strip()][:8]
+        concepts = [norm(c).strip() for c in pt.get("concepts", []) if norm(c).strip()][:12]
         need = max(1, min(int(pt.get("min_matches", 1) or 1), len(concepts) or 1))
         sets = [_concept_windows(data, c, cache) for c in concepts]
         idf = [math.log(1 + N / (1 + len(w))) for w in sets]

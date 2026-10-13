@@ -221,6 +221,15 @@ class ServerTests(unittest.TestCase):
         self.assertEqual(self.post("/api/passages", {"points": "pas une liste"}, self.SERVER_HEADERS)[0], 400)
         self.assertEqual(self.post("/api/inconnu", self.POINTS, self.SERVER_HEADERS)[0], 404)
 
+    def test_passages_limite_de_resultats_et_notions(self):
+        payload = {"points": [{"id": "q", "concepts": ["connaissances"]}], "limit": 1}
+        self.assertEqual(len(json.loads(self.post("/api/passages", payload, self.SERVER_HEADERS)[1])["points"]["q"]), 1)
+        payload["limit"] = 99  # plafonné à 15, jamais plus que les PV disponibles
+        rows = json.loads(self.post("/api/passages", payload, self.SERVER_HEADERS)[1])["points"]["q"]
+        self.assertTrue(1 <= len(rows) <= 15)
+        twelve = {"points": [{"id": "q", "concepts": [f"mot{i}" for i in range(20)] + ["connaissances"]}]}
+        self.assertEqual(self.post("/api/passages", twelve, self.SERVER_HEADERS)[0], 200)
+
     def test_passages_limites_de_taille(self):
         many = {"points": [{"id": str(i), "concepts": ["connaissances"]} for i in range(200)]}
         status, body = self.post("/api/passages", many, self.SERVER_HEADERS)

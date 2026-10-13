@@ -150,11 +150,11 @@ class Handler(BaseHTTPRequestHandler):
         for item in raw_points[:60]:
             if not isinstance(item, dict):
                 continue
-            concepts = [str(c)[:60] for c in (item.get("concepts") or []) if str(c).strip()][:8]
+            concepts = [str(c)[:60] for c in (item.get("concepts") or []) if str(c).strip()][:12]
             if not concepts:
                 continue
             try:
-                need = max(1, min(int(item.get("min_matches", 1)), 8))
+                need = max(1, min(int(item.get("min_matches", 1)), 12))
             except (TypeError, ValueError):
                 need = 1
             points.append({"id": str(item.get("id", ""))[:80], "concepts": concepts, "min_matches": need})
@@ -166,9 +166,13 @@ class Handler(BaseHTTPRequestHandler):
             except (TypeError, ValueError):
                 return default
 
+        try:
+            limit = max(1, min(int(body.get("limit", 3)), 15))
+        except (TypeError, ValueError):
+            limit = 3
         with LOCK:
             data = get_data()
-            result = P.search_points(data, points, year("since", 0), year("until", 9999), limit=3, extract=700)
+            result = P.search_points(data, points, year("since", 0), year("until", 9999), limit=limit, extract=700)
         self._send(200, json.dumps({"ok": True, "pv_indexes": len(data["docs"]), "points": result}, ensure_ascii=False))
 
     def _api(self, url):
