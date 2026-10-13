@@ -5,6 +5,14 @@ private/*
 !private/cfdt-nexus-bibliotheque/**
 !private/cfdt-nexus-dossiers/
 !private/cfdt-nexus-dossiers/**
+!private/cfdt-nexus-precedents/
+!private/cfdt-nexus-precedents/**
+# Le module Précédents ne contient que du code : jamais l'index des PV ni ses caches.
+private/cfdt-nexus-precedents/**/pv_index/
+private/cfdt-nexus-precedents/**/*.jsonl
+private/cfdt-nexus-precedents/**/*.pkl
+private/cfdt-nexus-precedents/**/*.db
+private/cfdt-nexus-precedents/**/*.txt
 
 # Ne jamais stocker de documents confidentiels dans le dépôt.
 confidential/*

@@ -25,6 +25,11 @@ SECTION_INTERFACE = "Etat de l'interface locale"
 SECTION_EXPERTS = "Etat des experts"
 SECTION_SCENARIOS = "Resultats des scenarios de test"
 SECTION_SECURITY = "Controles securite locale"
+SECTION_PRECEDENTS = "Module Precedents"
+
+# Seuls modules autorises a joindre le service local (loopback). Tout autre reseau reste interdit.
+LOOPBACK_SERVICE_FILES = {"private/cfdt-nexus-precedents/app.js"}
+LOOPBACK_URL = re.compile(r"http://(?:127\.0\.0\.1|localhost)(?::\d+)?")
 
 
 @dataclass
@@ -192,6 +197,10 @@ def check_interface(results: list[CheckResult]) -> None:
         "private/cfdt-nexus-dossiers/index.html",
         "private/cfdt-nexus-dossiers/app.js",
         "private/cfdt-nexus-dossiers/styles.css",
+        "private/cfdt-nexus-precedents/index.html",
+        "private/cfdt-nexus-precedents/app.js",
+        "private/cfdt-nexus-precedents/styles.css",
+        "private/cfdt-nexus-precedents/module.json",
     ]
     ok, present, missing = exists_all(required)
     add(
@@ -210,6 +219,7 @@ def check_interface(results: list[CheckResult]) -> None:
         ROOT / "cockpit/settings.html",
         ROOT / "private/cfdt-nexus-bibliotheque/index.html",
         ROOT / "private/cfdt-nexus-dossiers/index.html",
+        ROOT / "private/cfdt-nexus-precedents/index.html",
     ]
     missing_refs = find_missing_local_references(html_files)
     add(
@@ -228,6 +238,7 @@ def check_interface(results: list[CheckResult]) -> None:
         ROOT / "cockpit/settings.js",
         ROOT / "private/cfdt-nexus-bibliotheque/app.js",
         ROOT / "private/cfdt-nexus-dossiers/app.js",
+        ROOT / "private/cfdt-nexus-precedents/app.js",
     ]
     check_js_syntax(results, js_files)
 
@@ -328,9 +339,17 @@ def check_no_external_services(results: list[CheckResult], files: list[Path]) ->
         "http://": "URL http",
     }
     findings: list[str] = []
+    allowed_notes: list[str] = []
     for file_path in files:
         content = file_path.read_text(encoding="utf-8", errors="replace")
+        loopback_only = rel(file_path) in LOOPBACK_SERVICE_FILES
+        if loopback_only:
+            # Exception strictement limitee : service local du module (127.0.0.1 / localhost) et fetch vers ce service.
+            content = LOOPBACK_URL.sub("", content)
+            allowed_notes.append(f"{rel(file_path)}: service local loopback autorise (aucun autre reseau)")
         for pattern, label in patterns.items():
+            if loopback_only and pattern == "fetch(":
+                continue
             if pattern in content:
                 findings.append(f"{rel(file_path)}: {label}")
     add(
@@ -341,7 +360,7 @@ def check_no_external_services(results: list[CheckResult], files: list[Path]) ->
         "Aucun appel reseau externe detecte dans les modules Nexus locaux."
         if not findings
         else "Des references reseau doivent etre verifiees.",
-        ["Modules JS Nexus locaux controles."] if not findings else findings,
+        (["Modules JS Nexus locaux controles."] + allowed_notes) if not findings else findings,
     )
 
 
@@ -613,6 +632,110 @@ def check_security(results: list[CheckResult]) -> None:
     )
 
 
+def check_precedents(results: list[CheckResult]) -> None:
+    module = ROOT / "private/cfdt-nexus-precedents"
+    evidence: list[str] = []
+    problems: list[str] = []
+
+    try:
+        data = json.loads((module / "module.json").read_text(encoding="utf-8"))
+        if data.get("service", {}).get("externalNetwork") is not False:
+            problems.append("module.json: service.externalNetwork doit etre false")
+        if data.get("dataPolicy", {}).get("storesExcerpts") is not False:
+            problems.append("module.json: dataPolicy.storesExcerpts doit etre false")
+        if data.get("service", {}).get("returns") != "references-only":
+            problems.append("module.json: service.returns doit etre references-only")
+        evidence.append("module.json: service local sans reseau externe, references uniquement")
+    except Exception as exc:  # noqa: BLE001
+        problems.append(f"module.json illisible : {exc!r}")
+
+    forbidden_suffixes = {".jsonl", ".pkl", ".db", ".txt", ".csv", ".sqlite"}
+    stray = [
+        rel(item)
+        for item in module.rglob("*")
+        if item.is_file()
+        and "__pycache__" not in item.parts
+        and (item.suffix.lower() in forbidden_suffixes or "pv_index" in item.parts)
+    ]
+    if stray:
+        problems.extend(f"donnee d'index dans le depot : {item}" for item in stray)
+    else:
+        evidence.append("Aucun fichier de donnees (index, cache, texte) dans le module.")
+
+    html_text = (module / "index.html").read_text(encoding="utf-8", errors="replace")
+    match = re.search(r"connect-src([^;\"]*)", html_text)
+    if not match:
+        problems.append("index.html: directive CSP connect-src absente")
+    else:
+        sources = match.group(1).split()
+        bad = [src for src in sources if src != "'self'" and not LOOPBACK_URL.fullmatch(src)]
+        if bad:
+            problems.append(f"index.html: connect-src non loopback : {' '.join(bad)}")
+        else:
+            evidence.append("CSP connect-src limite a 'self' et au loopback.")
+
+    app_text = (module / "app.js").read_text(encoding="utf-8", errors="replace")
+    allowed_fields = re.search(r"PRC_ALLOWED\s*=\s*\[([^\]]*)\]", app_text)
+    if not allowed_fields or "extrait" in allowed_fields.group(1):
+        problems.append("app.js: la liste PRC_ALLOWED doit exister et exclure 'extrait'")
+    else:
+        evidence.append("app.js: seuls des champs de reference sont conserves (aucun extrait).")
+
+    server_text = (module / "service/server.py").read_text(encoding="utf-8", errors="replace")
+    if '("127.0.0.1", PORT)' not in server_text or "0.0.0.0" in server_text:
+        problems.append("server.py: le service doit ecouter uniquement sur 127.0.0.1")
+    else:
+        evidence.append("server.py: ecoute sur 127.0.0.1 uniquement.")
+    if 'k != "extrait"' not in server_text:
+        problems.append("server.py: le filtre qui retire les extraits est absent")
+
+    gitignore = (ROOT / ".gitignore").read_text(encoding="utf-8", errors="replace")
+    for needle in ("private/cfdt-nexus-precedents/**/*.jsonl", "private/cfdt-nexus-precedents/**/pv_index/"):
+        if needle not in gitignore:
+            problems.append(f".gitignore: regle manquante {needle}")
+    if not problems:
+        evidence.append(".gitignore: l'index des PV ne peut pas etre ajoute au depot.")
+
+    add(
+        results,
+        SECTION_PRECEDENTS,
+        "Securite du module Precedents",
+        STATUS_OK if not problems else STATUS_BLOCKING,
+        "Module Precedents conforme a la politique de securite documentaire."
+        if not problems
+        else "Le module Precedents ne respecte pas la politique de securite.",
+        evidence if not problems else problems,
+    )
+
+    tests_dir = module / "service/tests"
+    try:
+        completed = subprocess.run(
+            [sys.executable, "-I", "-m", "unittest", "discover", "-s", str(tests_dir)],
+            capture_output=True,
+            text=True,
+            timeout=180,
+            cwd=str(ROOT),
+        )
+        tail = [line for line in (completed.stderr or completed.stdout).strip().splitlines() if line][-3:]
+        add(
+            results,
+            SECTION_PRECEDENTS,
+            "Tests du service Precedents",
+            STATUS_OK if completed.returncode == 0 else STATUS_FIX,
+            "Tests du service executes sur corpus fictif." if completed.returncode == 0 else "Des tests du service echouent.",
+            tail,
+        )
+    except Exception as exc:  # noqa: BLE001
+        add(
+            results,
+            SECTION_PRECEDENTS,
+            "Tests du service Precedents",
+            STATUS_FIX,
+            "Les tests du service n'ont pas pu etre executes.",
+            error=repr(exc),
+        )
+
+
 def escape_table(value: str) -> str:
     return value.replace("|", "\\|").replace("\n", " ")
 
@@ -690,6 +813,7 @@ def write_report(results: list[CheckResult]) -> Path:
         SECTION_EXPERTS,
         SECTION_SCENARIOS,
         SECTION_SECURITY,
+        SECTION_PRECEDENTS,
     ]:
         sections.extend([render_section(section, results), ""])
     sections.extend([render_errors(results), "", render_tests_executed(results), ""])
@@ -707,6 +831,7 @@ def main() -> int:
         check_experts,
         check_scenarios,
         check_security,
+        check_precedents,
     ]
     for check in checks:
         try:

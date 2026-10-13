@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CFDT Nexus - Précédents dans les PV</title>
+    <meta
+      name="description"
+      content="Précédents dans les PV du CE/CSE : références classées par pertinence avec frise chronologique."
+    >
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; connect-src 'self' http://127.0.0.1:8791 http://localhost:8791; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'"
+    >
+    <link rel="stylesheet" href="styles.css?v=1.0.0">
+    <script src="app.js?v=1.0.0" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#prcContent">Aller au contenu</a>
+
+    <header class="app-header">
+      <div class="brand-block" aria-label="CFDT Nexus">
+        <span class="brand-mark">Cfdt.</span>
+        <span class="brand-copy">
+          <strong>CFDT Nexus</strong>
+          <span>Précédents dans les PV</span>
+        </span>
+      </div>
+
+      <nav class="module-nav" aria-label="Modules CFDT Nexus">
+        <a href="../cfdt-nexus-dossiers/index.html">Dossiers</a>
+        <a href="../cfdt-nexus-bibliotheque/index.html">Bibliothèque</a>
+        <a class="module-nav__active" href="index.html" aria-current="page">Précédents</a>
+        <a href="../../cockpit/index.html">Analyse documentaire</a>
+        <a href="../../cockpit/settings.html">Paramètres</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="button button--ghost" type="button" id="prcCopyTimeline">Copier la chronologie</button>
+        <button class="button button--ghost" type="button" id="prcClear">Effacer</button>
+      </div>
+    </header>
+
+    <section class="principle-strip" aria-label="Règle de confidentialité">
+      <strong>Références uniquement.</strong>
+      <span>Cette page n'affiche ni extrait de PV ni donnée nominative : date, PV, page, pertinence. Pour lire le passage, ouvrez le PV dans votre dossier local ou demandez-le à l'assistant.</span>
+    </section>
+
+    <main class="prc-shell" id="prcContent">
+      <section class="panel prc-source">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Étape 1</p>
+            <h1>Lancer la recherche</h1>
+            <p>Un groupe de formulations équivalentes par ligne, séparées par <code>|</code>. Le premier groupe est le sujet (obligatoire) ; les suivants précisent le contexte et renforcent le classement.</p>
+          </div>
+        </div>
+        <div class="prc-source__grid">
+          <label class="prc-field">
+            <span>Groupes de formulations</span>
+            <textarea id="prcGroups" rows="4" placeholder="suivi des connaissances|test de connaissances|QCM&#10;installations|conducteurs|opérateurs"></textarea>
+          </label>
+          <label class="prc-field">
+            <span>Années (facultatif)</span>
+            <span class="prc-range">
+              <input id="prcSince" type="number" min="2000" max="2030" placeholder="depuis">
+              <input id="prcUntil" type="number" min="2000" max="2030" placeholder="jusqu'à">
+            </span>
+          </label>
+        </div>
+        <div class="form-actions">
+          <button class="button button--primary" type="button" id="prcSearch" disabled>Rechercher les précédents</button>
+          <span class="prc-status" id="prcStatus" role="status" aria-live="polite">Vérification du service local…</span>
+        </div>
+
+        <details class="prc-manual" id="prcManual">
+          <summary>Mode manuel (si le service local n'est pas lancé)</summary>
+          <label class="prc-field">
+            <span>Commande à exécuter depuis la racine du dépôt (PowerShell ou Bash)</span>
+            <textarea id="prcCommand" rows="3" readonly></textarea>
+          </label>
+          <div class="form-actions">
+            <button class="button button--ghost" type="button" id="prcCopyCommand">Copier la commande</button>
+            <label class="button button--ghost prc-file">
+              Importer le résultat (.json)
+              <input id="prcFile" type="file" accept=".json,application/json" hidden>
+            </label>
+          </div>
+          <p class="prc-hint">Enregistrez la sortie dans un fichier <code>.json</code> puis importez-la ici. Les extraits éventuels sont supprimés à l'import.</p>
+        </details>
+      </section>
+
+      <section class="panel" id="prcResults" hidden>
+        <div class="section-heading section-heading--toolbar">
+          <div>
+            <p class="eyebrow">Étape 2</p>
+            <h1 id="prcTitle">Précédents</h1>
+            <p id="prcSummary"></p>
+          </div>
+          <div class="toolbar">
+            <label class="toolbar-control">
+              <span>Trier</span>
+              <select id="prcSort" aria-label="Trier les précédents">
+                <option value="relevance">Pertinence</option>
+                <option value="asc">Chronologique (ancien → récent)</option>
+                <option value="desc">Chronologique (récent → ancien)</option>
+              </select>
+            </label>
+            <label class="toolbar-control">
+              <span>Pertinence min. <output id="prcMinOut">0</output></span>
+              <input id="prcMin" type="range" min="0" max="100" step="5" value="0">
+            </label>
+          </div>
+        </div>
+
+        <h2 class="prc-subtitle">Frise chronologique <small id="prcYearHint"></small></h2>
+        <div class="prc-timeline" id="prcTimeline" role="group" aria-label="PV par année"></div>
+
+        <h2 class="prc-subtitle">Précédents <small id="prcCount"></small></h2>
+        <ol class="prc-list" id="prcList"></ol>
+
+        <p class="prc-hint" id="prcLimits"></p>
+      </section>
+
+      <section class="panel prc-empty" id="prcEmpty">
+        <p class="eyebrow">Aucun résultat importé</p>
+        <p>Saisissez vos formulations puis cliquez sur « Rechercher les précédents ». Si le service local n'est pas lancé, utilisez le mode manuel.</p>
+      </section>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>

@@ -1,0 +1,49 @@
+{
+  "id": "cfdt-nexus-precedents",
+  "name": "Précédents dans les PV",
+  "version": "1.0.0",
+  "sprint": "Précédents - recherche de précédents dans les PV du CE/CSE",
+  "entry": "index.html",
+  "storage": {
+    "mode": "localStorage",
+    "key": "cfdt-nexus-precedents-v1",
+    "schemaVersion": "precedents-references-v1"
+  },
+  "service": {
+    "type": "local-loopback",
+    "host": "127.0.0.1",
+    "defaultPort": 8791,
+    "entry": "service/server.py",
+    "returns": "references-only",
+    "externalNetwork": false
+  },
+  "referenceFields": [
+    "rang",
+    "pertinence",
+    "date",
+    "precision_date",
+    "fichier",
+    "page",
+    "groupes_couverts",
+    "passages",
+    "lecture"
+  ],
+  "dataPolicy": {
+    "indexLocation": "hors depot (variable NEXUS_PV_INDEX, defaut ~/.claude/nexus-private/pv_index)",
+    "storesExcerpts": false,
+    "storesNominativeData": false,
+    "policy": "knowledge/SECURITY_POLICY.md"
+  },
+  "futureIntegrations": {
+    "assistantIA": true,
+    "intelligentRouter": true,
+    "agentFeed": true,
+    "semanticSearch": true
+  },
+  "allowedAgents": [
+    "defenseur-syndical",
+    "conseiller-salarie",
+    "redacteur-cfdt",
+    "cssct"
+  ]
+}

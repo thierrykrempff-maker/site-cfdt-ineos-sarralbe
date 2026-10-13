@@ -61,6 +61,18 @@ Elle ne doit pas stocker :
 - des documents médicaux ;
 - des comptes rendus confidentiels non expurgés.
 
+## Application au module Précédents (recherche dans les PV du CE/CSE)
+
+Les procès-verbaux du CE/CSE contiennent des noms de salariés et des cas individuels : ils sont **confidentiels**.
+
+- L'index texte des PV reste **hors dépôt** (variable `NEXUS_PV_INDEX`) ; le dépôt ne contient que le code du module,
+  et `.gitignore` interdit l'index, ses caches et les fichiers texte dans `private/cfdt-nexus-precedents/`.
+- Le service local n'écoute que sur `127.0.0.1` et ne tient aucun journal des requêtes. Il ne renvoie aux navigateurs que
+  des **références** (date, PV, page, pertinence) ; les extraits ne sont servis qu'au serveur du Nexus local (clients non
+  navigateur), pour l'analyse d'ordre du jour CSE, et n'apparaissent que dans cette interface locale.
+- Le navigateur ne conserve que des références ; tout champ non prévu est supprimé à l'import.
+- Un passage de PV ne se lit que localement, ponctuellement, avec validation humaine (voir « Règle IA »).
+
 ## Règle IA
 
 Les assistants IA de CFDT Nexus peuvent aider à analyser un document sensible uniquement si celui-ci est fourni ponctuellement dans un cadre maîtrisé.

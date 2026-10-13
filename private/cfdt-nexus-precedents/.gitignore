@@ -1,0 +1,10 @@
+# Le module ne contient que du code : jamais l'index des PV, ses caches ni des textes extraits.
+pv_index/
+*.jsonl
+*.pkl
+*.db
+*.sqlite
+*.txt
+*.csv
+__pycache__/
+precedents.json
