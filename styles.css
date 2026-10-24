@@ -3076,3 +3076,14 @@ svg {
   font-size: 15px;
   line-height: 1.45;
 }
+
+/* Menu : sur les écrans de 1181 à 1350 px, le menu se resserre pour ne pas passer sous le bouton Adhérer */
+@media (min-width: 1181px) {
+  .nav {
+    gap: clamp(6px, calc((100vw - 1100px) * 0.016), 10px);
+  }
+
+  .nav__link {
+    font-size: clamp(11.5px, calc((100vw - 694px) * 0.0244), 16px);
+  }
+}
