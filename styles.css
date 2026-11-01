@@ -2037,9 +2037,6 @@ svg {
   border-radius: 16px;
 }
 
-.feed-article-visual--narrow {
-  max-width: 420px;
-}
 
 .feed-article-callout {
   margin: 8px 0;
